@@ -1,0 +1,340 @@
+<style>
+  .content{
+    background-color: #EAEAEA;
+  }
+  .addr_item{
+    padding:30px;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    margin-top: 30px;
+  }
+  .top{
+    flex-direction: column;
+    justify-content: center;
+  }
+  .addr_name{
+    margin-bottom: 10px;
+  }
+  .addr_name_txt{
+    font-size: 24px;
+    color: #454545;
+  }
+  .addr_detail_txt{
+    font-size: 28px;
+    color: #666666;
+  }
+  .dv{
+    border-bottom-color: #ccc;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    height: 1px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .img{
+    width:38px;
+    height:38px;
+  }
+  .addr_opt{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .addr_opt_item{
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .addr_opt_item{
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  .mgl{
+    margin-left: 25px;
+  }
+  .opt_name_txt{
+    font-size:28px;
+    color:#767676;
+    margin-left: 5px;
+  }
+  .add_btn{
+      background-color: #EB5D69;
+      margin-left: 40px;
+      margin-right: 40px;
+      margin-top: 60px;
+      flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .add_btn_txt{
+    color: white;
+    font-size: 32px;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+  .header{
+    flex-direction: row;
+    justify-content: center;
+    background-color: #EB5D69;
+    height:88px;
+    align-items: center;
+    color: #ffffff;
+  }
+
+  .item-txt {
+    font-size: 28px;
+    color: #555;
+  }
+
+  .item-text {
+    font-size: 28px;
+    color: #000000;
+  }
+
+  .input{
+    height: 40px;
+    font-size:24px;
+    width:710px;
+    margin-left:20px;
+  }
+
+  .item{
+    height:90px;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .red{
+    color:#F49601;
+    font-size:28px;
+  }
+
+  .buttons{
+    height:100px;
+    margin-top:80px;
+    border-width:1px;
+    border-style:solid;
+    border-color:#EB5E68;
+    width:700px;
+    background-color:#FDE314;
+    margin-left:25px;
+    color:white;
+    border-radius:0px;
+    text-align: center;
+    font-size:40px;
+    padding-top: 30px;
+  }
+
+  .row-start{
+  	width:140px;
+  	flex-direction: row;
+  	justify-content: flex-start;
+  	/*margin-left:10px;*/
+  }
+
+  .code-border-input{
+  	width:300px;
+  	height: 40px;
+  	font-size:24px;
+  	margin-left:20px;
+  }
+
+  .code-border{
+  	width:320px;
+  	height:90px;
+  	margin-top:-25px;
+    margin-left:25px;
+  	background-color:#EB5D69;
+  	flex-direction: row;
+  	justify-content: flex-start;
+  	align-items: center;
+  }
+
+  .code-text{
+  	color:#ffffff;
+    
+    text-align: center;
+    background-color: #EB5D69;
+    border-color: #EB5D69;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="添加银行卡" title-color="white" left-item-title="返回" left-item-color="white">
+        <scroller class="content">
+          <div>
+          <!-- start: 输入框 -->
+          <wxc-list-item class="item">
+          	<div class="row-start">
+          		<text class="item-text">卡号</text>
+            	<text class="red">*</text>
+            	<text class="item-txt">：</text>
+          	</div>
+            <input class="input" value="{{addCardData.accoutNumber}}" oninput="vchange($event, 'accountNumber')" type="text" placeholder="请输入银行卡号">
+          </wxc-list-item>
+
+          <wxc-list-item class="item">
+          	<div class="row-start">
+          		<text class="item-text">开户银行</text>
+            	<text class="red">*</text>
+            	<text class="item-txt">：</text>
+          	</div>
+            <input class="input" type="text" value="{{addCardData.bankName}}" oninput="vchange($event, 'bankName')" placeholder="请输入开户银行名称">
+          </wxc-list-item>
+
+          <wxc-list-item class="item">
+          	<div class="row-start">
+          		<text class="item-text">开户支行</text>
+            	<text class="red">*</text>
+            	<text class="item-txt">：</text>
+          	</div>
+            <input class="input" type="text" value="{{addCardData.bankBranch}}" oninput="vchange($event, 'bankBranch')" placeholder="请输入开户支行名称">
+          </wxc-list-item>
+
+          <wxc-list-item class="item">
+          	<div class="row-start">
+          		<text class="item-text">持卡人</text>
+            	<text class="red">*</text>
+            	<text class="item-txt">：</text>
+          	</div>
+            <input class="input" type="text" value="{{addCardData.accountName}}" oninput="vchange($event, 'accountName')" placeholder="请输入持卡人姓名">
+          </wxc-list-item>
+
+          <wxc-list-item class="item">
+          	<div class="row-start">
+          		<text class="item-text">手机号</text>
+            	<text class="red">*</text>
+            	<text class="item-txt">：</text>
+          	</div>
+            <input class="input" type="text" value="{{addCardData.contactNumber}}" oninput="vchange($event, 'contactNumber')" placeholder="银行卡预留手机号">
+          </wxc-list-item>
+
+           <!-- start: 提交按钮 -->
+            <div class="pd-b20">
+              <!-- <div onclick="submit()" style="color:white;"> -->
+                <text onclick="submit()" class="buttons">提交</text>
+              <!-- </div> -->
+            </div>
+             <!-- end: 提交按钮 -->
+
+          </div>
+          </scroller>
+    </wxc-navpage>
+  
+</template>
+
+<script>
+  require('weex-components');
+  var stream = require('@weex-module/stream');
+  var modal = require('@weex-module/modal');
+
+  var data = {
+    addCardData:{}
+  };
+
+  data.utils = require('./js-kit/utils');
+
+  //添加银行卡
+ var createCard = function(me) {
+    var bundleUrl = me.$getConfig().bundleUrl;
+  var type = data.utils.getParameterByName('type', bundleUrl);
+
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/addCard/createBankCard",
+      type:'json',
+      body:data.addCardData
+    }, function(response) {
+      if(response.data.error == 0) {
+        me.utils.toast({'message': '添加银行卡成功', 'duration': 1},function () {
+          if(type){
+            me.$openURL(me.utils.getAppBaseUrl(me) + 'withdraw.js');
+          }else{
+            me.$openURL(me.utils.getAppBaseUrl(me) + 'bankCards.js');
+          }
+        });
+      }
+    },function(response){
+
+    });
+  };
+
+   //获取银行卡信息
+   var getCardInfo = function(me, id) {
+      data.utils.fetch(me, {
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/addCard/get",
+        type:'json',
+        body:{id: id}
+      }, function(response) {
+        if(response.data) {
+          data.addCardData = response.data.data;
+        }
+      },function(response){
+
+      });
+    };
+
+   //修改银行卡
+ var updateCard = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/addCard/updateBankCard",
+      type:'json',
+      body:data.addCardData
+    }, function(response) {
+      if(response.data.error == 0) {
+        me.utils.toast({'message': '修改银行卡成功', 'duration': 1},function () {
+          me.$openURL(me.utils.getAppBaseUrl(me) + 'bankCards.js');
+        });
+      }
+    },function(response){
+
+    });
+  };
+
+  //获取验证码
+  // var getCodeNumber = function(me) {
+  //   data.utils.fetch(me, {
+  //     method: 'post',
+  //     url: data.utils.getServerBaseUrl() + "webapp/addCard/getCode",
+  //     type:'json',
+  //     body:{phone:data.addCardData.ContactNumber}
+  //   }, function(response) {
+  //     alert("getCode");
+  //   },function(response){
+
+  //   });
+  // };
+
+
+  module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init: function () {
+      var bundleUrl = this.$getConfig().bundleUrl;
+      data.addCardData.id = data.utils.getParameterByName('id', bundleUrl);
+      if(data.addCardData.id) {
+        getCardInfo(this, data.addCardData.id);
+      }      
+    },
+    methods: {
+      vchange: function (e, m) {
+        this.addCardData[m] = e.value;
+      },
+      submit: function () {
+        if(data.addCardData.id) {
+          updateCard(this);
+        }else{
+          createCard(this);
+        }
+      }
+    }
+  };
+</script>

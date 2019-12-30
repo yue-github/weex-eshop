@@ -1,0 +1,261 @@
+<style>
+  .bg-grey{
+    background-color: #EDEDED;
+  }
+  .header {
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 88px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-bottom-width:1px;
+    border-bottom-color:#EDEDED;
+  }
+
+  .content {
+    background-color: #EDEDED;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .search-panel {
+    flex: 1; 
+    border-radius: 10px;
+    flex-direction: row; 
+    align-items: center; 
+    border-style:solid;
+    border-width:1px;
+    border-color:#DDDDDD;
+    background-color: #fff;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .search-input {
+    flex: 1;
+    height: 50px; 
+    border-radius: 10px; 
+    font-size: 26px; 
+    color: #999;
+  }
+
+ 
+  
+  .product-panel {
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+   	/*padding-left: 6px; 
+    padding-right: 6px;*/
+    margin-left:-5px;
+  }
+
+  .product-item {
+   /* margin-left: 8px;
+    margin-right: 8px;*/
+    margin-top: 8px;
+   /* margin-bottom: 15px;*/
+    padding-bottom: 15px;
+    border-top-width: 1px;
+    border-top-color: #d9d9d9;
+    border-bottom-width: 1px;
+    border-bottom-color: #d9d9d9;
+    border-left-width: 1px;
+    border-left-color: #d9d9d9;
+    border-right-width: 1px;
+    border-right-color: #d9d9d9;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    width:372px;
+    margin-left:5px;
+    overflow: hidden;
+  }
+
+  .product-image {
+    width: 372px;
+	height: 347px;
+  }
+
+  .product-name {
+    color: #333;
+    font-size: 24px;
+    padding-top: 15px;
+    width: 300px;
+    height: 76px;
+    line-height: 30px;
+    overflow: hidden;
+    /*border-bottom-color: #d9d9d9;
+    border-bottom-width: 1px;
+    border-bottom-color: #d9d9d9;*/
+  }
+
+  .product-txt {
+    flex-direction: row; 
+    margin-top: 15px; 
+    justify-content: space-between;
+    /*align-items: center;*/
+  }
+
+  .product-price {
+    font-size: 28px;
+    color: #F49601;
+    margin-right: 10px;
+  }
+
+  .product-price-icon {
+    font-size: 20px;
+    color: #F49601;
+    margin-right: 10px;
+    margin-bottom: 2px;
+  }
+
+  .product-note {
+    font-size: 24px;
+    color: #999999;
+  }
+  .discount{
+    color:#666666;
+    font-size:24px;
+    text-decoration:line-through;
+  }
+  .success{
+    width:152px;
+    height:152px;
+    margin-top:150px;
+    margin-left:300px;
+  }
+  .tiaojian{
+    width:750px;
+    height:72px;
+    background-color:#ffffff;
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(234, 234, 234, 0);
+    height: 50;
+  }
+   .search-icon {
+    width: 36px; 
+    height: 36px;
+  }
+  .search-iconHead{
+    width: 36px; 
+    height: 36px;
+  }
+  .search-iconHead2 {
+    width: 30px; 
+    height: 30px;
+    
+  }
+  .iconHead{
+  	flex-direction: row;
+  	justify-content:flex-start;
+  	
+  }
+  .iconHeadText{
+ 	flex:1;
+  	font-size:28px;
+  	color:#000;
+  	margin-top:20px;
+  	margin-bottom:20px;
+  	align-items: center;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="套餐列表" title-color="white" left-item-title="返回" left-item-color="white">
+    <list class="content list">
+      <cell class="cell" style="margin-top:12px;background-color:#EDEDED;">
+        <div class="product-panel">
+          <div class="product-item" onclick="toProduct" ds="{{item}}" repeat="item in list">
+            <image class="product-image" src="{{item.image}}"></image>
+            <div style="padding-left: 15; padding-right: 15;">
+              <text class="product-name">{{item.title}}</text>
+              <div class="product-txt">
+                <div style="flex-direction: row;justify-content: flex-end;align-items: flex-end;">
+                  <text class="product-price-icon">
+                    ￥
+                  </text>
+                  <text class="product-price">
+                    {{utils.toDecimal2(item.discount)}}
+                  </text>
+                </div>
+                <text class="product-note" style="margin-top:5px;margin-left:60px;">
+                </text>
+              </div>
+            </div>
+          </div>
+        </div>
+      </cell>
+    </list>
+  </wxc-navpage>
+</template>
+
+<script>
+  require('weex-components');
+  require('./by-components/by-select.we');
+  var stream = require('@weex-module/stream');
+
+  var data = {
+    list: [],
+  };
+  
+  data.utils = require('./js-kit/utils');
+ 
+  //获取搜索产品列表
+  var getList = function(me, group_activity_id) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/group_activity/set_meal_list",
+      type:'json',
+      body: {group_activity_id:group_activity_id}
+    }, function(response) {
+      if(response.data.error == 0) {
+        var list = response.data.data;
+        for (var i = 0; i < list.length; i++) {
+          var item = list[i];
+          item.image = data.utils.getAbsolutePath(item.image);
+        }
+        data.list = list;
+      }
+    },function(response){
+
+    });
+  };
+
+  module.exports = {
+    data: data,
+    init:function () {
+      var bundleUrl = this.$getConfig().bundleUrl;
+      var activityId = data.utils.getParameterByName('activityId', bundleUrl);
+      getList(this, activityId);
+
+      var headerHeight =  data.utils.getRealHeight(this, 88);
+      this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight;
+    },
+    created: function() {
+      
+    },
+    ready: function () {
+      
+    },
+    methods: {
+      toProduct: function (e) {
+        var v = e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'setMealDetail.js?id=' + v);
+      },
+    }
+  };
+</script>

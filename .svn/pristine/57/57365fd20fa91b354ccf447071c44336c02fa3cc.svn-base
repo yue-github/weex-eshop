@@ -1,0 +1,120 @@
+<style>
+	.lg_top{
+		height: 85px;
+	    flex-direction: row;
+	    align-items: center;
+	}
+	.lg_top_txt{
+		font-size:28px;
+	}
+	.info{
+		flex-direction: row;
+		height:104px;
+		align-items: center;
+	}
+	.info_txt{
+		font-size:28px;
+		color:#666666;
+	}
+	.lg_border{
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		border-bottom-color: #EAEAEA;
+	}
+	.dv{
+		height: 20px;
+		background-color: #EAEAEA;
+	}
+	.lg_item{
+		flex-direction: row;
+	}
+	.lg_item_txt{
+		width:650px;
+		font-size:28px;
+		color: #999999;
+	}
+	.lg_right{
+		margin-left:20px;
+		margin-top: -7px;
+	}
+	.lg_left_border{
+		border-left-width: 1px;
+		border-left-color: #EAEAEA;
+		border-left-style: solid;
+		margin-left: 10px;
+		height:100px;
+	}
+	.icon_round{
+		height: 24px;
+		width: 24px;
+		border-radius: 18px;
+		background-color: #EAEAEA;
+	}
+	.pl20{
+		padding-left: 20px;
+	}
+</style>
+
+<template>
+	<wxc-navpage data-role="none" height="88" background-color="#EB5D69" title="物流详情" title-color="white" left-item-title="返回" left-item-color="white">
+        <!-- start: 物流公司 -->
+	    <div class="top">
+	    	<div class="lg_top pl20 lg_border"><text class="lg_top_txt">物流公司：申通快递</text></div>
+	    	<div class="lg_top pl20"><text class="lg_top_txt">物流单号：201232521</text></div>
+	    </div>
+	    <!-- end: 物流公司 -->
+
+	    <!-- start: 分割线 -->
+	    <div class="dv"></div>
+	    <!-- end: 分割线 -->
+
+	    <!-- start: 物流详细信息 -->
+	    <div class="bottom">
+	    	<div class="info pl20"><text class="info_txt">物流信息 :</text></div>
+	    	<div class="lg_item pl20">
+	    		<div>
+	    			<div class="icon_round" style="background-color:#EB5D69"></div>
+	    			<div class="lg_left_border"></div>
+	    		</div>
+	    		<div class="lg_right">
+	    			<text class="lg_item_txt" style="color:#EB5D69">已收件</text>
+	    			<text class="lg_item_txt" style="color:#EB5D69">2016-09-12 12:23:34</text>
+	    		</div>
+	    		
+	  		</div>
+	  		<div class="lg_item pl20">
+	    		<div>
+	    			<div class="icon_round"></div>
+	    			<div class="lg_left_border"></div>
+	    		</div>
+	    		<div class="lg_right">
+	    			<text class="lg_item_txt">快件已到达【广州中转部】冯绍峰的范德萨发大幅度发发的发的顺丰到付</text>
+	    			<text class="lg_item_txt">2016-09-11 12:23:34</text>
+	    		</div>
+	    		
+	  		</div>
+	  		<div class="lg_item pl20">
+	    		<div>
+	    			<div class="icon_round"></div>
+	    		</div>
+	    		<div class="lg_right">
+	    			<text class="lg_item_txt">快件已到达【广州中转部】</text>
+	    			<text class="lg_item_txt">2016-09-11 12:23:34</text>
+	    		</div>
+	    		
+	  		</div>
+	    </div>
+	    <!-- end: 物流详细信息 -->
+    </wxc-navpage>
+	
+</template>
+
+<script>
+  require('weex-components');
+  module.exports = {
+    data: {
+      baseURL: '',
+    },
+    
+  }
+</script>

@@ -1,0 +1,227 @@
+<style>
+  .bg-grey{
+    background-color:#EDEDED;
+  }
+  .header{
+    flex-direction: row;
+      justify-content: center;
+      background-color: #EB5D69;
+      height:88px;
+      align-items: center;
+      color: #ffffff;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+
+  .coupons-image{
+    position: absolute;
+    margin-top:20px;
+    margin-left:25px;
+    padding-bottom: 50px;
+    border-radius: 5px;
+    width:710px;
+    height:280px;
+  }
+
+  .item{
+    width:700px;
+    height:300px;
+    margin-top:20px;
+    margin-left:20px;
+    margin-bottom: 20px;
+    background-color:white;
+  }
+
+  .item-row{
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .row{
+    flex-direction:row;
+  }
+
+  .item-left{
+    align-items: flex-start;
+  }
+
+  .text-left{
+    text-align:left;
+  }
+
+  .text-right{
+    text-align:right;
+  }
+
+  .font-white{
+    color:#ffffff;
+  }
+
+  .coupon-name{
+    font-size: 28px;
+    margin-left:50px;
+    margin-top:20px;
+    width:300px;
+  }
+
+  .coupon-use{
+    font-size: 28px;
+    margin-top:20px;
+    width:300px;
+  }
+
+  .coupon-money{
+    margin-left:50px;
+    margin-top:35px;
+    width:300px;
+    font-size:60px;
+  }
+
+  .coupon-value{
+    font-size: 28px;
+    margin-top:60px;
+    width:300px;
+  }
+
+  .coupon-time{
+    font-size: 28px;
+    margin-left:20px;
+    margin-top:55px;
+    padding-bottom: 20px;
+    color:#666666;
+    width:430px;
+  }
+
+  .coupon-status{
+    font-size: 28px;
+    margin-top:55px;
+    width:200px;
+  }
+
+  .font-red{
+    color:#ED5E4E;
+  }
+
+  .font-blue{
+    color:#009AF4;
+  }
+
+  .font-grey{
+    color:#999798;
+  }
+
+  .image{
+    width:710px;
+    height:280px;
+    position: absolute;
+  }
+     .shoppingEmpty{
+    width:227px;
+    height:227px;
+    margin-top:150px;
+    margin-left:260px;
+  }
+
+  .success-text{
+    font-size: 36px;
+    text-align:center;
+    margin-top:50px;
+    color:#999999;
+  }
+  .font-ededed{
+  	color:#999999
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="我的现金券" title-color="white" left-item-title="返回" left-item-color="white">
+        <scroller if="{{dataLength==0}}">
+           <div>
+            <image class="shoppingEmpty" src="{{'src/images/icon_list_empty.png'}}"></image>
+            <text class="success-text">亲，你没有现金券记录！</text>
+          </div>
+        </scroller>
+    <scroller if="{{dataLength>0}}" class="bg-grey">
+    <div>
+    
+    <!-- start: 顶部logo -->
+    <div>
+      <div class="item" repeat="obj in cash">
+        <div class="coupons-image-grey item-row">
+          <image if="{{is_used==0}}" class="image" src="{{utils.getImageBaseUrl() + 'images/coupons_01.png'}}"></image>
+          <image if="{{is_used==1}}"  class="image" src="{{utils.getImageBaseUrl() + 'images/coupons_03.png'}}"></image>
+          <div class="item-left">
+            <div class="item-row">
+              <text class="coupon-name text-left font-ededed">我的现金券</text>
+              <text class="coupon-use text-right font-ededed">立即使用></text>
+            </div>
+            <div class="row">
+              <text class="coupon-money text-left font-ededed">￥{{utils.toDecimal2(obj.full)}}</text>
+              <text class="coupon-value text-right font-ededed">{{obj.title}}</text>
+            </div>
+            <div class="row">
+              <text class="coupon-time text-left">有效期:{{obj.startDate}}—{{obj.endDate}}</text>
+              <text if="{{obj.isUsed==0}}"  class="coupon-status text-right font-red">未使用</text>
+               <text if="{{obj.isUsed==1}}"  class="coupon-status text-right font-grey">已使用</text>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+    <!-- end: 顶部logo -->
+
+    
+
+    </div>
+    </scroller>
+  </wxc-navpage>
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+
+ var data = {cash:[],dataLength:0};
+
+ data.utils = require('./js-kit/utils');
+
+
+ //获取优惠券
+ var getCoupons = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/cash/getMyCashs",
+      type:'json',
+      body: {offset: 0,length: 5,isTimeOut: 0}
+    }, function(response) {
+      if(response.data&&response.data.data){
+      data.cash = response.data.data;
+        data.dataLength=response.data.data.length;
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+      getCoupons(this);
+    },
+    methods: {
+
+    }
+  };
+
+</script>

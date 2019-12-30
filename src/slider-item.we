@@ -1,0 +1,24 @@
+<template>
+  <image class="slider-item" style="width: 750px;height: {{iheight}};" src="{{image}}"></image>
+</template>
+
+<script>
+  module.exports = {
+    data: {
+      image: '',
+      link: '',
+      href: '',
+      iheight: 220,
+    },
+    methods: {
+      ready: function() {
+        this.href = this.link;
+      }
+    }
+  };
+</script>
+
+<style>
+  .slider-item {
+  }
+</style>

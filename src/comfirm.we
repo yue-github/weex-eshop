@@ -1,0 +1,1822 @@
+<style>
+.header-title{
+  color:#ffffff;
+  font-size:36px;
+}
+.header{
+  flex-direction: row;
+  justify-content: center;
+  background-color: #EB5D69;
+  height:88px;
+  align-items: center;
+  color: #ffffff;
+}
+
+.bg-grey{
+  background-color:#EAEAEA;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 180px;
+  /*height: 900;*/
+}
+
+.item{
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-bottom-color:#EAEAEA;
+  border-bottom-width: 1px;
+}
+
+.star{
+  width: 17px;
+  height:60px;
+  margin-left:20px;
+  margin-top:25px;
+}
+
+.row{
+  flex-direction:row;
+  justify-content: flex-start
+}
+
+.mg-t20{
+  margin-left:20px;
+}
+
+.item-product-deteils{
+  background-color:#ffffff;
+  margin-top:20px;
+}
+
+.item-product {
+  height: 220px;
+  margin-left: 20px;
+  margin-right: 20px;
+  flex-direction: row;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top-style: solid;
+  border-top-color:#EAEAEA;
+  border-top-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color:#EAEAEA;
+  border-bottom-width: 1px;
+}
+
+.product-image {
+  width: 136px;
+  height: 136px;
+}
+
+.product-r {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.p-info1 {
+  height: 62px;
+  /*overflow-wrap: hidden;*/
+  /*overflow:hidden;*/
+}
+
+.product-name {
+  overflow: hidden;
+  font-size: 28px;
+  color: #333333;
+}
+
+.product-summary {
+  font-size: 24px;
+  color: #999999;
+}
+
+.product-price {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.p-price {
+  color: #eb5d68;
+  font-size: 26px;
+  margin-top:5px;
+}
+
+.p-num {
+  font-size: 32px;
+  color: #666666;
+}
+
+.space-between{
+  flex-direction: row ;
+  justify-content: space-between;
+}
+
+.mg-b-20{
+  margin-bottom: 20px;
+}
+.font-26{
+  font-size:26px;
+}
+
+.font-28{
+  font-size:28px;
+}
+
+.font-grey-3{
+  color:#999999;
+}
+
+.font-grey-2{
+  color:#666666;
+}
+
+.username{
+  margin-top:30px;
+  /*margin-left:20px;*/
+}
+
+.address{
+  margin-top:20px;
+  margin-bottom:30px;
+  /*margin-left:20px;*/
+}
+
+.mg-t-20{
+  margin-right:20px;
+}
+
+.toAddress{
+  font-size:48px;
+  margin-top:30px;
+  color: #999999;
+}
+
+.driver{
+  margin-top:15px;
+  margin-bottom:15px;
+  margin-left:20px;
+  color:#666666;
+}
+
+.driver-r{
+  margin-right:30px;
+  text-align:right;
+}
+
+.select{
+  border-bottom-style:solid;
+  border-bottom-width:2px;
+  border-bottom-color:#EAEAEA;
+}
+
+.select-name{
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left:20px;
+}
+
+.select-item{
+  /*flex-direction: row;*/
+  flex-direction: column;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  border-bottom-color:#EAEAEA;
+}
+
+.select-item-name{
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  border-bottom-color:#EAEAEA;
+}
+
+.select-title{
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left:20px;
+  font-size:28px;
+  color:#666666;
+}
+
+.note{
+  border-bottom-style:solid;
+  border-bottom-width:2px;
+  border-bottom-color:#EAEAEA;
+  margin-top:20px;
+  padding-bottom:20px;
+}
+
+.note-input{
+  width:710px;
+  margin-left:20px;
+  height:60px;
+  font-size:28px;
+  padding-left: 10px;
+  background-color:#EAEAEA;
+  border-radius:5px;
+  padding-bottom: 5px;
+  padding-top:5px;
+}
+
+.comfirm_bottom{
+  height:160px;
+  background-color: #999999;
+
+}
+
+.comfirm-bottom{
+  flex-direction: row;
+  /*justify-content: center;*/
+  /*position: fixed;*/
+  position: absolute;
+  bottom: 0;
+  width:750px;
+  /*height:80px;*/
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D1D1D1;
+}
+
+.flex-column{
+  flex-direction: column;
+  /*justify-content: flex-start;*/
+}
+
+.pd-t-20{
+  padding-top:20px;
+}
+
+.comfirm-item{
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom-style:solid;
+  border-bottom-width:2px;
+  border-bottom-color:#EAEAEA;
+  width:750px;
+  padding-bottom:20px;
+}
+
+.comfirm-logo{
+  width:26px;
+  height:26px;
+  margin-left:20px;
+}
+
+.comfirm-item-title{
+  font-size:26px;
+  color:#999999;
+  margin-left:20px;
+}
+
+.comfirm-amount{
+  flex-direction: row;
+  justify-content: space-between;
+  height:100px;
+}
+
+.comfirm-flex-row{
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-top:30px;
+}
+
+.comfirm-name{
+  margin-left:20px;
+  font-size:28px;
+  color:#666666;
+  padding-bottom:20px;
+}
+
+.red{
+  color:#F49601;
+  font-size: 32px;
+  padding-bottom:20px;
+}
+
+.submit-bottom{
+  flex-direction: row;
+  justify-content: center;
+  width:250px;
+  background-color:#FDE314;
+  height:100px;
+}
+
+.submit{
+  text-align: center;
+  color:#ffffff;
+  font-size: 32px;
+  margin-top:30px;
+}
+
+.bg-white{
+  background-color:#ffffff;
+}
+
+.shop-title {
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 80;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shop-ex {
+  flex-direction: row;
+}
+
+.shop-products {
+
+}
+
+.radio {
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left:20px;
+  width:32;
+  height:32;
+}
+.pay-icon-style{
+    height: 40px;
+    margin: 15px;
+    width: 40px;
+    position: absolute;
+    right: 20px;
+}
+.add-amount{
+  font-size:32px;
+  border-style:solid;
+  border-width:1px;
+  border-color:#D1D1D1;
+  width:60px;
+  height:50px;
+  text-align:center;
+  color: #999;
+}
+.amount{
+  width:50px;
+  height:50px;
+  font-size:30px;
+  text-align:center;
+  border-top-style:solid;
+  border-top-width:1px;
+  border-top-color:#D1D1D1;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  border-bottom-color:#D1D1D1;
+}
+.row-end-center{
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.seven-refund{
+  font-size:18px;
+  color: #ffffff;
+  padding-top:3px;
+  padding-bottom:3px;
+  padding-left:5px;
+  padding-right:5px;
+  border-style: solid;
+  border-width:1px;
+  border-color:#EB5D69;
+  border-radius: 3px;
+  text-align:center;
+  width:120px;
+  background-color:#EB5D69;
+  margin-top:10px;
+  margin-bottom: 5px;
+}
+.no-seven-refund{
+  font-size:18px;
+  color: #EB5D69;
+  padding-top:3px;
+  padding-bottom:3px;
+  padding-left:5px;
+  padding-right:5px;
+  border-radius: 3px;
+  width:350px;
+  margin-top:10px;
+  margin-bottom: 5px;
+}
+
+.driver-text{
+  font-size:28px;
+  color: #666666;
+}
+
+/*.bottom-driver{
+  margin-left: 20px;
+  font-size:24px;
+  color: #666666;
+  padding-bottom: 20px;
+}*/
+
+  .piao-tiem{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .to-piao{
+    width:30px;
+    height:30px;
+    position: absolute;
+    top:20px;
+    right:20px;
+  }
+
+  .piao-details-item{
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color:#D1D1D1;
+  }
+  .p-d-i-vlue{
+     flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .invoiceType2{
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color:#D1D1D1;
+  }
+  .piao-input-text{
+    font-size:28px;
+    color: #666666;
+    margin-left:20px;
+  }
+  .piao-submit{
+    font-size:28px;
+    margin-top:10px;
+    margin-bottom:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    width:150px;
+    background-color: #FDE314;
+    text-align:center;
+    color:#ffffff;
+  }
+  .invoiceTypeBut{
+    text-align:center;
+    font-size:28px;
+    margin-top:10px;
+    margin-bottom:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    width:150px;
+    border-style:solid;
+    border-width:1px;
+    border-color:#D1D1D1;
+    margin-left: 20px;
+    color: #D1D1D1;
+  }
+  .onselInvoiceTypeBut{
+      border-color:#D1D1D1;
+      color:#666666;
+  }
+  .selInvoiceTypeBut{
+      border-color:#F7B148;
+      color:#F7B148;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="确认订单" title-color="white" left-item-title="返回" left-item-color="white">
+  <!-- 微信端 -->
+  <scroller class="bg-grey" style="height:{{serverHeight}}">
+  <!-- android -->
+  <!-- <scroller class="bg-grey"> -->
+
+  <!-- <scroller class="bg-grey" style="{{isWebPlatform == true : '' ? height:serverHeight}}"> -->
+
+    <!-- start: 运费信息 -->
+    <div class="item">
+      <div clsaa="row">
+        <div if="{{addressLength>0}}" class="space-between" onclick="toAddresses">
+          <div style="margin-left:20px">
+            <text class="username font-28 font-grey-2">收货人：{{address.contacts}} {{address.phone}}</text>
+            <text class="address font-28 font-grey-3">{{address.province}} {{address.city}} {{address.district}} {{address.detailedAddress}}</text>
+          </div>
+          <div class="mg-t-20">
+            <image style="width:16px;height:28px;margin-top:60px;" src="{{utils.getImageBaseUrl() + 'images/right_to.png'}}"></image>
+          </div>
+        </div>
+        <div if="{{addressLength==0}}" class="space-between" onclick="toAddresses">
+          <div style="margin-left:20px;margin-bottom:30px;">
+            <text class="username font-28 font-grey-2">添加收货地址</text>
+          </div>
+          <div class="mg-t-20">
+            <image style="width:16px;height:28px;margin-top:30px;margin-bottom:30px;" src="{{utils.getImageBaseUrl() + 'images/right_to.png'}}"></image>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end: 运费信息 -->
+
+    <!-- start: 订单详情 -->
+    <div class="item-product-deteils" repeat="{{shop in info.shopList}}">
+        <div class="shop-title">
+          <div>
+            <text class="font-28">{{shop.shopName}}</text>
+          </div>
+          <div class="shop-ex">
+            <!-- <text class="font-28">运送方式</text> -->
+            <!-- <text class="font-28">运费:￥0</text> -->
+          </div>
+        </div>
+        <div>
+          <div class="item-product" repeat="{{p in shop.products}}">
+            <div class="product-l">
+              <image class="product-image" src="{{utils.getAbsolutePath(p.mainPic)}}"></image>
+            </div>
+
+            <div class="product-r">
+              <div>
+                <text class="product-name font-26">{{p.productName}}</text>
+              </div>
+              <div class="p-info1">
+                <text class="product-summary">{{p.selectProterties}}</text>
+                <text if="{{p.isSupportReturn == 1}}" class="seven-refund">七天退换</text>
+                <text if="{{p.isSupportReturn == 0 || !p.isSupportReturn}}" class="no-seven-refund">此商品不支持七天无理由退换</text>
+              </div>
+              <div class="product-price">
+                <text class="p-price">￥{{utils.toDecimal2(p.price)}}</text>
+                <div class="row-end-center">
+                  <text class="add-amount" onClick="setAmount($event, p, -1)">-</text>
+                  <input class="amount" type="text" value="{{p.amount}}" oninput="setAmount($event, p, 'amount')">
+                  <text class="add-amount" onClick="setAmount($event, p, 1)">+</text>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-title">
+            <div>
+              <!-- <text class="driver-text">配送费</text> -->
+            </div>
+            <div class="shop-ex">
+              <!-- <text class="font-28" style="color:#666666;" onclick="selectTemplate">{{templateTypeName}}</text> -->
+              <text class="driver-text">运费:￥{{utils.toDecimal2(shop.deliveryPrice)}}</text>
+            </div>
+          </div>
+        </div>
+        <!-- start: 优惠券 -->
+        <!-- <div clsaa="row">
+          <div class="select">
+            <text class="select-name font-28 font-grey-2">优惠券：</text>
+          </div>
+          <div class="select-item" repeat="{{item in shop.couponList}}" shop="{{shop}}" ds="{{item}}" onclick="selectCoupons" >
+            <image class="radio" a="{{shop.shopName}}" if="{{!(shop.promotion_id == item.id && shop.promitionType == item.type)}}" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+            <image class="radio" a="{{shop.shopName}}" if="{{shop.promotion_id == item.id && shop.promitionType == item.type}}" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+            <text class="select-title">{{item.title}}</text>
+          </div>
+        </div> -->
+        <!-- start: 优惠券 -->
+    </div>
+     
+    <!-- end: 订单详情 -->
+
+    <div class="item-product-deteils">
+      <div clsaa="row">
+        <div class="select">
+          <text class="select-name font-28 font-grey-2">支付方式：</text>
+        </div>
+      
+        
+        <div if="{{!isWebPlatform}}" class="select-item" onclick="selectPayType(2)">
+          <div style="flex-direction: row;justify-content: flex-start;">
+            <image if="{{order.payType!=2}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+            <image if="{{order.payType==2}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+            <text class="select-title">支付宝支付</text>
+            <image src="{{utils.getImageBaseUrl() + 'images/icon_aliPay.png'}}" class="pay-icon-style"></image>
+          </div>
+        </div>
+        <div class="select-item" onclick="selectPayType(1)">
+          <div style="flex-direction: row;justify-content: flex-start;">
+            <image if="{{order.payType!=1}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+            <image if="{{order.payType==1}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+            <text class="select-title">微信支付</text>
+            <image src="{{utils.getImageBaseUrl() + 'images/icon_weixin.png'}}" class="pay-icon-style"></image>
+          </div>
+        </div>
+        <div  if="{{isWebPlatform}}" class="select-item" onclick="selectPayType(3)">
+          <div style="flex-direction: row;justify-content: flex-start;">
+            <image if="{{order.payType!=3}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+            <image if="{{order.payType==3}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+            <text class="select-title">银联支付</text>
+            <image src="{{utils.getImageBaseUrl() + 'images/icon_unPay.png'}}" class="pay-icon-style"></image>
+          </div>
+        </div>
+        <div class="select-item" onclick="selectPayType(5)">
+          <div style="flex-direction: row;justify-content: flex-start;">
+            <image if="{{order.payType!=5}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+            <image if="{{order.payType==5}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+            <text class="select-title">团购卡支付</text>
+            <image src="{{utils.getImageBaseUrl() + 'images/icon_myBalance.png'}}" class="pay-icon-style"></image>
+          </div>
+        </div>
+        <!-- <div class="select-item" onclick="selectPayType(4)">
+          <div style="flex-direction: row;justify-content: flex-start;">
+            <image if="{{order.payType!=4}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+            <image if="{{order.payType==4}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+            <text class="select-title">余额支付</text>
+            <text class="select-title">￥{{utils.toDecimal2(balance.money)}}</text>
+            <image src="{{utils.getImageBaseUrl() + 'images/icon_myBalance.png'}}" class="pay-icon-style"></image>
+          </div>
+          <div style="flex-direction: column;justify-content: flex-start;">
+            <text style="font-size:26px;color: #999999;padding-left:52px;padding-bottom:20px;">使用余额支付积分翻倍</text>
+          </div>
+        </div> -->
+    </div>
+
+    <!-- start: 优惠券 -->
+    <div class="item-product-deteils">
+      
+    </div>
+    <!-- end: 优惠券 -->
+
+    <!-- start: 发票 -->
+    <div class="item-product-deteils">
+      <div clsaa="row">
+        <div class="space-between" onclick="toPiao(piao)">
+          <div style="margin-left:20px;margin-bottom:30px;">
+            <text class="username font-28 font-grey-2" if="{{invoiceHead.type==1}}">发票信息：普通发票&nbsp;&nbsp;{{invoiceHead.invoiceHead}}</text>
+            <text class="username font-28 font-grey-2" if="{{invoiceHead.type==2}}">发票信息：电子发票&nbsp;&nbsp;{{invoiceHead.invoiceHead}}</text>
+          </div>
+          <div class="mg-t-20">
+            <image style="width:16px;height:28px;margin-top:30px;margin-bottom:30px;" src="{{utils.getImageBaseUrl() + 'images/right_to.png'}}"></image>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end: 发票 -->
+
+    <!-- start: 具体发票 -->
+    <div class="item-product-deteils" if="{{piao == 1}}">
+      <div clsaa="row">
+        <div>
+            <div>
+              <text class="select-name font-28 font-grey-2">发票类型</text>
+            </div>
+            <div class="piao-details-item">
+              <text class="invoiceTypeBut {{invoiceHead.type==1?'selInvoiceTypeBut':'onselInvoiceTypeBut'}}" onclick="selectInvoiceType(1)">纸质发票</text>
+              <text class="invoiceTypeBut {{invoiceHead.type==2?'selInvoiceTypeBut':'onselInvoiceTypeBut'}}" onclick="selectInvoiceType(2)">电子发票</text>
+            </div>
+        </div>
+        <div if="{{invoiceHead.type==1}}">
+          <div>
+            <div>
+              <text class="select-name font-28 font-grey-2">发票抬头</text>
+            </div>
+            <div class="piao-details-item" >
+              <div class="p-d-i-vlue" onclick="selectPiao(1)">
+                  <image if="{{selectPiaoType.piaoPerson == false}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+                  <image if="{{selectPiaoType.piaoPerson == true}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+                  <text class="piao-input-text">个人</text>
+              </div>
+
+              <div class="p-d-i-vlue" onclick="selectCom(1)">
+                  <image if="{{selectPiaoType.piaoPerson == true}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+                  <image if="{{selectPiaoType.piaoPerson == false}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+                  <text class="piao-input-text">单位</text>
+              </div>
+            </div>
+          </div>
+
+          <div if="{{selectPiaoType.piaoPerson == false}}" >
+            <div repeat="{{item in companyType}}">
+              <div class="piao-details-item" ds="{{item}}">
+                <image class="radio" if="{{item.companySelectType == 0}}" onclick="selectCompany(1,$index)" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+                <image class="radio" if="{{item.companySelectType == 1}}" onclick="selectCompany(1,$index)" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+                <text class="piao-input-text" onclick="selectCompany(1,$index)">{{item.invoiceHead}}</text>
+                <image style="width:20px;height:20px;position: absolute;right:20px;top:20px;" onclick="delectPiao(item.id)" src="{{utils.getImageBaseUrl() + 'images/fapiao_cha.png'}}"></image>
+              </div>
+            </div>
+            <div class="piao-details-item" style="padding-top:10px;padding-bottom:10px;">
+              <text class="piao-input-text">发票抬头(单位):</text>
+              <input style="width:550px;height:60px;font-size:28px;padding-left:10px;" type="text" value="{{companyName}}" oninput="cchange($event, companyName)" placeholder="公司单位">
+            </div>
+            <div class="piao-details-item" style="padding-top:10px;padding-bottom:10px;">
+              <text class="piao-input-text">纳税人识别码 :</text>
+              <input style="width:550px;height:60px;font-size:28px;padding-left:10px;" type="text" value="{{companyName2}}" oninput="cchange2($event, companyName)"  placeholder=" 识别码">
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <text class="select-name font-28 font-grey-2">发票内容</text>
+            </div>
+            <div class="piao-details-item" >
+             <image class="radio" src="{{'src/images/icon_radio_b.png'}}"></image>
+                  <text class="piao-input-text">订单明细</text>
+            </div>
+          </div>
+          
+          <div class="piao-details-item" style="justify-content: center;" onclick="addPiao">
+            <text class="piao-submit">确定</text>
+          </div>
+        </div>
+        <div if="{{invoiceHead.type==2}}">
+          <div>
+            <div>
+              <text class="select-name font-28 font-grey-2">发票抬头</text>
+            </div>
+            <div class="invoiceType2" >
+              <div class="p-d-i-vlue">
+                  <div class="p-d-i-vlue" onclick="selectPiao(2)">
+                    <image if="{{selectPiaoType.piaoPerson1 == false}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+                    <image if="{{selectPiaoType.piaoPerson1 == true}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+                    <text class="piao-input-text">个人</text>
+                  </div>
+
+                  <div class="p-d-i-vlue" onclick="selectCom(2)">
+                      <image if="{{selectPiaoType.piaoPerson1 == true}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+                      <image if="{{selectPiaoType.piaoPerson1 == false}}" class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+                      <text class="piao-input-text">单位</text>
+                  </div>
+              </div>
+              <div if="{{selectPiaoType.piaoPerson1 == false}}" style="padding-buttom:20px">
+                  <input class="note-input"  type="text" value="{{invoiceHead.invoiceHead}}" oninput="invoiceHeadchange($event, invoiceHead.invoiceHead)" placeholder="请填写单位名称，必填">
+              </div>
+            </div>
+            
+          </div>
+          <div class="piao-details-item" style="padding-top:10px;padding-bottom:10px;">
+              <text class="piao-input-text">收票人电话:</text>
+              <input style="width:450px;height:60px;font-size:28px;padding-left:10px;" type="text" value="{{getInvoicePerson.phone}}" oninput="phonechange($event, getInvoicePerson.phone)" placeholder="收票人手机号码，必填">
+          </div>
+            <div class="piao-details-item" style="padding-top:10px;padding-bottom:10px;">
+              <text class="piao-input-text">收票人邮箱:</text>
+              <input style="width:450px;height:60px;font-size:28px;padding-left:10px;" type="text" value="{{getInvoicePerson.email}}" oninput="emailchange($event, getInvoicePerson.email)" placeholder="用来接收电子发票邮箱，必填">
+          </div>
+          <div>
+            <div>
+              <text class="select-name font-28 font-grey-2">发票内容</text>
+            </div>
+            <div class="piao-details-item" >
+             <image class="radio" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+                  <text class="piao-input-text">订单明细</text>
+            </div>
+          </div>
+          
+          <div class="piao-details-item" style="justify-content: center;" onclick="saveInvoiceEmail">
+            <text class="piao-submit">确定</text>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <!-- end: 具体发票 -->
+
+    <!-- start: 补充说明 -->
+    <div class="item">
+      <div clsaa="row">
+        <div class="note">
+          <input class="note-input" type="text" value="{{note}}" oninput="vchange($event, 'note')" placeholder="买家留言">
+        </div>
+      </div>
+    </div>
+    <!-- end: 补充说明 -->
+
+   <!--  <by-prompt>
+  </by-prompt> -->
+
+    
+  </scroller>
+
+  <!-- start: 确认订单 -->
+  <div class="comfirm-bottom bg-white">
+    <div class="flex-column">
+      <div class="pd-t-20">
+        <div class="comfirm-item">
+          <image class="comfirm-logo" src="{{utils.getImageBaseUrl() + 'images/comfirm_01.png'}}"></image>
+          <text class="comfirm-item-title">不要相信任何人通过短信、QQ等发送所谓“退款链接”</text>
+        </div>
+      </div>
+
+      <div class="comfirm-amount bg-white">
+        <div style="width:500px;">
+          <div class="comfirm-flex-row">
+            <text class="comfirm-name">
+              合计：
+            </text>
+            <text class="red">￥{{productTotal}}</text>
+            <!-- <text class="bottom-driver">邮费{{info.allPrice}}</text> -->
+          </div>
+        </div>
+
+        <div>
+          <div sname="submit" id="submit" class="submit-bottom" onclick="submit">
+            <text class="submit">确认下单</text>
+          </div>
+          <div>
+          </div>
+        </div>
+
+      </div>
+      <!-- end: 确认订单 -->
+    </div>
+  </div>
+
+  <!-- 团购卡支付 -->
+  <by-card is_show_card_dialog="{{is_show_card_dialog}}">
+  </by-card>
+
+  <!--begin 余额支付弹窗-->
+  <by-prompt show="{{show}}">
+  </by-prompt>
+  <!--end 余额支付弹窗-->
+
+  <by-select title="选择运送方式" height="340" id="template" sname="template" sdata="{{templates}}"></by-select>
+
+  <!-- 提交订单中 -->
+  <div style="justify-content:center;width:750px;height:{{devHeight}};background-color:rgba(0, 0, 0, 0.5);" if="{{isCover}}">
+    <div><text style="text-align:center;color:#fff;">提交订单中...</text></div>
+  </div>
+  </wxc-navpage>
+</template>
+
+  <script>
+  require('weex-components');
+  require('./by-components/by-prompt.we');
+  require('./by-components/by-card.we');
+  var data = {
+  	productTotal:0,
+  	theSameOrderNum:'',
+    product: {id: 0,amount: 1, priceId: 0},
+    address: {},
+    myInfo: {},
+    order: {payType: 1, note: ""},
+    info: {allPrice: 0,shopList:[{products: []}]},
+    addressLength:0,
+    balance: {money: 0},
+    piao: 0,
+    selectPiaoType: {piaoPerson: true,piaoPerson1: true},
+    invoiceHead:{type:'1',invoiceHead:'个人',invoiceContent:'订单明细',invoiceClass:''},
+    piaoInvoiceHead: '',
+    companyType: [],
+    addNum: '',
+    defaultNum: 0,
+    companyName: '',
+    companyName2: '',
+    ppiao: 1,
+    show: 1,
+    isSetBalance: 0,
+    secret: '',
+    balanceSecretTrue: 0,
+    productsLength: 0,
+    shopInfo: [{'expressType': ''}],
+    templates: [
+      {"id":1,"name": "快递"},
+      {"id":2,"name": "EMS"},
+      {"id":3,"name": "平邮"}
+    ],
+    templateTypeName: '运送方式',
+    isAndroidPlatform: false,
+    isWebPlatform: false,
+    isIosPlatform: false,
+    getInvoicePerson:{phone:'',email:''},
+    isCover:false,
+    devHeight:'',
+    is_show_card_dialog: 0,
+    card_code: '',
+    card_password: '',
+    order_type: '',
+    group_set_meal_id: ''
+  };
+  data.utils = require('./js-kit/utils');
+  var modal = require('@weex-module/modal');
+  require('./by-components/by-select.we');
+
+  // require('./by-components/by-prompt.we');
+
+  //根据地址获取商品信息
+  var getproductInfoByAddress=function(address_id,me){
+    var info={};
+    if(data.product.id){
+      info.id=data.product.id;
+      info.amount=data.product.amount;
+      info.priceId=data.product.priceId;
+      info.address_id=address_id;
+      data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/comfirm/productInfo",
+      type:'json',
+      body:info
+      }, function(response) { 
+          data.info.shopList = response.data.data;
+          data.info.allPrice = toDecimal2(response.data.deliveryPrice);
+          data.productTotal = response.data.totalPayable;
+          data.productsLength = 1;
+      });
+    }else{
+      info.addressId=address_id;
+      data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/comfirm/getDeliveryList",
+      type:'json',
+      body:info
+      }, function(response) {
+          data.info.shopList = response.data.data;
+          data.info.allPrice = toDecimal2(response.data.deliveryPrice);
+          data.productTotal = response.data.totalPayable;
+          data.productsLength = 1;
+      });
+    }
+  }
+  //获取收货地址
+  var getAddresses = function(me) {
+    data.utils.fetch(me,{
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/comfirm/many",
+        type:'json'
+      }, function(response) {
+        if(response.data && response.data.error === 0 && response.data.addresses.length > 0) {
+          var ads = null;
+          if(data.addressId) {
+            //filter 返回数组 符合条件必须符合return
+            var temp = response.data.addresses.filter(function(s){
+                return s.id == data.addressId;
+            });
+            if(temp.length > 0) {
+              ads = temp[0];
+            }
+          }else{
+            ads = response.data.addresses[0];
+          }
+
+          data.order.address_id = ads.id;
+          data.address = ads;
+          data.addressLength=response.data.addresses.length;
+          getOrderInfo(me);
+        }else{
+          getOrderInfo(me);
+          data.addressLength=0;
+        }
+      },function(response){
+
+      });
+  }
+
+  //制保留2位小数，如：2，会在2后面补上00.即2.00    
+  function toDecimal2(x) {    
+      var f = parseFloat(x);    
+      if (isNaN(f)) {    
+          return false;    
+      }    
+      var f = Math.round(x*100)/100;    
+      var s = f.toString();    
+      var rs = s.indexOf('.');    
+      if (rs < 0) {    
+          rs = s.length;    
+          s += '.';    
+      }    
+      while (s.length <= rs + 2) {    
+          s += '0';    
+      }    
+      return s;    
+  }
+
+  //获取订单信息
+  var getOrderInfo = function(me) {
+    var address_id = 0;
+    if (data.address.id !== undefined) {
+      address_id = data.address.id;
+    }
+    
+    if (data.order_type == 3) {
+      //团购卡购买
+      data.utils.fetch(me,{
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/group_activity/orderList",
+        type:'json',
+        body: {group_set_meal_id: data.group_set_meal_id, address_id: address_id}
+      }, function(response) {
+        if(response.data.error === 0) {
+          data.info.shopList = response.data.data;
+          data.info.allPrice = toDecimal2(response.data.deliveryPrice);
+          data.order.orders = response.data.data;
+          data.productsLength = data.order.orders.length;
+          data.productTotal = response.data.totalPayable;
+        }
+      },function(response){
+
+      });
+    } else {
+      if(data.product.id) {
+        //直接购买信息
+        data.product.address_id = address_id;
+        data.utils.fetch(me,{
+          method: 'post',
+          url: data.utils.getServerBaseUrl() + "webapp/comfirm/productInfo",
+          type:'json',
+          body: data.product
+        }, function(response) {
+          if(response.data) {
+            if(response.data.error === 0) {
+              if(response.data.data) {
+                data.info.shopList = response.data.data;
+                data.info.allPrice = toDecimal2(response.data.deliveryPrice);
+                data.productTotal = response.data.totalPayable;
+                data.productsLength = 1;
+              }else{
+                modal.toast({'message': '加载失败', 'duration': 1});
+              }
+            }
+          }
+        },function(response){
+
+        });
+      } else {
+        //购物车信息
+        data.utils.fetch(me,{
+          method: 'post',
+          url: data.utils.getServerBaseUrl() + "webapp/comfirm/getDeliveryList",
+          type:'json',
+          body: {address_id: address_id}
+        }, function(response) {
+          if(response.data) {
+            if(response.data.error === 0) {
+              data.info.shopList = response.data.data;
+              data.info.allPrice = toDecimal2(response.data.deliveryPrice);
+              data.order.orders = response.data.data;
+              for(var i = 0; i < data.order.orders.length; i++) {
+                data.order.orders[i].promitionType = 1;
+                data.order.orders[i].promotion_id = 1;
+              }
+              data.productsLength = data.order.orders.length;
+              data.productTotal = response.data.totalPayable;
+            }
+          }
+        },function(response){
+
+        });
+      }
+    }
+  }
+
+  //判断是否设置余额支付密码
+  var isSetBalancePwd = function (me) {
+    data.utils.fetch(me, {
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/wallet/isSetBalancePwd",
+        type:'json'
+      }, function(response) {
+        if(response.data) {
+          if(response.data.error == 0) {
+            data.isSetBalance = 1;
+          }else if(response.data.error == -1){
+            data.isSetBalance = 0;
+          }
+        }
+      },function(response){
+
+      });
+  }
+
+  //获取我的钱包
+  var getBalance = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/wallet/balance",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        data.balance = response.data.info;
+      }
+    },function(response){
+
+    });
+  };
+
+  //判断余额是否足够支付
+  var balancePayOrder = function (type) {
+    //使用余额支付
+    if(type == 4) {
+      if(data.balance.money < data.info.allPrice) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  //获取个人信息
+  var getCenterInfo = function(me) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/center/info",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0 && response.data.info) {
+          data.myInfo = response.data.info;
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+  //获取发票抬头
+  var getinVoice = function (me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/comfirm/getinVoice",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          for(var i = 0; i < response.data.data.length; i++) {
+            response.data.data[i].companySelectType = 0;
+          }
+          data.companyType = response.data.data;
+        }
+      }
+    },function(response){
+
+    });
+  }
+
+  //添加发票抬头
+  var createInvoice = function (me) {
+  	//alert(data.invoiceHead.invoiceClass)
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/comfirm/createInvoice",
+      type:'json',
+      body: {invoiceHead: data.invoiceHead.invoiceHead,invoiceContent:1,companyCode:data.invoiceHead.invoiceClass}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          getinVoice(me);
+        }
+      }
+    },function(response){
+
+    });
+  }
+
+  //删除发票抬头
+  var deleteOnePiao = function (me, id) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/comfirm/deleteInvoice",
+      type:'json',
+      body: {id: id}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          getinVoice(me);
+        }
+      }
+    },function(response){
+
+    });
+  }
+
+  //公众号微信支付
+  var toWxPay = function(me,orderId,tmdNum) {
+    data.utils.fetch(me,{
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/orders/getJsApiParameters",
+        type:'json',
+        body:{tradeCode:tmdNum}
+      }, function(response) {
+        if(response.data) {
+            function jsApiCall()
+            {
+                WeixinJSBridge.invoke(
+                    'getBrandWCPayRequest',
+                    response.data.data,
+                    function(res){
+                        if (res.err_msg == "get_brand_wcpay_request:ok") {
+                          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmSuccess.js');
+                        }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmCancel.js');
+                        }else{
+                          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmFaile.js');
+                        }
+                    }
+                );
+            }
+
+            var actionpay = function() {
+                if (typeof WeixinJSBridge == "undefined")
+                {
+                    if (document.addEventListener)
+                    {
+                        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                    }
+                    else if (document.attachEvent)
+                    {
+                        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                    }
+
+                }
+                else
+                {
+                    jsApiCall();
+                }
+            };
+
+            if(response.data.error == 0) {
+              actionpay();
+            }
+            else if(response.data.error == 3){
+              modal.toast({'message': '登录超时', 'duration': 1});
+            }
+            else {
+              modal.toast({'message': '服务器错误' + response.data.code + response.data.errmsg, 'duration': 1});
+            }
+            
+        }
+      },function(response){
+
+      });
+  }
+
+  //支付宝支付
+  var toAlipay = function(order, me) {
+    var alipay = require('@weex-module/alipay');
+    alipay.pay(order.price, order.tradeNo, function(resp) {
+      if (resp.result == 0) {
+        payChangeStatus(me, order.tradeNo);
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmSuccess.js');
+      }else if(resp.result == 1){
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmCancel.js');
+      }else{
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmFaile.js');
+      }
+      // modal.toast({'message': resp.result, 'duration': 1});
+    });
+  }
+
+  //@注 前端改变支付状态
+  var payChangeStatus = function (me, tradeNo) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/orders/payOrderByTradeNo",
+      type:'json',
+      body: {tradeNo: tradeNo}
+    }, function(response) {
+      if(response.data) {
+        //modal.toast({'message': 'error=' + response.data.error, 'duration': 1});
+      }
+    },function(response){
+
+    });
+  }
+
+  var toWXAppPay = function(order, me) {
+    var wxpay = require('@weex-module/wxpay');
+    wxpay.pay(me.utils.getServerBaseUrl()+'pc/comfirmOrder/wxpayCallback', order.price, order.tradeNo, function(resp) {
+      if (resp.result == 0) {
+          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmSuccess.js');
+      }else if(resp.result == 1){
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmCancel.js');
+      }else{
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmFaile.js');
+      }
+      // // modal.toast({'message': resp.result, 'duration': 1});
+    });
+  }
+
+  //去支付, tmdNUm等于theSameOrderNum
+  var actionPay = function(response, me,tmdNum) {
+    if(response.data) {
+      me.submiting = false;
+      if (response.data.payType == 4 && response.data.error == -1) {
+        modal.toast({'message': '余额不足,请选择其他支付方式', 'duration': 1});
+      }
+
+      if(response.data && response.data.error === 0) {
+        if(me.order.payType == 2) {
+            toAlipay({price: response.data.totalFee, tradeNo: response.data.theSameOrderNum}, me);
+        } else if(me.order.payType == 1) {
+          if(me.isWebPlatform) {
+            toWxPay(me, response.data.orderId,tmdNum);
+          } else {
+            toWXAppPay({price: response.data.totalFee, tradeNo: response.data.theSameOrderNum}, me);
+            // modal.toast({'message': 'app微信支付还没开通', 'duration': 1});
+          }
+          
+        } else if(me.order.payType == 3) {
+          $('#weex').append(response.data.payInfo);
+             
+        }else if(me.order.payType == 4) {
+            if (response.data.error === 0 ) {
+               me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmSuccess.js');
+            }
+        }
+      }
+    }    
+  }
+
+  //改变产品数量
+  var changeProductNum = function (ds, n, me) {
+    if(!me.product.id) {
+      data.utils.fetch(me, {
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/shoppingCart/update",
+        type:'json',
+        body:{id:ds.id,amount:ds.amount}
+      }, function(response) {
+        if(response.data) {
+          if(response.data.error == -1) {
+            modal.toast({'message': '库存不足', 'duration': 1});
+            getOrderInfo(me);
+          }else{
+            getOrderInfo(me);
+          }
+        }
+      },function(response){
+
+      });
+    }else{
+      me.product.amount = ds.amount;
+      data.utils.fetch(me, {
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/comfirm/changeOrderProductAmount",
+        type:'json',
+        body:{productId:me.product.id,priceId: me.product.priceId,amount:me.product.amount}
+      }, function(response) {
+        if(response.data) {
+          if(response.data.error == -1) {
+            modal.toast({'message': '库存不足', 'duration': 1});
+            data.product.amount = response.data.storeAmount;
+            getOrderInfo(me);
+          }else{
+            getOrderInfo(me);
+          }
+        }
+      },function(response){
+
+      });
+    }
+  }
+
+  //判断支付密码是否正确
+  var balancePwd = function (me, secret, callback) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/wallet/isCorrectBalancePwd",
+      type:'json',
+      body: {balancePwd: secret}
+    }, function(response) {
+      if(response.data && callback) {
+        callback(response.data);
+      }
+      
+    },function(response){
+
+    });
+  }
+
+  //确认下单
+  var actionSubmit = function (me) {
+    // 判断是否web平台
+    if(me.isWebPlatform){
+      me.order.source=2;
+      //是否安卓平台
+    }else if(me.isAndroidPlatform){
+      me.order.source=3;
+      // 是否ios平台
+    }else if(me.isIosPlatform){
+      me.order.source=4;
+    }
+    //是否有商品
+    if(data.productsLength == 0) {
+      modal.toast({'message': '提交信息确保有订单信息', 'duration': 1});
+      return;
+    }
+    if(me.productTotal == "0" || me.productTotal == 0) {
+      modal.toast({'message': '请确保提交价格大于0元', 'duration': 1});
+      return;
+    }
+    me.order.balance = 0;
+    me.order.gold = 0;
+    me.order.orders = me.info.shopList;
+    me.order.invoiceHead = data.invoiceHead;
+    if(data.piao == 1) {
+      me.order.invoiceHead = data.invoiceHead;
+    }
+    
+    for(var i = 0; i < me.order.orders.length; i++) {
+      me.order.orders[i].expressType = 1;
+    }
+
+    me.isCover = true;
+
+    if (data.order_type == 3) {
+      // 团购卡购买
+      data.utils.fetch(me,{
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/group_activity/submitOrder",
+        type:'json',
+        body: {
+          startTime:me.product.startTime,
+          endTime:me.product.endTime,
+          address_id: me.order.address_id,
+          source: me.order.source,
+          payType: 5,
+          couponId: 0,
+          invoice:JSON.stringify(me.order.invoice),
+          note: me.order.note,
+          card_code: data.card_code,
+          card_password: data.card_password,
+          group_set_meal_id: data.group_set_meal_id
+        }
+      }, function(response) {
+        me.isCover = false;
+        var error = response.data.error;
+        if(error == 0){
+          data.is_show_card_dialog = 0;
+          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmSuccess.js');
+        } else if (error == -1) {
+          modal.toast({'message': '账号或密码错误', 'duration': 1});
+        } else if (error == -2) {
+          modal.toast({'message': '订单金额不能大于购物卡金额', 'duration': 1});
+        } else if (error == -3) {
+          modal.toast({'message': '套餐不存在', 'duration': 1});
+        } else if (error == -4) {
+          modal.toast({'message': '该卡号已被使用', 'duration': 1});
+        } else if (error == -5) {
+          modal.toast({'message': '提交信息确保有订单信息', 'duration': 1});
+        } else if (error == -6) {
+          modal.toast({'message': '活动还没开始', 'duration': 1});
+        } else if (error == -7) {
+          modal.toast({'message': '活动已结束', 'duration': 1});
+        }
+      },function(response){
+          me.isCover = false;
+      });
+    } else {
+      if(me.product.id) {
+        //直接购买提交订单
+        me.order.id = me.product.id;
+        me.order.priceId = me.product.priceId;
+        me.order.amount = me.product.amount;
+        me.order.startTime = me.product.startTime;
+        me.order.endTime = me.product.endTime;
+        data.utils.fetch(me,{
+          method: 'post',
+          url: data.utils.getServerBaseUrl() + "webapp/comfirm/saveOrder",
+          type:'json',
+          body: {
+            startTime:me.product.startTime,
+            endTime:me.product.endTime,
+            address_id:me.order.address_id,   //地址id
+            source:me.order.source,       //平台类型
+            payType:me.order.payType,     //支付类型
+            couponId:me.order.couponId,     //优惠券id
+            priceId:me.order.priceId,     //单品id
+            amount:me.order.amount,       //优惠券id
+            productId:me.order.id,
+            note: me.order.note       
+          }
+        }, function(response) {
+          if(response.data.error == 0){
+            actionPay(response, me, response.data.theSameOrderNum);
+          }
+          me.isCover = false;
+        },function(response){
+          me.isCover = false;
+        });
+      } else {
+        //购物车提交订单
+        data.utils.fetch(me,{
+          method: 'post',
+          url: data.utils.getServerBaseUrl() + "webapp/comfirm/saveOrderByCart",
+          type:'json',
+          body: {
+            startTime:JSON.stringify(me.product.startTime),
+            endTime:JSON.stringify(me.product.endTime),
+            address_id:JSON.stringify(me.order.address_id),  
+            source:JSON.stringify(me.order.source),      
+            payType:JSON.stringify(me.order.payType),    
+            couponId:JSON.stringify(me.order.couponId),    
+            invoice:JSON.stringify(me.order.invoice),
+            note: me.order.note         
+          }
+        }, function(response) {
+            if(response.data.error == 0){
+              data.theSameOrderNum = response.theSameOrderNum;
+              actionPay(response, me, response.data.theSameOrderNum);
+            }
+            me.isCover = false;
+        },function(response){
+            me.isCover = false;
+        });
+      }
+    }
+  }
+
+  module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+
+        this.isWebPlatform = data.utils.isWebPlatform(this);
+        this.isAndroidPlatform = data.utils.isAndroidPlatform(this);
+        this.isIosPlatform = data.utils.isIosPlatform(this);
+        this.devHeight = this.$getConfig().env.deviceHeight;
+    },
+    init:function () {
+      var headerHeight =  data.utils.getRealHeight(this, 88);
+      var footerHeight =  data.utils.getRealHeight(this, 188);
+      this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight - footerHeight;
+
+      var bundleUrl = this.$getConfig().bundleUrl;
+      data.product.id = data.utils.getParameterByName('id', bundleUrl);
+      data.product.amount = data.utils.getParameterByName('amount', bundleUrl);
+      data.product.priceId = data.utils.getParameterByName('priceId', bundleUrl);
+      data.product.startTime = data.utils.getParameterByName('startTime', bundleUrl);
+      data.product.endTime = data.utils.getParameterByName('endTime', bundleUrl);
+      data.addressId = data.utils.getParameterByName('addressId', bundleUrl);
+      data.order_type = data.utils.getParameterByName('order_type', bundleUrl);
+      data.group_set_meal_id = data.utils.getParameterByName('group_set_meal_id', bundleUrl);
+
+      getAddresses(this);
+      // getOrderInfo(this);
+      getBalance(this);
+      getCenterInfo(this);
+      // isSetBalancePwd(this);
+    },
+    ready: function () {
+      var me = this;
+
+      me.$on('templateclick', function (e) {
+        me.templateTypeName = e.detail.name;
+        //将店铺选的快递方式放进一个数组
+        for(var i = 0; i < data.shopInfo.length; i++) {
+          data.shopInfo[i].expressType = e.detail.id;
+        }
+      }.bind(this));
+
+      me.$on('promptOk', function(res){
+        if(res.detail == "") {
+          modal.toast({'message': '支付密码不能为空', 'duration': 1});
+          return;
+        }
+        if(res.detail) {
+          var reg = new RegExp(/^\d{6}$/);
+          if(reg.test(res.detail) == false) {
+            modal.toast({'message': '必须输入6位数数字', 'duration': 1});
+            return;
+          }
+        }
+        balancePwd(me, res.detail, function (result) {
+          if(result.error != 0) {
+            modal.toast({'message': '密码不正确', 'duration': 1});
+            return;
+          }
+          actionSubmit(me);
+        });
+        
+      });
+
+      me.$on('promptCancel', function(res){
+        me.submiting = false;
+        data.show = res.detail;
+      });
+
+      me.$on('promptCardOk', function(res){
+        data.card_code = res.detail.card_code;
+        data.card_password = res.detail.card_password;
+        if(data.card_code == "") {
+          modal.toast({'message': '卡号不能为空', 'duration': 1});
+          return;
+        }
+        if(data.card_password == "") {
+          modal.toast({'message': '密码不能为空', 'duration': 1});
+          return;
+        }
+        actionSubmit(me);
+      });
+
+      me.$on('promptCardCancel', function(res){
+        me.submiting = false;
+        data.is_show_card_dialog = res.detail;
+      });
+    },
+    methods: {
+      submit: function() {
+        if(this.submiting === true) {
+          return;
+        }
+        this.submiting = true;
+        var me = this;
+        if(data.addressLength == 0) {
+          modal.toast({'message': '请添加收货地址', 'duration': 1});
+          return;
+        }
+       
+        if (data.order_type == 3) {
+          data.is_show_card_dialog = 1;
+          return;
+        } else {
+          actionSubmit(me);
+        }
+      },
+      selectPayType: function(t) {
+        this.order.payType = t;
+      },
+      toAddresses: function() { 
+        if(data.product.id && data.product.amount && data.product.priceId) {
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'addresses.js?type=1&id=' + data.product.id + '&priceId=' + data.product.priceId + '&amount=' + data.product.amount + '&addr=1');
+        }else{
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'addresses.js?type=1&addr=1');
+        }
+      },
+      setAmount: function (e, item, n) {
+        // if(data.product.id) {
+        //   alert("立即购买");
+        // }else{
+        //   alert("购物车购买");
+        // }
+        // return;
+        var me = this;
+
+        item.amount = parseInt(item.amount);
+        if(e.target.attr.value == "+" || e.target.attr.value == "-") {
+          if(e.target.attr.value == "+") {
+            item.amount += 1;
+          }else if (e.target.attr.value == "-") {
+            item.amount -= 1;
+          }
+        }else{
+          item.amount = e.target.attr.value;
+        }
+
+        if(item.amount) {
+          var m = parseInt(item.amount);
+        }else{
+          item.amount = 1;
+        }
+
+        // var prevAmount = item.amount;
+        // alert(prevAmount);
+
+        // changeProductNum(item, m, this, function(result) {
+        //   if(result.error == -1) {
+        //     item.amount = prevAmount;
+        //     modal.toast({'message': '库存不足', 'duration': 1});
+        //   }
+        // });
+
+        changeProductNum(item, m, this);
+
+      },
+      toPiao: function (v) {
+        if(v == 0) {
+          data.piao = 1;
+          getinVoice(this);
+        }else{
+          data.piao = 0;
+        }
+      },
+      selectInvoiceType: function (e) {
+
+          data.invoiceHead.type=e;
+
+          var me=this;
+          data.utils.fetch(me,{
+          method: 'post',
+          url: data.utils.getServerBaseUrl() + "webapp/invoice/getInvoicePerson",
+          type:'json',
+          body: {}
+        }, function(response) {
+          if(response.data){
+            data.getInvoicePerson=response.data.data;
+          }
+        
+        },function(response){
+
+        });
+      
+      },
+      selectPiao: function (e) {
+          if(data.invoiceHead.type==1){
+                data.selectPiaoType.piaoPerson = true;
+                data.invoiceHead.invoiceHead= '个人';
+                
+        }else if(data.invoiceHead.type==2){
+            data.selectPiaoType.piaoPerson1 = true;
+            data.invoiceHead.invoiceHead= '个人';
+        }
+      },
+        selectCom: function (e) {
+          if(data.invoiceHead.type==1){
+                data.selectPiaoType.piaoPerson = false;   
+          }else if(data.invoiceHead.type==2){
+                data.invoiceHead.invoiceHead="";
+                data.selectPiaoType.piaoPerson1 = false;  
+          }
+      },
+      cchange: function (e, m) {
+        data.invoiceHead.invoiceHead  = e.value;
+        data.companyName = '';
+      },
+      cchange2: function (e, m) {
+        data.invoiceHead.invoiceClass  = e.value;
+        data.companyName2 = '';
+      },
+      invoiceHeadchange: function (e, m) {
+        data.invoiceHead.invoiceHead = e.value;
+      },
+      phonechange: function (e, m) {
+         data.getInvoicePerson.phone = e.value;
+      },
+      emailchange: function (e, m) {
+        data.getInvoicePerson.email = e.value;
+      },
+      addPiao: function () {
+        if(data.selectPiaoType.piaoPerson){
+           data.piao=0;
+          data.ppiao=1;
+        }else{
+          createInvoice(this);
+        }
+      
+      },
+      selectCompany: function (v, k) {
+        data.piao=0;
+        data.ppiao=1;
+        if(v == 1) {
+          for(var i = 0; i < data.companyType.length; i++) {
+            if(i == k) {
+              data.companyType[i].companySelectType = 1;
+              data.invoiceHead.invoiceHead = data.companyType[i].invoiceHead;
+            }else{
+              data.companyType[i].companySelectType = 0;
+            }
+          }
+          
+        }
+      },
+      saveInvoiceEmail:function(){ 
+          if(!data.invoiceHead.invoiceHead){
+             modal.toast({'message': '请填写单位名称！', 'duration': 1});
+              return;
+          }
+          if(!data.getInvoicePerson.phone){
+             modal.toast({'message': '请填写收票人电话！', 'duration': 1});
+              return;
+          }
+          if(!data.getInvoicePerson.email){
+             modal.toast({'message': '请填写收票人邮箱！', 'duration': 1});
+              return;
+          }
+          var me=this;
+          data.utils.fetch(me,{
+          method: 'post',
+          url: data.utils.getServerBaseUrl() + "webapp/invoice/saveInvoiceEmail",
+          type:'json',
+          body: data.getInvoicePerson
+          }, function(response) {
+             data.piao=0;
+              data.ppiao=1;
+          },function(response){
+         
+          });
+         
+      },
+      selectCoupons: function (e) {
+        var id = e.target.attr.ds.id;
+        var type = e.target.attr.ds.type;
+        var shop = e.target.attr.shop;
+        shop.shopName = shop.shopName + type + '&' + id;
+        shop.promitionType = type;
+        shop.promotion_id = id;
+
+         // for(var i = 0; i < data.info.shopList.length; i++) {
+         //        data.info.shopList[i].promitionType = 12;
+         //        data.info.shopList[i].promotion_id = 12;
+         //        data.info.shopList[i].shopName = 'abc';
+         //        // alert(data.info.shopList[i].promotion_id );
+         //    }
+
+      },
+      vchange: function (e, m) {
+        data.order.note = e.value;
+      },
+      delectPiao: function (id) {
+        deleteOnePiao(this, id);
+      },
+      selectTemplate: function() {
+        this.$vm('template').show();
+      }
+    }
+  };
+
+  </script>

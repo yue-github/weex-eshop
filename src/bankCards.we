@@ -1,0 +1,201 @@
+<style>
+  font{
+    font-size:36px;
+  }
+  .header{
+    flex-direction: row;
+      justify-content: center;
+      background-color: #EB5D69;
+      height:88px;
+      align-items: center;
+      color: #ffffff;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+  .card-image{
+    position: absolute;
+    margin-top:20px;
+    margin-left:20px;
+    padding-bottom: 50px;
+    border-radius: 5px;
+    width:710px;
+    height:220px;
+    background-color:#C75056;
+  }
+  .bank-logo{
+    margin-top: 20px;
+    margin-left:40px;
+    width: 70px;
+    height: 70px;
+  }
+
+  .bank-name{
+    width: 200px;
+    /*position: absolute;*/
+    margin-top: 20px;
+  }
+
+  .position{
+    position: relative;
+  }
+
+  .bank_name{
+    font-size: 30px;
+    margin-top:20px;
+    margin-left:20px;
+    color:#ffffff;
+    padding-bottom: 5px;
+  }
+
+  .bank_type{
+    font-size: 26px;
+    margin-left:20px;
+    color:#ffffff;
+  }
+
+  .card_num{
+    margin-top: 10px;
+    margin-right:20px;
+    flex-direction: row;
+    justify-content: flex-end;
+    color:#ffffff;
+  }
+
+  .item{
+    margin-top: 20px;
+    width:710px;
+    height:160px;
+    background-color:#FDE314;
+    margin-left:20px;
+    border-radius: 5px;
+  }
+
+  .item-row{
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .item-left{
+    align-items: flex-start;
+  }
+
+  .border-dashed{
+    width:710px;
+    height:160px;
+    margin-top:50px;
+    border-width:2px;
+    border-style:dashed;
+    border-color:#EAEAEA;
+    margin-left:20px;
+    align-items:center;
+  }
+
+  .add_card{
+    width:50px;
+    height:50px;
+    margin-top:35px;
+  }
+
+  .add_title{
+    color: #666666;
+    text-align: center;
+    margin-top:10px;
+    width:200px;
+  }
+  
+  .bank-number{
+    font-size:32px;
+    color:#ffffff;
+    margin-bottom: 20px;
+  }
+
+  .row-start{
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="银行卡" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller>
+
+    <!-- start: 顶部logo -->
+    <div>
+
+      <div class="item" onclick="toEditCard" ds="{{item}}" repeat="item in cards">
+        <div class="item-row">
+          <image class="bank-logo" src="{{utils.getImageBaseUrl()+'images/bank_01.png'}}"></image>
+          <div class="row-start">
+            <text class="bank_name">{{item.bankBranch}}</text>
+            <text class="bank_type">储蓄卡</text>
+          </div>
+        </div>
+        <div class="card_num">
+          <text class="bank-number">**** **** **** **** {{item.number}}</text>
+        </div>
+      </div>
+
+      <div class="border-dashed" onclick="addCard">
+        <image class="add_card" src="{{utils.getImageBaseUrl()+'images/add_card.png'}}"></image>
+        <text class="add_title">添加银行卡</text>
+      </div>
+
+    </div>
+    
+    <!-- end: 顶部logo -->
+
+    
+
+    </scroller>
+  </wxc-navpage>
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+
+ var data = {cards:[]};
+
+ data.utils = require('./js-kit/utils');
+
+ var getBankCards = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/bankCards/many",
+      type:'json',
+      body:{length:10,offset:0}
+    }, function(response) {
+      if(response.data) {
+        data.cards = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+      getBankCards(this);
+    },
+    methods: {
+      addCard: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'addCard.js');
+      },
+      toEditCard: function (e) {
+        var v = e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'addCard.js?id=' + v);
+      }
+    }
+  };
+
+</script>

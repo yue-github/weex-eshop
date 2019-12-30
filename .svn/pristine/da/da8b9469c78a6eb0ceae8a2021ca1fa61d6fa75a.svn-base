@@ -1,0 +1,689 @@
+<style>
+  .bg-grey{
+    background-color:#EDEDED;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .header {
+    position: sticky;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 88px;
+    background-color: #FDE314;
+  }
+
+  .search-icon {
+    width: 38px; 
+    height: 38px;
+  }
+
+  .search-input {
+    flex: 1;
+    height: 50px; 
+    border-radius: 10px; 
+    font-size: 24px; 
+    color: #999;
+  }
+
+  .search-panel {
+    width: 300px;
+    flex: 1; 
+    border-radius: 10px;
+    flex-direction: row; 
+    align-items: center; 
+    background-color: #fff;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .logo {
+    width: 16px; 
+    height: 30px; 
+    margin-right: 28px;
+  }
+
+  .tabs {
+    height: 100px;
+    background-color: #ffffff;
+    flex-direction: row;
+  }
+
+  .tab {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-bottom-width: 5px;
+  }
+
+  .tab-text {
+    padding-bottom: 20px;
+    font-size: 28px;
+    color: #333333;
+  }
+
+  .promotion-row{
+    flex-direction: row;
+    justify-content:flex-start;
+    margin-top:20px;
+    margin-bottom:10px;
+  }
+
+  .mg-l-15{
+    margin-left:15px;
+  }
+
+  .promotion-bg{
+    width:237px;
+    height:117px;
+    position: absolute;
+  }
+
+  .promotion-row{
+    flex-direction: row;
+    justify-content:flex-start;
+  }
+
+  .promotion-border{
+    flex-direction: column;
+    justify-content:flex-start;
+    width:160px;
+    border-right-style:dashed;
+    border-right-width:2px;
+    border-right-color:#ffffff;
+    margin-bottom:20px;
+  }
+
+  .promotion-value{
+    flex-direction: row;
+    justify-content:flex-start;
+    text-align:center;
+  }
+
+  .promotion-value-icon{
+    margin-left:50px;
+    font-size:28px;
+    margin-top:5px;
+  }
+
+  .promotion-value-money{
+    margin-left:10px;
+    font-size:36px;
+  }
+
+  .promotion-title{
+    text-align: center;
+    font-size:20px;
+    margin-right:5px;
+    margin-left:5px;
+  }
+
+  .promotion-click{
+    width:50px;
+    font-size:24px;
+    margin-top:15px;
+    margin-left:5px;
+  }
+
+  .promotion-to{
+    font-size:30px;
+    margin-top:20px;
+  }
+
+  .comment-bg{
+    position: absolute;
+    width:750px;
+    height:300px;
+  }
+
+  .comment-between{
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom:10px;
+  }
+
+  .comment-title{
+    font-size:36px;
+    color:#F49601 ;
+    margin-left:50px;
+    margin-top:30px;
+  }
+
+  .comment-summary{
+    font-size:24px;
+    color:#F49601 ;
+    margin-left:50px;
+    margin-top:10px;
+  }
+
+  .comment-to{
+    border-style:solid;
+    border-width:2px;
+    border-color:#F49601 ;
+    width:150px;
+    height:50px;
+    margin-top:10px;
+    margin-left:50px;
+  }
+
+  .comment-to-text{
+    text-align:center;
+    /*margin-top:10px;*/
+    margin-bottom:10px;
+    color:#F49601 ;
+  }
+
+  .comment-product{
+    width:253px;
+    height:183px;
+    margin-top:30px;
+    margin-right:20px;
+  }
+
+  .recommend-panel {
+    padding-bottom: 20px; 
+    background-color: #fff;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .product-panel {
+  	flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+   	/*padding-left: 6px; 
+    padding-right: 6px;*/
+    margin-left:-5px;
+  
+  }
+
+  .product-item {
+  /* margin-left: 8px;
+    margin-right: 8px;*/
+    margin-top: 8px;
+   /* margin-bottom: 15px;*/
+    padding-bottom: 15px;
+    border-top-width: 1px;
+    border-top-color: #d9d9d9;
+    border-bottom-width: 1px;
+    border-bottom-color: #d9d9d9;
+    border-left-width: 1px;
+    border-left-color: #d9d9d9;
+    border-right-width: 1px;
+    border-right-color: #d9d9d9;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    width:372px;
+    margin-left:5px;
+    overflow: hidden;
+    
+  }
+
+  .product-image {
+    width: 372px;
+	height: 347px;
+  }
+
+   .product-name {
+    color: #333;
+    font-size: 24px;
+    padding-top: 15px;
+    width: 300px;
+    height: 76px;
+    line-height: 30px;
+    overflow: hidden;
+    /*border-bottom-color: #d9d9d9;
+    border-bottom-width: 1px;
+    border-bottom-color: #d9d9d9;*/
+  }
+
+  .product-price {
+    font-size: 24px;
+    color: #FDE314;
+    margin-right: 10px;
+  }
+
+  .product-note {
+    font-size: 20px;
+    color: #999999;
+  }
+
+  .product-txt {
+    flex-direction: row; 
+    margin-top: 15px; 
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .font-white{
+    color:#ffffff;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height='0'>
+    <scroller class="bg-grey">
+      <!--begin 搜索-->
+      <div class="header">
+          <image class="logo" onclick="toback" src="{{utils.getImageBaseUrl() + 'images/back.png'}}"></image>
+          <div class="search-panel">
+            <input placeholder="店铺内搜索:连衣裙" value="{{keyName}}" oninput="lchange($event, 'keyName')" class="search-input"></input>
+            <image src="{{utils.getImageBaseUrl() + 'images/icon_search.png'}}" onclick="search()" class="search-icon"></image>
+          </div>
+          <!-- <image style="width:52px;height:25px;margin-left:20px;" src="{{utils.getImageBaseUrl() + 'images/shopNew.png'}}"></image> -->
+      </div>
+      <!--end 搜索-->
+
+      <!-- start: 店铺信息 -->
+      <div>
+        <div style="flex-direction: row;justify-content: space-between">
+          <text></text>
+          <div>
+            <image style="width:102px;height:103px;margin-left:120px;margin-top:20px;" src="{{shopInfo.logoPic}}"></image>
+          </div>
+          <div if="{{is_shopCollect == 0}}" onclick="collectShop()">
+            <text style="width:140px;background-color:#FDE314;border-radius:5px;color:#ffffff;text-align:center;font-size:28px;margin-top:20px;margin-bottom:20px;margin-right:20px;padding-top:10px;padding-bottom:10px;">+关注</text>
+          </div>
+          <div if="{{is_shopCollect == 1}}" onclick="cancelShopCollect()">
+            <text style="width:140px;background-color:#FDE314;border-radius:5px;color:#eee;text-align:center;font-size:28px;margin-top:20px;margin-bottom:20px;margin-right:20px;padding-top:10px;padding-bottom:10px;">取消关注</text>
+          </div>
+        </div>
+        
+        <image style="width:750px;height:280px;position: absolute;" src="{{utils.getImageBaseUrl() + 'images/shop_bg.jpg'}}"></image>
+        
+        <text style="text-align:center;font-size:28px;color:#ffffff;margin-top:10px;">{{shopInfo.name}}</text>
+        <text style="text-align:center;font-size:24px;color:#ffffff;margin-top:10px;">{{shopInfo.note}}</text>
+        <text style="text-align:center;font-size:24px;color:#ffffff;margin-top:10px;padding-bottom:10px;">销量 {{shopInfo.sales}} | 收藏 {{shopInfo.collect}}</text>
+      </div>
+      <!-- end: 店铺信息 -->
+
+      <!-- start: 导航栏 -->
+      <div class="tabs">
+        <div class="tab" style="border-bottom-color: {{tabIndex == 0 ? '#FDE314' : '#EEEEEE'}};" onclick="checkTab(0)">
+          <image if="{{tabIndex == 0}}" style="width:35px;height:35px;margin-top:20px;margin-bottom:10px;" src="{{utils.getImageBaseUrl() + 'images/shop_icon_2.png'}}"></image>
+          <image if="{{tabIndex == 1 || tabIndex == 2}}" style="width:35px;height:35px;margin-top:20px;margin-bottom:10px;" src="{{utils.getImageBaseUrl() + 'images/shop_icon_1.png'}}"></image>
+          <text class="tab-text" style="color: {{tabIndex == 0 ? '#FDE314' : '#3D4246'}};">店铺首页</text>
+        </div>
+        <div class="tab" style="border-bottom-color: {{tabIndex == 1 ? '#FDE314' : '#EEEEEE'}};" onclick="checkTab(1)">
+          <image if="{{tabIndex == 1}}" style="width:35px;height:35px;margin-top:20px;margin-bottom:10px;" src="{{utils.getImageBaseUrl() + 'images/product_icon_02.png'}}"></image>
+          <image if="{{tabIndex == 0 || tabIndex == 2}}" style="width:35px;height:35px;margin-top:20px;margin-bottom:10px;" src="{{utils.getImageBaseUrl() + 'images/product_icon_01.png'}}"></image>
+          <text class="tab-text" style="color: {{tabIndex == 1 ? '#FDE314' : '#3D4246'}};">全部宝贝</text>
+        </div>
+        <div class="tab" style="border-bottom-color: {{tabIndex == 2 ? '#FDE314' : '#EEEEEE'}};" onclick="checkTab(2)">
+          <image if="{{tabIndex == 2}}" style="width:35px;height:35px;margin-top:20px;margin-bottom:10px;" src="{{utils.getImageBaseUrl() + 'images/new_icon_02.png'}}"></image>
+          <image if="{{tabIndex == 0 || tabIndex == 1}}" style="width:35px;height:35px;margin-top:20px;margin-bottom:10px;" src="{{utils.getImageBaseUrl() + 'images/new_icon_01.png'}}"></image>
+          <text class="tab-text" style="color: {{tabIndex == 2 ? '#FDE314' : '#3D4246'}};">最近上新</text>
+        </div>
+      </div>
+      <!-- end: 导航栏 -->
+
+      <!-- start: 店铺首页 -->
+      <div if="{{tabIndex == 0}}">
+        <!-- start: 活动券 -->
+        <div class="promotion-row">
+
+          <div class="mg-l-15" repeat="item in couponList">
+            <image class="promotion-bg" src="{{utils.getImageBaseUrl() + 'images/shop_promotion_01.png'}}"></image>
+            <div class="promotion-row">
+              <div class="promotion-border">
+                <div class="promotion-value">
+                  <text class="promotion-value-icon font-white">￥</text>
+                  <text class="promotion-value-money font-white">{{item.discount}} </text>
+                </div>
+                <text class="promotion-title font-white">{{item.title}}</text>
+              </div>
+              
+              <text class="promotion-click font-white">点击领取</text>
+              <text class="promotion-to font-white">></text>
+            </div>
+          </div>
+        </div>
+        <!-- start: 活动券 -->
+
+        <!-- start: 促销产品 -->
+        <div>
+          <image class="comment-bg" src="{{utils.getImageBaseUrl() + 'images/shop_promotion_bg.jpg'}}"></image>
+          <div class="comment-between">
+            <div style="margin-bottom:30px;">
+              <text class="comment-title">楼兰密语红枣夹核桃</text>
+              <text class="comment-summary">软糯香甜搭配酥脆可口</text>
+              <text style="font-size:36px;color:#F49601;margin-left:50px;margin-top:10px;">￥120.00</text>
+              <a class="comment-to">
+                <text class="comment-to-text">立即购买</text>
+              </a>
+            </div>
+
+            <image class="comment-product" src="{{utils.getImageBaseUrl() + 'images/shop_promotion_product_01.png'}}"></image>
+          </div>
+        </div>
+        <!-- start: 促销产品 -->
+        
+        <!-- start: 推荐产品 -->
+        <div class="recommend-panel">
+          <div class="product-panel" onclick="toProduct" ds="{{item}}" repeat="item in onShellPro">
+            <div class="product-item">
+              <image class="product-image"  src="{{item.mainPic}}"></image>
+              <div style="padding-left: 15; padding-right: 15;">
+                <text class="product-name">{{item.name}}</text>
+                <div class="product-txt">
+                  <text class="product-price">
+                    ￥{{utils.toDecimal2(item.suggestedRetailUnitPrice)}}
+                  </text>
+                  <text class="product-note">
+                    <!-- 10人付款 -->
+                  </text>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- end: 推荐产品 -->
+
+      </div>
+      <!-- end: 店铺首页 -->
+      
+      <!-- start: 全部宝贝 -->
+      <div if="{{tabIndex == 1}}">
+        <!-- start: 全部宝贝 -->
+        <div class="recommend-panel">
+
+          <div class="product-panel" onclick="toProduct" ds="{{item}}" repeat="item in onShellPro">
+            <div class="product-item">
+              <image class="product-image"  src="{{item.mainPic}}"></image>
+              <div style="padding-left: 15; padding-right: 15;">
+                <text class="product-name">{{item.name}}</text>
+                <div class="product-txt">
+                  <text class="product-price">
+                    ￥{{utils.toDecimal2(item.suggestedRetailUnitPrice)}}
+                  </text>
+                  <text class="product-note">
+                    <!-- 10人付款 -->
+                  </text>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- end: 全部宝贝 -->
+      </div>
+      <!-- start: 全部宝贝 -->
+
+      <!-- start: 最近上新 -->
+      <div if="{{tabIndex == 2}}">
+        <!-- start: 最近上新 -->
+        <div class="recommend-panel">
+
+          <div class="product-panel" onclick="toProduct" ds="{{item}}" repeat="item in onNewPro">
+            <div class="product-item">
+              <image class="product-image"  src="{{item.mainPic}}"></image>
+              <div style="padding-left: 15; padding-right: 15;">
+                <text class="product-name">{{item.name}}</text>
+                <div class="product-txt">
+                  <text class="product-price">
+                    ￥{{utils.toDecimal2(item.suggestedRetailUnitPrice)}}
+                  </text>
+                  <text class="product-note">
+                    <!-- 10人付款 -->
+                  </text>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- end: 最近上新 -->
+      </div>
+      <!-- start: 最近上新 -->
+      
+
+      
+    </scroller>
+  </wxc-navpage>
+  
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+ var modal = require('@weex-module/modal');
+
+ var data = {
+    shopInfo: {},
+    onShellPro: [],
+    onNewPro: [],
+    couponList: [],
+    keyName: "",
+    tabIndex: 0,
+    is_shopCollect: 0,
+    isShow: false
+ }
+
+ data.utils = require('./js-kit/utils');
+
+ //获取店铺信息
+ var getShopInfo = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shopHome/shopInfo",
+      type:'json',
+      body:{shopId: data.shopInfo.id}
+    }, function(response) {
+      if(response.data) {
+        data.shopInfo = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+  //获取已上架物品
+ var getOnshellProduct = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shopHome/onShelfProduct",
+      type:'json',
+      body:{shopId: data.shopInfo.id,offset: 1,length: 10}
+    }, function(response) {
+      if(response.data) {
+        data.onShellPro = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+   //获取最新产品
+ var getOnLastProduct = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shopHome/shopLastProduct",
+      type:'json',
+      body:{shopId: data.shopInfo.id,offset: 1,length: 10}
+    }, function(response) {
+      if(response.data) {
+        data.onNewPro = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+   //获取优惠券
+ var getCouponsList = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shopHome/couponList",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        data.couponList = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+  //关注店铺
+  var getShopCollect = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shopHome/collectShop",
+      type:'json',
+      body: {shopId: data.shopInfo.id}
+    }, function(response) {
+      if(response.data) {
+        if(response.data && response.data.error == 0) {
+          data.is_shopCollect = 1;
+          modal.toast({'message': '关注成功', 'duration': 1});
+        }else if(response.data && response.data.error == -1){
+          modal.toast({'message': '该店铺已收藏', 'duration': 1});
+        }else{
+          modal.toast({'message': '收藏失败', 'duration': 1});
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+  //取消店铺收藏
+  var cancelCollect = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shopCollections/cancelShopByShopId",
+      type:'json',
+      body: {shopId: data.shopInfo.id}
+    }, function(response) {
+      if(response.data) {
+        if(response.data && response.data.error == 0) {
+          data.is_shopCollect = 0;
+          modal.toast({'message': '取消收藏成功', 'duration': 1});
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+  //检测店铺收藏
+  var checkShopCollect = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shopCollections/isCollect",
+      type:'json',
+      body: {shopId: data.shopInfo.id}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == -2) {
+          data.is_shopCollect = 1;
+        }else if(response.data.error == -3) {
+          data.is_shopCollect = 0;
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+  //店铺内搜索商品
+  var getSearchProduct = function(me, keyName) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shopHome/searchProduct",
+      type:'json',
+      body: {keyName: keyName,shopId: data.shopInfo.id,offset: 1,length:10}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          modal.toast({'message': '搜索成功', 'duration': 1});
+        }else{
+          modal.toast({'message': '搜索失败', 'duration': 1});
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+  //查询
+  var searchProduct = function(me) {
+	  var bundleUrl = me.$getConfig().bundleUrl;
+	  var ids = data.utils.getParameterByName('id', bundleUrl);
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/home/searchProduct",
+      type:'json',
+      body: {offset: 1,length: 10,keyName: data.keyName}
+    }, function(response) {
+      if(response.data) {
+      	 me.$openURL(me.utils.getAppBaseUrl(me) + 'products.js?id='+ids+'&pageNumber=' + 1 + '&pageSize=' + 10 + '&keyName=' + data.keyName);
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+      data:data,
+      created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+            data.utils.pop(this);
+          });
+      },
+      init: function () {
+        var bundleUrl = this.$getConfig().bundleUrl;
+        data.shopInfo.id = data.utils.getParameterByName('id', bundleUrl);
+        getShopInfo(this);
+        getOnshellProduct(this);
+        getCouponsList(this);
+        //检测是否店铺收藏
+        checkShopCollect(this);
+      },
+      methods: {
+        checkTab: function(index) {
+          if(index == 0) {
+            getOnshellProduct(this);
+          }else if (index == 1) {
+            getOnshellProduct(this);
+          }else if(index == 2) {
+            getOnLastProduct(this);
+          }
+          this.tabIndex = index;
+        },
+        collectShop: function () {
+          getShopCollect(this);
+        },
+        lchange: function (e, m) {
+          this.keyName = e.value;
+        },
+        search: function () {
+         searchProduct(this);
+          //getSearchProduct(this, data.keyName);
+        },
+        toProduct: function (e) {
+       
+          var v = e.target.attr.ds.id;
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + v);
+        },
+        toback: function () {
+          data.utils.pop(this);
+        },
+        cancelShopCollect: function () {
+          cancelCollect(this);
+        }
+      }
+    };
+</script>

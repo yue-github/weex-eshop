@@ -1,0 +1,220 @@
+<style>
+  .bg-grey{
+    background-color: #EDEDED;
+  }
+
+  .heigt-300{
+    width:750px;
+    height:320px;
+  }
+
+  .points-bg{
+    width:750px;
+    height:320px;
+    position: absolute;
+  }
+
+  .row-content{
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top:10px;
+    margin-left:10px;
+  }
+
+  .points-icon{
+    width:30px;
+    height:30px;
+  }
+
+  .points-title{
+    font-size:28px;
+    color:#ffffff;
+    margin-left:5px;
+  }
+
+  .points-value{
+    font-size:90px;
+    text-align:center;
+    color:#ffffff;
+    margin-top:20px;
+  }
+
+  .points-bottom{
+    font-size:28px;
+    color:#ffffff;
+    margin-top:80px;
+    margin-left:10px;
+  }
+
+  .nav{
+    width:750px;
+    flex-direction: row;
+    justify-content: center;
+    margin-top:20px;
+    margin-bottom:20px;
+  }
+
+  .nav-text{
+    font-size:28px;
+    color:#999999;
+  }
+
+  .nav-tiem{
+    width:750px;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color:#ffffff;
+    height:100px;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color:#999999;
+  }
+
+  .col-start{
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .item-title{
+    margin-top:30px;
+    font-size:30px;
+    margin-left:10px;
+  }
+
+  .black{
+    color:#000000;
+  }
+
+  .grey{
+    color:#999999;
+  }
+
+  .red{
+    color:#ED5D67;
+  }
+
+  .value{
+    font-size:30px;
+    margin-right:20px;
+    margin-top:30px;
+  }
+
+  .submit-border{
+    width:710px;
+    margin-top:80px;
+    background-color:#EB5E68;
+    height:90px;
+    margin-left:20px;
+  }
+  
+  .submit{
+    color:#ffffff;
+    font-size:32px;
+    text-align:center;
+    margin-top:25px;
+  }
+
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="我的积分" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="bg-grey">
+      <!-- start: 顶部logo -->
+      <div class="heigt-300">
+        <image class="points-bg" src="{{'src/images/points.png'}}"></image>
+        <div>
+          <div class="row-content">
+            <image class="points-icon" style="margin-top:3px;" src="{{'src/images/points_icon.png'}}"></image>
+            <text class="points-title">积分余额</text>
+          </div>
+          <text class="points-value">{{pointInfo}}</text>
+          <text class="points-bottom" style="margin-bottom:200px;">将要过期的积分：0</text>
+        </div>
+      </div>
+      <!-- end: 顶部logo -->
+
+      <!-- start: 积分明细 -->
+      <div>
+        <div class="nav">
+          <text class="nav-text">近一个月的积分明细</text>
+        </div>
+        <div class="nav-tiem" repeat="item in points">
+          <div class="col-start">
+            <!-- <text class="item-title black">{{item.source}}</text> -->
+            <text class="item-title grey">{{item.created_at}}</text>
+          </div>
+          <text class="value red">{{item.source}}</text>
+        </div>
+      </div>
+
+    </scroller>
+  </wxc-navpage>
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+
+ var data = {
+    pointInfo: 0,
+    points: []
+  };
+
+  data.utils = require('./js-kit/utils');
+
+  var souceMap = {
+    9: "签到积分",
+  }
+
+//获取积分总额列表
+ var getTotalPoint = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/points/myPoint",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        data.pointInfo = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+  //获取积分列表
+ var getPoints = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/points/many",
+      type:'json',
+      body: {offset: 0,length: 10}
+    }, function(response) {
+      if(response.data) {
+        for(var i = 0; i < response.data.data.length; i++) {
+          response.data.data[i].source = souceMap[response.data.data[i].source];
+        }
+        data.points = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+      getTotalPoint(this);
+      getPoints(this);
+    },
+    methods: {
+
+    }
+  };
+</script>

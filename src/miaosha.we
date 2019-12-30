@@ -1,0 +1,533 @@
+<style>
+  .content-page {
+    background-color: #f5f5f5;
+    /*height: 800px;*/
+  }
+
+  .content {
+    background-color: #f5f5f5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 80px;
+  }
+  .refresh {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .list {
+
+  }
+
+  .body {
+    background-color: #f5f5f5;
+  }
+
+  .header {
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 88px;
+    background-color: #eb5d68;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    flex-direction: row;
+    height: 97px;
+    width: 750px;
+    background-color: #eb5d68;
+  }
+
+  .slider {
+   flex-direction: row;
+   width: 750px;
+   height: 400px;
+ }
+
+ .indicator {
+   width: 750px;
+   height: 400px;
+   margin-top: 170px;
+   itemSelectedColor: #eb5d68;
+ }
+
+.adv-p {
+  width: 375px;
+  height: 200px;
+}
+
+.adv-image {
+  width: 750px;
+  height: 70px;
+}
+
+.floor-title {
+  font-size: 28px;
+}
+
+.product-item {
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-top: 20px;
+  padding-bottom: 15;
+  border-top-width: 1px;
+  border-top-color: #d9d9d9;
+  border-bottom-width: 1px;
+  border-bottom-color: #d9d9d9;
+  border-left-width: 1px;
+  border-left-color: #d9d9d9;
+  border-right-width: 1px;
+  border-right-color: #d9d9d9;
+  border: 1px solid #d9d9d9;
+  height:460px;
+}
+
+.product-image {
+  width: 345px;
+  height: 320px;
+}
+
+.product-name {
+  color: #333;
+  font-size: 24px;
+  margin-top: 15px;
+  margin-left:15px;
+  padding-bottom: 15px;
+}
+
+.product-price {
+  font-size: 24px;
+  color: #eb5d68;
+  margin-right: 10px;
+}
+
+.product-note {
+  font-size: 20px;
+  color: #999999;
+}
+
+.title-line {
+  width: 80px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-top-width: 1px;
+  border-top-color: #eb5d68;
+  border-bottom-width: 1px;
+  border-bottom-color: #eb5d68;
+  border-left-width: 1px;
+  border-left-color: #eb5d68;
+  border-right-width: 1px;
+  border-right-color: #eb5d68;
+  border: 1px solid #eb5d68;
+  height: 1px;
+}
+
+.logo {
+  width: 104px; 
+  height: 31px; 
+  margin-right: 28px; 
+}
+
+.search-panel {
+  flex: 1; 
+  border-radius: 10px;
+  flex-direction: row; 
+  align-items: center; 
+  background-color: #fff;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.search-input {
+  flex: 1;
+  height: 50px; 
+  border-radius: 10px; 
+  font-size: 24px; 
+  color: #999;
+}
+
+.search-icon {
+  width: 38px; 
+  height: 38px;
+}
+
+.adv-panel {
+  margin-top: 20px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+}
+
+.recommend-panel {
+  margin-top: 20px;  
+  padding-bottom: 20px; 
+  background-color: #fff; 
+}
+
+.recommend-title {
+  flex-direction: row; 
+  align-items: center; 
+  justify-content: center;
+  height: 50; 
+  border-bottom: 1px solid #d9d9d9;
+  border-bottom-width: 1px; 
+  border-bottom-color: #d9d9d9;
+}
+
+.product-panel {
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  padding-left: 6px; 
+  padding-right: 6px;
+}
+
+.product-txt {
+  flex-direction: row; 
+  margin-top: 15px; 
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recommend-name {
+  color: #eb5d68; 
+  font-size: 28;
+}
+.miaosha-icon{
+  font-size:24px;
+  color:#EC331E;
+  margin-top:5px;
+}
+.miaosha-price{
+  font-size:32px;
+  color:#EC331E;
+}
+.miaosha-discount{
+  font-size:28px;
+  color:#666666;
+  text-decoration: line-through;
+}
+.miaosha-text{
+  font-size:30px;
+  color:#ffffff;
+  margin-right:10px;
+}
+.slider-coupons{
+   flex-direction: row;
+   width: 750px;
+   height: 200px;
+ }
+.miaosha-coupons-row{
+  flex-direction: row;
+  padding-left: 6px;
+  padding-right: 6px;
+  height:150px;
+  margin-bottom:20px;
+}
+
+.miaosha-coupons-item{
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width:332px;
+  margin-left:10px;
+  margin-right:10px;
+}
+
+.miaosha-coupons-col{
+  flex-direction: row;
+  justify-content:flex-start;
+}
+
+.miaosha-coupons-icon{
+  font-size:24px;
+  color:#EA341E;
+  margin-top:12px;
+}
+
+.miaosha-coupons-value{
+  font-size:40px;
+  color:#EA341E;
+}
+
+.miaosha-coupons-text{
+  font-size:24px;
+  color:#666666;
+  margin-top:8px;
+}
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#EB5D69" title="秒杀抢购" title-color="white" left-item-title="返回" left-item-color="white">
+    <!--begin 搜索-->
+     <!-- <div class="header">
+       <image class="logo" src="{{utils.getImageBaseUrl()+'images/home_logo.png'}}"></image>
+       <div class="search-panel">
+        <input placeholder="请输入关键字" value="{{keyName}}" oninput="vchange($event, 'keyName')" class="search-input"></input>
+        <image src="{{utils.getImageBaseUrl()+'images/icon_search.png'}}" onclick="searchProduct" class="search-icon"></image>
+      </div>
+    </div> -->
+    <!--end 搜索-->
+    
+    <list class="content-page" style="height:{{serverHeight}}">
+      <!--begin 轮播图-->
+      <cell>
+         <slider class="slider" append="tree" interval="3000" auto-play="true">
+          <indicator class="indicator"></indicator>
+          <slider-page  pheight="400" repeat="{{sliders}}"></slider-page>
+        </slider>
+      </cell>
+    <!--end 轮播图-->
+
+    <!-- start: 计时器 -->
+    <cell>
+      <div style="flex-direction: row;justify-content: space-between;align-items: center;height:100px;background-color:#ffffff;margin-bottom: 20px;">
+        <div style="flex-direction: row;justify-content: flex-start;align-items: center;">
+          <image style="width:30px;height:30px;margin-left:20px;" src="{{utils.getImageBaseUrl() + 'images/miaosha_icon.png'}}"></image>
+          <text style="font-size:30px;color:#FF0E24;margin-left:10px;">{{promotion.promotionTitle}}</text>
+        </div>
+        
+        <text style="font-size:30px;color:#4C525E;margin-right:20px;">距离本场结束:{{hour}}:{{min}}:{{second}}</text>
+      </div>
+    </cell>
+    <!-- end: 计时器 -->
+
+    <!-- start: 优惠券 -->
+      <cell>
+        <div class="miaosha-coupons-row">
+
+          <div class="miaosha-coupons-item">
+            <image src="{{utils.getImageBaseUrl()+'images/miaosha_item_bg.jpg'}}" style="width:332px;height:150px;position: absolute;"></image>
+            <image src="{{utils.getImageBaseUrl()+'images/miaosha_is_used.png'}}" style="width:80px;height:80px;position: absolute;top:40px;left:190px;"></image>
+            <div style="margin-top:20px;margin-left:-30px;">
+              <div class="miaosha-coupons-col">
+                <text class="miaosha-coupons-icon">￥</text>
+                <text class="miaosha-coupons-value">20</text>
+              </div>
+              <text class="miaosha-coupons-text">仅限促销活动商品</text>
+              <text class="miaosha-coupons-text">2016-11-23至2016-12-24</text>
+            </div>
+          </div>
+
+          <div class="miaosha-coupons-item">
+            <image src="{{utils.getImageBaseUrl()+'images/miaosha_item_bg.jpg'}}" style="width:332px;height:150px;position: absolute;"></image>
+            <image src="{{utils.getImageBaseUrl()+'images/miaosha_is_used.png'}}" style="width:80px;height:80px;position: absolute;top:40px;left:190px;"></image>
+            <div style="margin-top:20px;margin-left:-30px;">
+              <div class="miaosha-coupons-col">
+                <text class="miaosha-coupons-icon">￥</text>
+                <text class="miaosha-coupons-value">20</text>
+              </div>
+              <text class="miaosha-coupons-text">仅限促销活动商品</text>
+              <text class="miaosha-coupons-text">2016-11-23至2016-12-24</text>
+            </div>
+          </div>
+
+          <div class="miaosha-coupons-item">
+            <image src="{{utils.getImageBaseUrl()+'images/miaosha_item_bg.jpg'}}" style="width:332px;height:150px;position: absolute;"></image>
+            <image src="{{utils.getImageBaseUrl()+'images/miaosha_is_used.png'}}" style="width:80px;height:80px;position: absolute;top:40px;left:190px;"></image>
+            <div style="margin-top:20px;margin-left:-30px;">
+              <div class="miaosha-coupons-col">
+                <text class="miaosha-coupons-icon">￥</text>
+                <text class="miaosha-coupons-value">20</text>
+              </div>
+              <text class="miaosha-coupons-text">仅限促销活动商品</text>
+              <text class="miaosha-coupons-text">2016-11-23至2016-12-24</text>
+            </div>
+          </div>
+
+        </div>
+      </cell>
+    <!-- end: 优惠券 -->
+
+  <!--begin 推荐产品-->
+  <cell>
+    <div class="recommend-panel">
+      <div class="recommend-title">
+        <!-- <div class="title-line"></div> -->
+        <text class="recommend-name">{{promotion.promotionDescription}}</text>
+        <!-- <div class="title-line"></div> -->
+      </div>
+
+      <div class="product-panel">
+        <div onclick="toProduct" ds="{{item}}" class="product-item" repeat="{{item in productList}}">
+          <image class="product-image"  src="{{item.mainPic}}"></image>
+          <div style="flex-dircetion: row;">
+            <text class="product-name">{{item.name}}</text>
+            <div style="flex-direction: row;justify-content:space-between;align-items: center;">
+              <image src="{{utils.getImageBaseUrl()+'images/miaosha_product_bg.jpg'}}" style="width:345px;height:80px;position: absolute;"></image>
+              <div style="margin-left:15px;">
+                <div style="flex-direction: row;justify-content:space-between;align-items: center;">
+                  <text class="miaosha-icon">￥</text>
+                  <text class="miaosha-price">{{item.actualPrice}}</text>
+                </div>
+                <text class="miaosha-discount">{{item.suggestedRetailUnitPrice}}</text>
+              </div>
+              <text class="miaosha-text">立即抢购</text>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </cell>
+  <!--end 推荐产品-->
+
+  </list>
+   
+</wxc-navpage>
+</template>
+
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+ var timer;
+
+ var data = {
+    sliders: [],
+    promotion: {},
+    productList: [],
+    codeText: '',
+    hour: 0,
+    min: 0,
+    second: 0,
+    timenum: 0,
+  };
+ data.utils = require('./js-kit/utils');
+
+  //获取轮播图
+  var getBanners = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/home/banners",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        var banners = response.data.advertisements;
+        var sliders = [];
+
+        for(var i = 0; i < banners.length; i++) {
+          var item  = banners[i];
+          sliders.push({items: [{image: item.path, link: item.url}]});
+        }
+
+        data.sliders = sliders;
+      }
+    },function(response){
+
+    });
+  };
+
+  //获取推荐产品
+  var getProduct = function (me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/home/paginatePromotionProduct",
+      type:'json',
+      body: {promotionId: 1,pageNumber: 20,pageSize: 1}
+    }, function(response) {
+      if(response.data) {
+        data.promotion = response.data.promotion;
+        data.productList = response.data.productList;
+        var myDate = new Date(data.promotion.remainTime/1000);
+      }
+    },function(response){
+
+    });
+  };
+
+  //日期格式转时间戳再转日期格式
+  var changeTime = function (stringTime) {
+    if(!stringTime) {
+      return;
+    }else{
+      // var stringTime = "2016-11-21 20:55:52";
+      var timestamp2 = Date.parse(new Date(stringTime));
+      return timestamp2 = timestamp2 / 1000;
+    }
+  }
+
+  // {totalPage:总页数,totalRow:总行数,promotion:{
+  //   id:id,promotionTitle:活动标题,promotionDescription:活动描述,startTime:开始时间,endTime:结束时间remainTime:活动剩余时间,promPic:促销活动图片
+  // },productList:[
+  //   {id:适用产品id,product_id:产品id,name:产品名称,summary:产品简介,suggestedRetailUnitPrice:原价,actualPrice:实际价格,mainPic:产品主图}
+  //   ]
+  // }
+
+
+  module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+      var headerHeight =  data.utils.getRealHeight(this, 88);
+      var footerHeight =  data.utils.getRealHeight(this, 80);
+      this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight - footerHeight;
+
+      
+      
+      getBanners(this);
+      getProduct(this);
+    },
+    methods: {
+      ready:function() {
+        timer = setInterval(this.start.bind(this), 1000)
+      },
+      start:function() {
+        if(data.timenum>0){
+          data.timenum--
+          data.codeText=data.timenum;
+          data.hour = Math.floor(data.timenum/3600);
+          data.min = Math.floor((data.timenum%3600)/60);
+          data.second = data.timenum%60;
+        }else{
+          data.codeText="活动已结束";
+        }
+      },
+      stop:function() {
+        clearInterval(timer)
+      },
+      toProduct: function (e) {
+        var v=e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + v);
+      },
+      toCategory: function(e) {
+        var v=e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + v);
+      },
+      vchange: function (e, m) {
+        this.keyName = e.value;
+      },
+      toCategory: function (categoryId) {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'products.js?categoryId=' + categoryId);
+      },
+      toSurrounding: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'surrounding.js');
+      },
+      toPromotion: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'promotion.js');
+      }
+    }
+  };
+
+</script>

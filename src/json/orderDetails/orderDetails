@@ -1,0 +1,5 @@
+{"error": 0,"order":{"id":1,"preferredContactPhone": "13642635227","receiveName": "李大力","receiveProvince": "广东省","receiveCity": "广州市","receiveDistrict": "天河区","receiveDetailAddress":"地中海518号666室","shopName": "花果山1","order_code": "4567891234567891","orderTime": "2016-11-11", "status": 1,"couponTitle": "双11促销", "payType": 1,"created_at": "2016-11-11", "deliveryPrice": 10,"totalPayable": 100,"details": [
+		{"name": "产品名1","mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","size": "2.5kg","package": "箱装","num": 15,"price": 60},
+		{"name": "产品名1","mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","size": "2.5kg","package": "箱装","num": 15,"price": 60}
+	]
+}}

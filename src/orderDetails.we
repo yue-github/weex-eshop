@@ -1,0 +1,828 @@
+<style>
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+  .header{
+    flex-direction: row;
+    justify-content: center;
+    background-color: #EB5D69;
+    height:88px;
+    align-items: center;
+    color: #ffffff;
+  }
+
+  .bg-grey{
+    background-color:#EAEAEA;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .item{
+    height: 160px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-bottom-color:#EAEAEA;
+    border-bottom-width: 1px;
+  }
+
+  .item-txt{
+    font-size: 28px;
+    margin-top:20px;
+    margin-bottom: 20px;
+    margin-left:20px;
+    color: #333333;
+  }
+
+  .star{
+    width: 17px;
+    height:60px;
+    /*margin-top:25px;*/
+  }
+
+  .row{
+    flex-direction:row;
+    justify-content: flex-start;
+  }
+
+  .column{
+    flex-direction:column;
+    justify-content: flex-start;
+  }
+
+  .mg-t20{
+    margin-left:20px;
+  }
+
+  .driver-details{
+    color: #333333;    
+    margin-top:20px;
+    font-size:28px;
+  }
+
+  .driver-time{
+    color: #999999;
+    margin-top:10px;
+    font-size:24px;
+  }
+
+  .consignee{
+    flex-direction:column;
+    justify-content: flex-start;
+    margin-left:20px;
+  }
+
+  .address{
+    margin-top: 10px;
+    font-size:28px;
+    color: #666666;
+  }
+
+  .item-product-deteils{
+    background-color:#ffffff;
+    margin-top:20px;
+  }
+
+  .item-title {
+    height: 70px;
+    border-bottom-style:solid;
+    border-bottom-width: 1px; 
+    border-bottom-color: #d9d9d9;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .shop-name {
+    font-size: 26px;
+    color: #333333;
+  }
+
+  .status {
+    font-size: 26px;
+    color: #eb5d68;
+  }
+
+  .item-product {
+    height: 210px;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction: row;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .product-image {
+    width: 136px;
+    height: 136px;
+  }
+
+  .product-r {
+    flex: 1;
+    margin-left: 20px;
+    height: 180px;
+  }
+
+  .p-info1 {
+    padding-top: 5px;
+    height: 32px;
+    /*overflow-wrap: hidden;*/
+    /*overflow:hidden;*/
+  }
+
+  .product-name {
+    font-size: 26px;
+    color: #333333;
+  }
+
+  .product-summary {
+    font-size: 24px;
+    color: #666666;
+  }
+
+  .p-info2 {
+   margin-top: 9px;
+  }
+
+  .product-attr {
+    font-size: 22px;
+    color: #666666;
+  }
+
+  .product-price {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 9px;
+  }
+  
+  .p-price {
+    color: #eb5d68;
+    font-size: 26px;
+  }
+
+  .p-num {
+    font-size: 22px;
+    color: #666666;
+  }
+
+  .item-bar {
+    height: 80px;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .btn {
+    /*width: 100px;*/
+    /*height:40px;*/
+    background-color: #FDE314;
+    padding-left: 20px;
+    padding-right: 20px;
+    /*padding-bottom: 5px;*/
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn-text {
+    text-align: center;
+    color: #ffffff;
+    font-size: 26px;
+    padding-top: 5px; 
+    padding-bottom: 5px; 
+    padding-left: 10px; 
+    padding-right: 10px; 
+  }
+
+  .driver-free-l{
+    margin-top:20px;
+    margin-left:20px;
+    color:#999999;
+    font-size:28px;
+  }
+
+  .driver-free-r{
+    margin-right:20px;
+    margin-top:20px;
+    color:#999999;
+    font-size:28px;
+  }
+
+  .red{
+    color:#FDE314;
+  }
+
+  .space-between{
+    flex-direction: row ;
+    justify-content: space-between;
+  }
+
+  .mg-b-20{
+    margin-bottom: 20px;
+  }
+  .font-26{
+    font-size:26px;
+  }
+  .dirver-details-item{
+    flex-direction: row;
+    justify-content: flex-start;
+   
+  }
+  .mg-l-20{
+    margin-left: 20px;
+  }
+  .change-payType{
+    margin-right:20px;
+    margin-top:20px;
+    background-color: #FDE314;
+    font-size:28px;
+    color:#ffffff;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:5px;
+    padding-bottom: 5px;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="订单详情" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="bg-grey">
+    <div>
+    
+
+    <!-- start: 收货人信息 -->
+    <div class="item" style="height:120px;">
+      <div class="row">
+        <div class="consignee">
+          <text class="driver-details" style="margin-top:20px;">收货人：{{order.receiveName}} {{order.preferredContactPhone}}</text>
+          <text class="address">{{order.receiveProvince}} {{order.receiveCity}} {{order.receiveDistrict}} {{order.receiveDetailAddress}}</text>
+        </div>
+        
+      </div>
+    </div>
+    <!-- end: 收货人信息 -->
+
+    <!-- start: 订单详情 -->
+    <div class="item-product-deteils">
+      <div class="item-title">
+        <text class="shop-name">{{order.shopName}}</text>
+        <text class="status">{{order.status}}</text>
+      </div>
+      <div repeat="item in order.details">
+        <div onclick="toProduct" ds="{{item}}" class="item-product">
+          <div class="product-l">
+            <image class="product-image" src="{{utils.getAbsolutePath(item.mainPic)}}"></image>
+          </div>
+
+          <div class="product-r">
+            <div>
+              <text class="product-name font-26">{{item.name}}</text>
+            </div>
+            <div class="p-info1">
+              <!-- <text class="product-summary">{{item.summary}}</text> -->
+            </div>
+            <div class="p-info2">
+              <text class="product-attr">{{item.selectProterties}}</text>
+            </div>
+            <div class="product-price">
+              <text class="p-price">￥{{utils.toDecimal2(item.actualUnitPrice)}}</text>
+              <text class="p-num">x{{item.unitOrdered}}</text>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-bar" if="{{item.status == 1}}">
+        <!-- <div class="item-bar"> -->
+          <div class="btn mg-l-20" if="{{item.status == 1&&(order.status == '待收货'||order.status == '待发货'||order.status == '待评价')}}" onclick="toRefund($event, $index)" ds="{{order.details}}">
+            <text class="btn-text">申请售后</text>
+          </div>
+          <!-- <div class="btn mg-l-20" if="{{item.status == 1}}" onclick="toRefund($event, $index)" ds="{{order.details}}"><text class="btn-text">申请售后</text></div> -->
+          <div class="btn mg-l-20" onclick="toComment($event, $index)" ds="{{order.details}}" if="{{order.status == '待评价'}}"><text class="btn-text">待评价</text></div>
+        </div>
+      </div>
+      <div class="item-bar"  if="{{order.status == '待付款' || order.status == '待评价' || order.status == '待收货' || order.status == '订单完成'}}">
+        <div class="btn mg-l-20" onclick="cancelOrder" if="{{order.status == '待付款'}}"><text class="btn-text">取消订单</text></div>
+        <div class="btn mg-l-20" onclick="toPay" if="{{order.status == '待付款'}}"><text class="btn-text">立即支付</text></div>
+        <div class="btn mg-l-20" onclick="toGet" if="{{order.status == '待收货'}}"><text class="btn-text">确认收货</text></div>
+        <div class="btn mg-l-20" if="{{order.status == '已评价'}}"><text class="btn-text">已评价</text></div>
+        <!-- <div class="btn mg-l-20" style="background-color: #ffffff;" if="{{order.status == '已取消'}}"><text class="btn-text" style="color: #333333;">订单已关闭</text></div> -->
+        <div class="btn mg-l-20" if="{{order.status == '订单完成'}}"><text class="btn-text">订单完成</text></div>
+      </div>
+      
+    </div>
+    <!-- end: 订单详情 -->
+
+    <!-- start: 运费信息 -->
+    <div class="item-product-deteils">
+      <div clsaa="row">
+        <div class="space-between">
+          <text class="driver-free-l">运费</text>
+          <text class="driver-free-r">￥{{utils.toDecimal2(order.deliveryPrice)}}</text>
+        </div>
+
+        <div class="space-between">
+          <text class="driver-free-l">实付费（含运费）</text>
+          <text class="driver-free-r red" style="margin-bottom:20px;">￥{{utils.toDecimal2(order.totalPayable)}}</text>
+        </div>
+      </div>
+    </div>
+    <!-- end: 运费信息 -->
+
+     <!-- start: 运费信息 -->
+    <div class="item-product-deteils">
+      <div clsaa="row">
+        <text class="driver-free-l">订单编号：{{order.order_code}}</text>
+      </div>
+      <div clsaa="row">
+        <text class="driver-free-l">创建时间：{{order.orderTime}}</text>
+      </div>
+      <!-- <div clsaa="row">
+        <text class="driver-free-l">{{order.status}}：{{order.updated_at}}</text>
+      </div> -->
+      <div clsaa="row" style="flex-direction: row;justify-content: space-between;align-items: center;">
+        <text class="driver-free-l">支付方式：{{order.payType}}</text>
+        <text if="{{order.status == '待付款'}}" class="change-payType" onclick="selectType">修改支付方式</text>
+      </div>
+      <div clsaa="row" if="{{order.couponDiscount!=null}}">
+        <text class="driver-free-l">使用优惠：{{order.couponDiscount}}</text>
+      </div>
+      <div clsaa="row" if="{{order.couponDiscount==null}}">
+        <text class="driver-free-l">使用优惠：暂无可使用的优惠劵</text>
+      </div>
+      <div clsaa="row">
+        <text class="driver-free-l">发票抬头：{{order.invoiceHead}}</text>
+      </div>
+      <div clsaa="row">
+        <text class="driver-free-l mg-b-20">会员备注：{{order.note}}</text>
+      </div>
+    </div>
+    <!-- end: 运费信息 -->
+
+    <!-- start: 快递信息 -->
+    <div style="background-color:#ffffff;margin-top:20px;">
+      <text class="item-txt">物流详情：</text>
+      <div style="flex-direction: row;justify-content: space-between;">
+        <div class="column" style="margin-top:-10px;">
+          <div class="dirver-details-item" repeat="{{item in dirverDetails}}">
+          <div style=" border-left-style:solid;border-left-width: 1px;  margin-left:20px; border-left-color: #c9c9c9;left:9"></div>
+            <image class="star" src="{{utils.getImageBaseUrl()+'images/driver_01.png'}}"></image>
+          
+            <div class="mg-t20">
+              <text class="driver-details" style="line-height:40;width:680">{{item.title}}</text>
+              <text class="driver-time">{{item.time}}</text>
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- <div class="mg-t-20">
+          <image style="width:16px;height:28px;margin-top:20px;margin-right:20px;" src="{{utils.getImageBaseUrl()+'images/right_to.png'}}"></image>
+        </div> -->
+      </div>
+      
+    </div>
+    <!-- end: 快递信息 -->
+
+    </div>
+    <by-select title="选择支付方式" height="{{hheight}}" sid="0" id="changeType" sname="changeType" sdata="{{changeTypes}}"></by-select>
+    </scroller>
+  </wxc-navpage>
+  
+</template>
+
+<script>
+ require('weex-components');
+ require('./by-components/by-select.we');
+ var stream = require('@weex-module/stream');
+ var modal = require('@weex-module/modal');
+
+// <!-- 1: 待付款,2: 待发货,3: 待收货,4: 待评价,5: 已评价,6: 已取消, 7订单完成 -->
+
+// 状态(1正常，2申请退款，3不通过，4通过，5退款成功，6已退货, 7已评价)
+ var statusMap = {
+  1:"待付款",
+  2:"待发货",
+  3:"待收货",
+  4:"待评价",
+  5:"已评价",
+  6:"已取消",
+  7:"订单完成"
+ }
+
+ var payTypeMap = {
+  2:"支付宝",
+  1:"微信支付",
+  3:"银联支付",
+  4:"余额支付",
+  5:"团购卡支付"
+ }
+
+ var data = {
+    order:{note: '', receiveName: '', preferredContactPhone: '', receiveProvince: '', receiveCity: '', receiveDistrict: '', receiveDetailAddress: '',deliveryPrice: '', totalPayable: '',order_code: '', orderTime: '', couponTitle: '',payType: '', details: []},
+    dirverDetails: [],
+    orderDetailsId: 0,
+    hheight: 270,
+    isRefundGood: 0,
+    isAndroidPlatform: false,
+    isWebPlatform: false,
+    isIosPlatform: false
+  };
+ data.utils = require('./js-kit/utils');
+
+ data.changeTypes = [
+    {id: 2, name:"支付宝"},
+    {id: 1, name:"微信支付"},
+    {id: 3, name:"银联支付"}
+ ];
+
+ //获取快递信息
+  var getLogisticsInfo = function(id, me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/orderDetails/getLogisticsInfo",
+      type:'json',
+      body: {orderId: id}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          data.dirverDetails = response.data.data;
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+
+ //获取订单详情
+ var getOrderDetails = function(id, me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/orderDetails/get",
+      type:'json',
+      body: {id:id}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+
+
+          for(var i = 0; i < response.data.order.details.length; i++) {
+            if(response.data.order.details[i].selectProterties == null || response.data.order.details[i].selectProterties == '') {
+              response.data.order.details[i].selectProterties = '';
+            }
+          }
+
+          data.order = response.data.order;
+
+          if(!data.order.invoiceHead) {
+            data.order.invoiceHead = '';
+          }
+          
+          data.order.status = statusMap[response.data.order.status];
+          data.order.payType = payTypeMap[response.data.order.payType];
+
+          if(data.order.status == '待收货' || data.order.status == '待发货' || data.order.status == '待评价') {
+            data.isRefundGood = 1;
+          }else{
+            data.isRefundGood = 0;
+          }
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+  //公众号微信支付
+  var toWxPay = function(me,orderId) {
+    data.utils.fetch(me,{
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/orders/getWxJsApiParameters",
+        type:'json',
+        body:{orderId: orderId}
+      }, function(response) {
+        if(response.data.error == 0) {
+
+            function jsApiCall()
+            {
+                WeixinJSBridge.invoke(
+                    'getBrandWCPayRequest',
+                    response.data.data,
+                    function(res){
+                        if (res.err_msg == "get_brand_wcpay_request:ok") {
+                          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmSuccess.js');
+                        }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmCancel.js');
+                        }else{
+                          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmFaile.js');
+                        }
+                    }
+                );
+            }
+
+            var weixinPay = function() {
+                if (typeof WeixinJSBridge == "undefined")
+                {
+                    if (document.addEventListener)
+                    {
+                        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                    }
+                    else if (document.attachEvent)
+                    {
+                        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                    }
+
+                }
+                else
+                {
+                    jsApiCall();
+                }
+            };
+
+            weixinPay();
+        }
+      },function(response){
+
+      });
+  }
+
+  var toAlipay = function(order, me) {
+    var alipay = require('@weex-module/alipay');
+    alipay.pay(order.price, order.tradeNo+"", function(resp) {
+      if (resp.result == 0) {
+        payChangeStatus(me, order.orderCode);
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'orders.js?status=2');
+      }else if(resp.result == 1){
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmCancel.js');
+      }else{
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmFaile.js');
+      }
+      // modal.toast({'message': resp.result, 'duration': 1});
+    });
+  }
+
+  //@注 前端改变支付状态
+  var payChangeStatus = function (me, orderCode) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/orders/payOrderByOrderCode",
+      type:'json',
+      body: {orderCode: orderCode}
+    }, function(response) {
+      if(response.data) {
+        // modal.toast({'message': 'error=' + response.data.error, 'duration': 1});
+      }
+    },function(response){
+
+    });
+  }
+
+  var toWXAppPay = function(order, me) {
+    var wxpay = require('@weex-module/wxpay');
+    wxpay.pay(me.utils.getServerBaseUrl()+'pc/comfirmOrder/wxpayCallback', order.price, order.tradeNo, function(resp) {
+      if (resp.result == 0) {
+          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmSuccess.js');
+      }else if(resp.result == 1){
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmCancel.js');
+      }else{
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmFaile.js');
+      }
+      // // modal.toast({'message': resp.result, 'duration': 1});
+    });
+  }
+
+  //银联支付
+  var unionPay=function(order,me){
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/orders/unionpay",
+      type:'json',
+      body: {tradeCode:order.order_code}
+    }, function(response) {
+        if(response.data){
+          $('#weex').append(response.data.payInfo);
+        }
+    }); 
+  }
+
+     //去支付
+  var actionPay = function(order, me) {
+      if(order.payType == "支付宝") {
+        toAlipay({price: order.totalPayable, tradeNo: order.order_code}, me);
+      } else if(order.payType == "微信支付") {
+        if(me.isWebPlatform) {
+          toWxPay(me, order.id);
+        } else {
+          toWXAppPay({price: order.totalPayable, tradeNo: order.order_code}, me);
+        }
+        
+      } else if(order.payType == "银联支付") {
+        unionPay(order,me);
+      }else if(order.payType == "余额支付") {
+        balancePay(me, order.id);
+      }
+  }
+
+  //余额支付
+  var balancePay = function (me, orderId) {
+    modal.confirm({
+      'message': '是否使用余额支付',
+      'okTitle': '确定',
+      'cancelTitle': '取消'
+    }, function(result) {
+        if(result == '确定') {
+            data.utils.fetch(me,{
+            method: 'post',
+            url: data.utils.getServerBaseUrl() + "webapp/orders/balancePay",
+            type:'json',
+            body: {orderId: orderId}
+          }, function(response) {
+            if(response.data) {
+              if(response.data.error == -1) {
+                modal.toast({'message': '余额不足', 'duration': 1});
+              }else if(response.data.error == 0) {
+                modal.toast({'message': '支付成功', 'duration': 1});
+                me.$openURL(me.utils.getAppBaseUrl(me) + 'orders.js?status=2');
+              }
+            }
+          },function(response){
+
+          });
+        }
+    });
+    
+  }
+
+  //改变支付状态
+  var changePayType = function(me, orderId, type) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/orders/editPaytype",
+      type:'json',
+      body: {orderId:orderId, payType: type}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          getOrderDetails(orderId, me);
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+
+        this.isWebPlatform = data.utils.isWebPlatform(this);
+    },
+    ready: function () {
+      var me = this;
+      me.$on('changeTypeclick', function (e) {
+        var type = e.detail.id;
+        changePayType(me, this.id, type);
+      }.bind(this));
+    },
+    init:function () {
+      var bundleUrl = this.$getConfig().bundleUrl;
+      data.id = data.utils.getParameterByName('id', bundleUrl);
+      getOrderDetails(data.id, this);
+      getLogisticsInfo(data.id, this);
+
+      this.isWebPlatform = data.utils.isWebPlatform(this);
+      if(this.isWebPlatform) {
+        data.changeTypes = [
+          {id: 1, name:"微信支付"},
+          {id: 3, name:"银联支付"},
+          {id: 4, name:"余额支付"}
+        ];
+        
+      }else{
+        data.eventTypes = [
+          {id: 2, name:"支付宝支付"},
+          {id: 1, name:"微信支付"},
+          {id: 3, name:"银联支付"},
+          {id: 4, name:"余额支付"}
+        ];
+        data.hheight = 360;
+      }
+    },
+    methods: {
+      toRefund: function (e, v) {
+        var datas = e.target.attr.ds;
+        var productOrderId = '';
+        for(var i = 0; i < datas.length; i++) {
+          if(i == v) {
+            productOrderId = datas[i].id;
+          }
+        }
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'refund.js?productOrderId=' + productOrderId);
+      },
+      toPay: function () {
+        var me = this;
+        actionPay(data.order, me);
+      },
+      cancelOrder: function (e) {
+        var me = this;
+
+        modal.confirm({
+          'message': '是否取消订单',
+          'okTitle': '确定',
+          'cancelTitle': '取消'
+        }, function(result) {
+            if(result == '确定') {
+              data.utils.fetch(me,{
+                method: 'post',
+                url: data.utils.getServerBaseUrl() + "webapp/orders/cancel",
+                type:'json',
+                body: {orderId: me.order.id}
+              }, function(response) {
+                if(response.data) {
+                    modal.toast({'message': '订单已取消', 'duration': 1});
+                    me.$openURL(me.utils.getAppBaseUrl(me) + 'orders.js?status=0');
+                }
+              },function(response){
+
+              });
+            }
+        });
+      },
+      selectType: function () {
+        if (this.isWebPlatform) {
+          this.changeTypes = [
+              {id: 1, name:"微信支付"},
+              {id: 3, name:"银联支付"}
+          ];
+        } else {
+          data.changeTypes = [
+              {id: 2, name:"支付宝"},
+              {id: 1, name:"微信支付"}
+          ];
+        }
+        this.$vm('changeType').show();
+      },
+      toProduct: function (e) {
+        var id = e.target.attr.ds.product_id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + id);
+      },
+      toComment: function (e, v) {
+        var me = this;
+        var datas = e.target.attr.ds;
+        var productOrderId = '';
+        for(var i = 0; i < datas.length; i++) {
+          if(i == v) {
+            productOrderId = datas[i].id;
+          }
+        }
+        modal.confirm({
+          'message': '是否跳转评价页面',
+          'okTitle': '确定',
+          'cancelTitle': '取消'
+        }, function(result) {
+            if(result == '确定') {
+                me.$openURL(me.utils.getAppBaseUrl(me) + 'comment.js?productOrderId=' + productOrderId); 
+            }
+        });
+      },
+      toGet: function (e) {
+        var me = this;
+        // var id = e.target.attr.ds.product_id;;
+
+        modal.confirm({
+                'message': '是否确认收货',
+                'okTitle': '确定',
+                'cancelTitle': '取消'
+              }, function(result) {
+                  if(result == '确定') {
+                      data.utils.fetch(me,{
+                      method: 'post',
+                      url: data.utils.getServerBaseUrl() + "webapp/orders/receive",
+                      type:'json',
+                      body: {orderId: data.id}
+                  }, function(response) {
+                    if(response.data) {
+                        modal.toast({'message': '确定收货', 'duration': 1});
+                        me.$openURL(me.utils.getAppBaseUrl(me) + 'orders.js?status=4'); 
+                    }
+                  },function(response){
+
+                  });
+                  }
+              });
+      },
+    }
+  };
+
+</script>

@@ -1,0 +1,6 @@
+{"error": 0, "promotions": [
+	{"id": 1,"promotionTitle": "9块9抢购，满100元可抢购","promotionDescription": "每日两款爆品，抢完即止", "products": [
+		{"id": 1,"name":"哈密瓜1","summary":"超大超好吃1","suggestedRetailUnitPrice":100,"mainPic":"http://192.168.1.120:8081/images/promotion_01.jpg"},
+		{"id": 2,"name":"哈密瓜2","summary":"超大超好吃2","suggestedRetailUnitPrice":100,"mainPic":"http://192.168.1.120:8081/images/promotion_01.jpg"}
+	]}
+]}

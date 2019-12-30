@@ -1,0 +1,63 @@
+<style>
+  .content {
+    background-color: #f5f5f5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .register-title{
+    font-size:32px;
+    margin-top: 20px;
+    color:#999999;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .register-text{
+    font-size:26px;
+    color:#999999;
+    text-indent:2em;
+    margin-bottom: 10px;
+  }
+</style>
+
+<template>
+	<wxc-navpage data-role="none" height="88" background-color="#FDE314" title="平台免责声明" title-color="white" left-item-title="返回" left-item-color="white">
+      <scroller class="content">
+        <div style="flex-direction: column;justify-content:center;width:750px;">
+          <text class="register-title">平台免责声明</text>
+          <text class="register-text">本网站在国家相关法律法规规定的范围内，只按现有状况提供网店在线进行销售第三方网络平台服务，本网站及其所有者非交易一方，也非交易任何一方之代理人或代表；同时，本网站及其所有者也未授权任何人代表或代理本网站及其所有者从事任何网络交易行为或做出任何承诺、保证或其他类似行为，除非有明确的书面授权。</text>
+          <text class="register-text">鉴于互联网及网络交易的特殊性，本网站无法鉴别和判断相关交易各主体之民事权利和行为能力、资质、信用等状况。因此，交易各方在交易前应加以仔细辨明，并慎重考虑可能产生的各项风险。</text>
+          <text class="register-text">本网站对于交易各方因各类情形而产生的任何纠纷，将由交易各方依据中华人民共和国现行的有关法律通过适当的方式直接加以解决，本网站及其所有者不参与其中；对于因此类交易而产生的各类纠纷之任何责任和后果，由交易各方承担，本网站及其所有者不承担任何责任及后果。</text>
+        </div>
+      </scroller>
+    </wxc-navpage>
+	
+</template>
+
+<script>
+  require('weex-components');
+  var stream = require('@weex-module/stream');
+
+  var data = {
+
+  }
+  
+  data.utils = require('./js-kit/utils');
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+
+    },
+    methods: {
+
+    }
+  };
+</script>

@@ -1,0 +1,443 @@
+<style>
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+  .header{
+    flex-direction: row;
+    justify-content: center;
+    background-color: #EB5D69;
+    height:88px;
+    align-items: center;
+    color: #ffffff;
+  }
+
+  .bg-grey{
+    background-color: #EAEAEA;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .input{
+    /*height:100px;*/
+    /*flex-direction: row;*/
+    /*align-items: flex-start;*/
+    padding-top: 8px;
+    margin-top:22px;
+    font-size:28px;
+    width:550px;
+  }
+
+  .comment{
+    width:750px;
+    /*height:365px;*/
+    background-color:#ffffff;
+  }
+
+  .row{
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .product_image{
+    width:98px;
+    height:98px;
+    margin-top:30px;
+    margin-left:30px;
+    margin-right:40px;
+  }
+
+  .upload{
+    margin-top:90px;
+    margin-bottom: 25px;
+  }
+
+  .upload_image{
+    width:128px;
+    height:128px;
+    margin-left:25px;
+  }
+
+  .item{
+    margin-top:30px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .item-txt {
+    margin-left:20px;
+    font-size: 28px;
+    color: #999999;
+  }
+
+  .star{
+    margin-right:20px;
+    width:30px;
+    height:30px;
+  }
+
+  .star-column{
+    margin-top:20px;
+    background-color:#ffffff;
+  }
+
+  .rate-name{
+    font-size: 32px;
+    margin-top:20px;
+    margin-left:20px;
+    color:#666666;
+  }
+
+  .star-image{
+    flex-direction:row;
+    justify-content: flex-end
+  }
+
+  .comfirm-flex-row{
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-top:30px;
+    width:500px;
+  }
+
+  .comfirm-name{
+    margin-left:20px;
+    font-size:28px;
+    color:#666666;
+    padding-bottom:20px;
+  }
+
+  .red{
+    color:#666666;
+    font-size: 32px;
+    padding-bottom:20px;
+  }
+
+  .submit-bottom{
+    width:250px;
+    background-color:#FDE314;
+    height:100px;
+  }
+
+  .submit{
+    text-align: center;
+    color:#ffffff;
+    font-size: 32px;
+    margin-top:30px;
+  }
+
+  .bg-white{
+    background-color:#ffffff;
+  }
+
+  .flex-column{
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .comfirm-bottom{
+    position: fixed;
+    bottom: 0;
+    border-top-color: #D1D1D1;
+    border-top-style: solid;
+    border-top-width: 1px;
+  }
+
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="发表评价" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="bg-grey" style="height:{{serverHeight}}">
+    <!-- start: 商品评价 -->
+    <div class="comment">
+      <!-- start:商品 -->
+      <div class="row">
+        <div>
+          <image class="product_image" src="{{productInfo.mainPic}}"></image>
+        </div>
+        <div style="height:100px;">
+          <input class="input" value="{{comment}}" oninput="comChange($event, 'comment')" type="text" rows="5" placeholder="亲?宝贝怎么样?你的评价可以帮助其他人哦~">
+        </div>
+      </div>
+      <!-- end:商品 -->
+      <!-- start:上传图片 -->
+      <div style="width:750;flex-direction:row;flex-wrap:wrap;padding-top:50;padding-left:45;padding-right:20;background:#fff;">
+        <div style="padding-right:20;" repeat="{{item in commentData.imgs}}" onclick="upload($index)">
+          <image style="width:120px;height:120px;margin-bottom:20;" src="{{item}}" >
+        </div>
+        <div style="width:120px;height:120px;margin-bottom:20;" onclick="upload(-1)" >
+           <img class="width:120px;height:120px;" src="{{utils.getImageBaseUrl()+ 'images/icon9.png'}}">
+        </div>
+      </div>
+    <!--   <div class="upload" onclick="upload">
+        <image class="upload_image" src="{{utils.getImageBaseUrl()+'images/upload_photo.png'}}">
+      </div> -->
+      <!-- end:上传图片 -->
+      
+    <!--   <div class="row" style="margin-left: 25px;height:150px;" if="{{commentData.imgs.length > 0}}">
+        <div style="width:140px;" repeat="{{item in commentData.imgs}}">
+          <image style="width: 120px;height:120px;" src="{{item}}">
+        </div>
+      </div>
+      
+    </div> -->
+    
+      
+    <!-- end: 商品评价 -->
+
+    <!-- start: 等级评价 -->
+    <div class="star-column">
+      <div>
+        <text class="rate-name">宝贝评分</text>
+      </div>
+      <!-- start: 描述相符 -->
+      <div class="item">
+        <text class="item-txt">描述相符：</text>
+        <div class="star-image">{{utils.getImageBaseUrl()+'images/star_01.png'}}
+          <image class="star" repeat="{{item in selratings1}}" ds="{{item}}"  onclick="ratings(1, $event)" src="{{'src/images/star_02.png'}}"></image>
+  
+          <image class="star" repeat="{{item in ratings1}}" ds="{{item}}" onclick="ratings(1, $event)" src="{{utils.getImageBaseUrl()+'images/star_01.png'}}"></image>
+        </div>
+      </div>
+      <!-- end: 描述相符 -->
+
+      <!-- start: 物流速度 -->
+      <div class="item">
+        <text class="item-txt">物流速度：</text>
+        <div class="star-image">
+            <image class="star" repeat="{{item in selratings2}}" ds="{{item}}" onclick="ratings(2, $event)" src="{{'src/images/star_02.png'}}"></image>
+  
+          <image class="star" repeat="{{item in ratings2}}" ds="{{item}}" onclick="ratings(2, $event)" src="{{utils.getImageBaseUrl()+'images/star_01.png'}}"></image>
+        </div>
+      </div>
+      <!-- end: 物流速度 -->
+
+      <!-- start: 服务质量 -->
+      <div class="item" style="padding-bottom:20px;">
+        <text class="item-txt">服务质量：</text>
+        <div class="star-image">
+         <image class="star" repeat="{{item in selratings3}}" ds="{{item}}" onclick="ratings(3, $event)" src="{{'src/images/star_02.png'}}"></image>
+  
+          <image class="star" repeat="{{item in ratings3}}" ds="{{item}}" onclick="ratings(3, $event)" src="{{utils.getImageBaseUrl()+'images/star_01.png'}}"></image>
+        </div>
+      </div>
+      <!-- end: 服务质量 -->
+    </div>
+    <!-- end: 等级评价 -->
+
+    <!-- start: 确认订单 -->
+    <div class="comfirm-bottom bg-white" style="margin-top:100px;">
+      <div style="flex-direction: row;justify-content: space-between;">
+        <div>
+          <div class="comfirm-flex-row">
+            <!-- <image style="width:28px;height:28px;margin-left:20px;margin-bottom:28px;margin-right:10px;" src="{{utils.getImageBaseUrl()+'images/p17_icon3.png'}}"></image>
+            <text class="red">匿名评价</text> -->
+          </div>
+        </div>
+
+        <div>
+          <div class="submit-bottom">
+            <text class="submit" onclick="submit()">发表评价</text>
+          </div>
+        </div>
+      </div>
+      
+    <!-- end: 确认订单 -->
+    </div>
+
+    
+
+    </scroller>
+   
+  </wxc-navpage>
+  
+  
+  
+</template>
+
+<script>
+  require('weex-components');
+  require('./by-components/by-select.we');
+  var stream = require('@weex-module/stream');
+  var modal = require('@weex-module/modal');
+
+   var data = {
+      productInfo:{},
+      commentData:{imgs:[]},
+      ratings1:[{value:1},{value:2},{value:3},{value:4},{value:5},],
+      selratings1:[],
+      ratings2:[{value:1},{value:2},{value:3},{value:4},{value:5},],
+      selratings2:[],
+      ratings3:[{value:1},{value:2},{value:3},{value:4},{value:5},],
+      selratings3:[],
+      hdata: [
+        {id: 1, name: '拍照'},
+        {id: 2, name: '相册'},
+      ],
+      productId:''
+    };
+
+    data.utils = require('./js-kit/utils');
+
+    //获取产品信息
+    var getProductOrder = function (me) {
+      data.utils.fetch(me, {
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/comment/getProductOrder",
+        type:'json',
+        body: {productOrderId: data.commentData.productOrderId}
+      }, function(response) {
+        if(response.data) {
+          data.productInfo = response.data.data;
+          data.productId = data.productInfo.product_id
+        }
+      },function(response){
+
+      });
+    }
+
+   module.exports = {
+        data:data,
+        created: function() {
+            $('#weex').append('<input type="file" id="file" style="display:none;"/>');
+            var me = this;
+            this.$on('naviBar.leftItem.click',function(e){
+              data.utils.pop(this);
+            });
+        },
+        init: function() {
+          var headerHeight =  data.utils.getRealHeight(this, 88);
+          this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight;
+
+          var bundleUrl = this.$getConfig().bundleUrl;
+          data.commentData.productOrderId = data.utils.getParameterByName('productOrderId', bundleUrl);
+          data.commentData.productOrderId = data.utils.getParameterByName('productOrderId', bundleUrl);
+         // data.commentData.productId = 377
+         
+        
+          getProductOrder(this);
+        },
+        methods: {
+          submit: function () {
+            var me = this;
+            if(!data.commentData.comment) {
+              modal.toast({'message': '评价内容不能为空', 'duration': 1});
+              return;
+            }
+            if(!data.commentData.ratings1) {
+              modal.toast({'message': '描述相符评分不能为空', 'duration': 1});
+              return;
+            }
+            if(!data.commentData.ratings2) {
+              modal.toast({'message': '物流速度评分不能为空', 'duration': 1});
+              return;
+            }
+            if(!data.commentData.ratings3) {
+              modal.toast({'message': '服务质量评分不能为空', 'duration': 1});
+              return;
+            }
+			data.commentData.productId  = data.productId
+            data.commentData.ratings =data.commentData.ratings1+data.commentData.ratings2+data.commentData.ratings3;
+            
+           // console.log(typeof( data.commentData.ratings),data.commentData.ratings)
+           // data.commentData.imgs = JSON.stringify(data.commentData.imgs);
+           
+            data.utils.fetch(this, {
+              method: 'post',
+              url: data.utils.getServerBaseUrl() + "webapp/comment/submit",
+              type:'json',
+              body:data.commentData
+            }, function(response) {
+              if(response.data) {
+
+                if(response.data.error == 0) {
+                  me.utils.toast({'message': '评价成功', 'duration': 1},function() {
+                    me.$openURL(me.utils.getAppBaseUrl(me) + 'index.js?index=3');
+                  });
+                }
+              }
+            },function(response){
+
+            });
+          },
+          comChange: function (e, m) {
+            this.commentData[m] = e.value;
+          },
+          ratings:function(k,e){
+           
+              var v=e.target.attr.ds.value;
+              if(k == 1) {
+                 this.selratings1=[];
+                 this.ratings1=[];
+                 this.commentData.ratings1=v;
+  
+                for(var i=0;i<v;i++){
+                    this.selratings1.push({value:i+1});
+                }
+                for(var j=v;j<5;j++){
+                    this.ratings1.push({value:i+1});
+                }
+              }
+              if(k == 2) {
+            this.selratings2=[];
+            this.ratings2=[];
+            this.commentData.ratings2=v;
+                for(var i=0;i<v;i++){
+                    this.selratings2.push({value:i+1});
+                }
+                for(var j=v;j<5;j++){
+                    this.ratings2.push({value:i+1});
+                }
+              } 
+               if(k == 3) {
+
+            this.selratings3=[];
+            this.ratings3=[];
+            this.commentData.ratings3=v;
+                for(var i=0;i<v;i++){
+                    this.selratings3.push({value:i+1});
+                }
+                for(var j=v;j<5;j++){
+                    this.ratings3.push({value:i+1});
+                }
+              }
+          },
+          upload: function(index) {
+          var me = this;
+            if(me.commentData.imgs.length>=5) {
+              modal.toast({'message': '最多上传5张图片', 'duration': 1});
+              return;
+            };
+            $('input:file').localResizeIMG({
+                width: 91,
+                quality: 0.8,
+                success: function (result) {
+                  // alert(result.base64);
+                  // console.log(result.base64);
+         
+                  me.utils.fetch(me, {
+                    method: 'post',
+                    url: me.utils.getServerBaseUrl() + "pc/orders/saveBase64",
+                    type:'json',
+                    body: {file: result.base64}
+                  }, function(response) {
+                    var datas = JSON.stringify(response.data);
+                    if(response.data) {
+                      if(index == -1) {
+                        me.commentData.imgs.push(JSON.parse(datas).path);
+                      }else{
+                        me.commentData.imgs.splice(index, 1, JSON.parse(response.data).data);
+                      } 
+                    }
+                  });
+                }
+            });
+            $('#file').click();
+          },
+        }
+      };
+</script>

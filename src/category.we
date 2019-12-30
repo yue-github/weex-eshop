@@ -1,0 +1,308 @@
+<style>
+  .bg-grey{
+    background-color:#EDEDED;
+    height: 3000px;
+  }
+    .bg-white{
+    background-color:#fff;
+    height: 3000px;
+  }
+  .header {
+    position: sticky;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 88px;
+    background-color: #eb5d68;
+  }
+
+  .search-icon {
+    width: 38px; 
+    height: 38px;
+  }
+
+  .search-input {
+    flex: 1;
+    height: 50px; 
+    border-radius: 10px; 
+    font-size: 24px; 
+    color: #999;
+  }
+
+  .search-panel {
+    flex: 1; 
+    border-radius: 10px;
+    flex-direction: row; 
+    align-items: center; 
+    background-color: #fff;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .logo {
+    width: 16px; 
+    height: 30px; 
+    margin-right: 28px; 
+  }
+
+  .row-between{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .is-select{
+    width:150px;
+    height:90px;
+    background-color: #EDEDED;
+    border-bottom-style: solid;
+    border-bottom-width:2px;
+    border-bottom-color: #D9D9D9;
+    border-left-style: solid;
+    border-left-width:2px;
+    border-left-color: #EB5D68;
+  }
+
+  .no-select{
+    width:150px;
+    height:90px;
+    background-color: #EDEDED;
+    border-bottom-style: solid;
+    border-bottom-width:2px;
+    border-bottom-color: #D9D9D9;
+    border-left-style: solid;
+    border-left-width:2px;
+    border-left-color: #ffffff;
+  }
+
+  .select-title{
+    text-align: center;
+    font-size:28px;
+    margin-top:30px;
+  }
+
+  .theme-color{
+    color: #EB5D68;
+  }
+
+  .grey-color{
+    color: #666666;
+  }
+
+  .width-560{
+    width:560px;
+  }
+
+  .category-title{
+    margin-left:20px;
+    margin-top:30px;
+    font-size:30px;
+    margin-bottom:30px;
+    flex-wrap: nowrap;
+    color:#333;
+    font-weight:bold;
+    width: 400px;
+    height:60px;
+    line-height: 60px;
+  }
+
+  .warp{
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap:wrap;
+  }
+
+
+  .product-title{
+    text-align:center;
+    font-size:26px;
+    margin-top:10px;
+  }
+  .product-panel {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 6px; 
+    padding-right: 6px;
+  }
+  .product-item {
+    justify-content:center;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color:#ffffff;
+    margin-top: 20px;
+    padding-bottom: 15;
+    width: 160px;
+    height:226px;
+  }
+  .product-image {
+    width: 155px;
+    height: 155px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: block;
+  }
+  .product-name {
+    color: #333;
+    font-size: 24px;
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .product-price {
+    font-size: 24px;
+    color: #eb5d68;
+    margin-right: 10px;
+  }
+
+  .product-note {
+    font-size: 20px;
+    color: #999999;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" left-item-title="返回" left-item-color="white" title="商品分类" title-color="white">
+    <scroller class="bg-white" style="height: {{serverHeight}}">
+      <!--begin 搜索-->
+     <!--  <div class="header">
+          <div>
+            <image class="logo" src="{{utils.getImageBaseUrl() + 'images/back.png'}}"></image>
+          </div>
+          <div class="search-panel">
+            <input placeholder="请输入关键字" class="search-input"></input>
+            <image src="{{utils.getImageBaseUrl() + 'images/icon_search.png'}}" class="search-icon"></image>
+          </div>
+      </div> -->
+      <!--end 搜索-->
+
+      <div class="row-between">
+        <!-- start: 导航栏 -->
+        <by-category-left current="{{current}}" category-name="{{categoryName}}">
+        </by-category-left>
+        <!-- end: 导航栏 -->
+
+        <!-- start: 产品分类 -->
+        <by-category-products products="{{products}}">
+        </by-category-products>
+        <!-- end: 产品分类 -->
+      </div>
+    </scroller>
+  </wxc-navpage>
+  
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ require('./by-components/by-category-left.we');
+ require('./by-components/by-category-products.we');
+ var stream = require('@weex-module/stream');
+
+
+ var data = {categoryName: [],products: [],current: 0,code:0};
+ data.utils = require('./js-kit/utils');
+
+ //获取分类名
+ var getAllCategory = function(me,code) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/category/getAllCategories",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        var id=response.data.data[0].id;
+        if(code){
+          data.current=code;
+          getProduct(code,me);
+        }else{
+          data.current=id;
+          getProduct(id,me);
+        }
+        data.categoryName = response.data.data;
+        
+      }
+    },function(response){
+   
+    });
+  };
+
+  //根据分类id获取产品
+ var getProduct = function(id, me) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/category/getProductByCateId",
+      type:'json',
+      body:{cateId:id}
+    }, function(response) {
+      if(response.data) {
+        var list = response.data.data;
+        for (var i = 0; i < list.length; i++) {
+          var item = list[i];
+          var childCateList = item.childCateList;
+          for (var j = 0; j < childCateList.length; j++) {
+            var childCate = childCateList[j];
+            childCate.mainPic = data.utils.getAbsolutePath(childCate.mainPic);
+          }
+        }
+        data.products = list;
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+    data: data,
+    created: function() {
+      
+        this.$on('naviBar.leftItem.click',function(e){
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'index.js');
+        });
+        this.$on('selectColor', function(ds){
+          var id = ds.detail.id;
+          if(this.code){
+            this.current =this.code;
+            getProduct(this.code, this);
+            this.code=0;
+          }else{
+            this.current = id;
+            getProduct(id, this);
+          }
+
+        });
+        this.$on('toProducts', function(ds){
+          var v = ds.detail.id;
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'products.js?categoryId=' + v+'&code='+this.current);
+        });
+    },
+    init:function () {
+      var headerHeight =  data.utils.getRealHeight(this, 88);
+      var footerHeight =  data.utils.getRealHeight(this, 88);
+      this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight -footerHeight;
+
+      var bundleUrl = this.$getConfig().bundleUrl;
+      this.code = data.utils.getParameterByName('code', bundleUrl);
+     
+      getAllCategory(this,this.code);
+    },
+    methods: {
+      selectColor: function (e) {
+        var id = e.target.attr.ds.id;
+        if(this.code){
+          this.current =this.code;
+          getProduct(this.code, this);
+        }else{
+          this.current = id;
+          getProduct(id, this);
+        }
+       
+      },
+      toProducts: function (e) {
+        var v=e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'products.js?categoryId=' + v);
+      }
+    }
+  };
+
+</script>

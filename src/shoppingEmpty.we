@@ -1,0 +1,113 @@
+<style>
+  .bg-grey{
+    background-color:#EDEDED;
+  }
+  .header{
+    flex-direction: row;
+    justify-content: center;
+    background-color: #EB5D69;
+    height:88px;
+    align-items: center;
+    color: #ffffff;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+
+  .shoppingEmpty{
+    width:227px;
+    height:227px;
+    margin-top:150px;
+    margin-left:260px;
+  }
+
+  .success-text{
+    font-size: 36px;
+    text-align:center;
+    margin-top:50px;
+  }
+
+  .buttons{
+    border-width:1px;
+    border-style:solid;
+    border-color:#EB5E68;
+    width:280px;
+    margin-left:235px;
+    margin-top:40px;
+    background-color:#EB5E68;
+    color:#ffffff;
+    border-radius:0px;
+  }
+  
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#EB5D69" title="购物车" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="bg-grey">
+      <!-- start: 付款成功 -->
+      <div>
+        <image class="shoppingEmpty" src="http://192.168.1.120:8081/images/shoppingEmpty.png"></image>
+        <text class="success-text">亲，购物车空空的耶！</text>
+        <!-- start: 提交按钮 -->
+        <div>
+          <wxc-button type="primary" size="middle" value="确认提现" class="buttons"></wxc-button>
+        </div>
+        <!-- end: 提交按钮 -->
+      </div>
+      
+      <!-- end: 付款成功 -->
+    </div>
+  </scroller>
+  </wxc-navpage>
+  
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ // var stream = require('@weex-module/stream');
+
+ // var data = {sliders: []};
+
+ //  //获取轮播图
+ //  var getBanners = function() {
+ //      stream.fetch({
+ //        method: 'GET',
+ //        url: "http://127.0.0.1:8081/json/banners",
+ //        type:'json'
+ //      }, function(response) {
+ //        var banners = response.data.banners;
+ //        var sliders = [];
+
+ //        for(var i = 0; i < banners.length; i++) {
+ //          var item  = banners[i];
+ //          sliders.push({items: [{image: item.path, link: item.url}]});
+ //        }
+
+ //        data.sliders = sliders;
+ //    },function(response){
+
+ //    });
+ //  };
+
+ //  //获取产品分类
+ //  var getCategories = function() {};
+
+ //  //获取推荐位置
+ //  var getPositions = function() {};
+
+ //  module.exports = {
+ //    data: data,
+ //    init:function () {
+ //      getBanners();
+ //      getCategories();
+ //      getPositions();
+ //    },
+ //    methods: {
+
+ //    }
+ //  };
+
+</script>

@@ -1,0 +1,111 @@
+<template>
+	<!-- start: 产品分类 -->
+    <div>
+      <div class="width-560" repeat="ds in products">
+       <div>
+          <div style="flex-direction:row;justify-content:flex-start;align-items:center;">
+             <text class="category-title">-- {{ds.name}} --</text>
+          </div>
+       </div>
+        <!-- start: 产品 -->
+
+        <div class="product-panel">
+          <div class="product-item" onclick="toProducts" ds="{{item}}" repeat="item in ds.childCateList">
+            <image class="product-image"  src="{{item.mainPic}}"></image>
+            <div style="padding-left: 15; padding-right: 15;">
+              <text class="product-name">{{item.name}}</text>
+            </div>
+          </div>
+        </div>
+        <!-- end: 产品 -->
+      </div>
+    </div>
+    <!-- end: 产品分类 -->
+
+    <!-- <input value="22" style="font-size:30"></input> -->
+  
+</template>
+
+<style>
+	.width-560{
+	    width:560px;
+	}
+
+	.category-title{
+		text-align: center;
+	    margin-top:30px;
+	    font-size:30px;
+	    margin-bottom:30px;
+	    flex-wrap: nowrap;
+	    color:#333;
+	    font-weight:bold;
+	    width: 560px;
+	    height:60px;
+	    line-height: 60px;
+	}
+
+	.product-panel {
+	    flex-direction: row;
+	    flex-wrap: wrap;
+	    -webkit-flex-wrap: wrap;
+	  	-moz-flex-wrap: wrap;
+	  	-ms-flex-wrap: wrap;
+	  	-o-flex-wrap: wrap;
+	    padding-left: 6px; 
+	    padding-right: 6px;
+	    padding-bottom: 20px;
+	}
+	.product-item {
+	    justify-content:center;
+	    margin-left: 10px;
+	    margin-right: 10px;
+	    background-color:#ffffff;
+	    margin-top: 20px;
+	    padding-bottom: 15;
+	    width: 160px;
+	    height:226px;
+	}
+	.product-image {
+	    width: 155px;
+	    height: 155px;
+	    margin-left: 5px;
+	    margin-right: 5px;
+	    display: block;
+	}
+	.product-name {
+	    color: #000;
+	    font-size: 26px;
+	    margin-top: 30px;
+	    text-align: center;
+	}
+
+	.product-price {
+	    font-size: 24px;
+	    color: #eb5d68;
+	    margin-right: 10px;
+	}
+
+	.product-note {
+	    font-size: 20px;
+	    color: #999999;
+	}
+	
+</style>
+
+<script>
+  // require('weex-components');
+  module.exports = {
+    data: {
+    	color: '#eb5d68',
+    	products:[]
+    },
+    methods: {
+    	toProducts: function (e) {
+    		this.$dispatch('toProducts',e.target.attr.ds);
+    	}
+    }
+  }
+</script>
+
+<style>
+</style>

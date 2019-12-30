@@ -1,0 +1,369 @@
+<style>
+  .bg-grey{
+    background-color:#EDEDED;
+    /*background-color:#EAEAEA;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .tabs {
+    height: 70px;
+    background-color: #ffffff;
+      flex-direction: row;
+  }
+
+  .tab {
+    flex: 1;
+    -webkit-flex: 1;  
+    align-items: center;
+    justify-content: center;
+    border-bottom-width: 5px;
+  }
+
+  .tab-text {
+    font-size: 32px;
+    color: #333333;
+  }
+
+  .wrap{
+    margin-top:20px;
+    background-color:#ffffff;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap:wrap;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+  }
+
+  .border-style{
+    border-style:solid;
+    border-width:1px;
+    border-color:#DDDDDD;
+    margin-top:20px;
+    margin-left:20px;
+    margin-bottom:20px;
+  }
+
+  .product-image{
+    width:342px;
+    height:318px;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color:#DDDDDD;
+  }
+
+  .product-name{
+    font-size:32px;
+    margin-top:10px;
+    padding-left:10px;
+    color:#000000;
+    width:342px;
+    height: 80px;
+    line-height: 40px;
+    white-space:nowrap;
+    overflow:hidden;
+  }
+
+  .price-column{
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-top:5px;
+    width:340px;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color:#DDDDDD;
+  }
+
+  .price{
+    font-size:28px;
+    margin-bottom: 5px;
+    margin-left:10px;
+    color:#EB5D69
+  }
+
+  .discount{
+    font-size:24px;
+    margin-bottom: 5px;
+    text-decoration:line-through;
+    margin-left:10px;
+    color:#999999;
+  }
+
+  .space-between{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .toCart{
+    width:170px;
+    padding-top:20px;
+    padding-bottom:20px;
+    color:#999999;
+    font-size:28px;
+    text-align:center;
+    border-bottom-right:solid;
+    border-right-width:1px;
+    border-right-color:#DDDDDD;
+  }
+
+  .collection{
+    width:170px;
+    margin-top:20px;
+    margin-bottom:20px;
+    font-size:28px;
+    text-align:center;
+    color:#999999;
+  }
+
+  .shop-text{
+    font-size:24px;
+    margin-left:10px;
+    margin-bottom: 5px;
+    color:#999999
+  }
+
+  .shop-rate{
+    font-size:24px;
+    margin-left:10px;
+    margin-bottom: 5px;
+    color:#EB5D69;
+  }
+ .shoppingEmpty{
+    width:227px;
+    height:227px;
+    margin-top:150px;
+    margin-left:260px;
+  }
+
+  .success-text{
+     width:750px;
+    font-size: 36px;
+    text-align:center;
+    margin-top:50px;
+    color:#999999;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="我的收藏" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="bg-grey">
+      <!-- start: 导航 -->
+      <div class="tabs">
+        <div class="tab" style="border-bottom-color: {{tabIndex == 0 ? '#FDE314' : '#ffffff'}};" onclick="checkTab(0)">
+          <text class="tab-text">商品</text>
+        </div>
+        <div class="tab" style="border-bottom-color: {{tabIndex == 1 ? '#FDE314' : '#ffffff'}};" onclick="checkTab(1)">
+          <text class="tab-text">店铺</text>
+        </div>
+      </div>
+      <!-- end: 导航 -->
+      
+      <!-- start: 产品页面 -->
+      <div class="wrap" if="{{tabIndex == 0}}">
+        <div if="{{productLength>0}}" class="border-style" repeat="{{item in productCollect}}">
+          <image class="product-image" src="{{item.mainPic}}" ds="{{item}}" onclick="toProduct"></image>
+          <text class="product-name" ds="{{item}}" onclick="toProduct">{{item.name}}</text>
+          <div class="price-column">
+            <!-- <text class="price">￥188</text> -->
+            <!-- <text class="discount">￥280</text> -->
+          </div>
+          <div class="space-between">
+            <text class="toCart" ds="{{item}}" onclick="toProduct">查看商品</text>
+            <text class="collection" ds="{{item}}" onclick="cancelCollect">取消收藏</text>
+          </div>
+        </div>
+        <div if="{{productLength==0}}"  style="height: {{serverHeight}};background-color: #EDEDED;">
+           <div>
+            <image class="shoppingEmpty" src="{{'src/images/icon_list_empty.png'}}"></image>
+            <text class="success-text">亲，你没有收藏记录！</text>
+           </div>
+        </div>
+
+      </div>
+      <!-- end: 产品页面 -->
+
+      <!-- start: 店铺页面 -->
+      <div class="wrap" if="{{tabIndex == 1}}">
+        <div if="{{shopLength>0}}" class="border-style" repeat="item in shopCollect">
+          <image class="product-image"src="{{item.logoPic}}"></image>
+          <text class="product-name">{{item.name}}</text>
+          <div class="price-column">
+            <!-- <text class="shop-text">综合评价</text> -->
+            <!-- <text class="shop-rate">4.9</text> -->
+          </div>
+          <div class="space-between">
+            <text class="toCart" ds="{{item}}" onclick="toShop">进入店铺</text>
+            <text class="collection" ds="{{item}}" onclick="cancelShopCollect">取消收藏</text>
+          </div>
+        </div>
+          <div if="{{shopLength==0}}"  style="height: {{serverHeight}};background-color: #EDEDED;">
+           <div>
+            <image class="shoppingEmpty" src="{{'src/images/icon_list_empty.png'}}"></image>
+            <text class="success-text">亲，你没有收藏记录！</text>
+           </div>
+        </div>
+
+      </div>
+      <!-- end: 店铺页面 -->
+
+
+    </scroller>
+  </wxc-navpage>
+  
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+
+ var data = {
+    productCollect: [],
+    shopCollect: [],
+    tabIndex: 0,
+    isShow: false,
+    productLength:1,
+    shopLength:1,
+  }
+
+  data.utils = require('./js-kit/utils');
+  var modal = require('@weex-module/modal');
+
+  //商品收藏
+ var getProductCollection = function(me) {
+    data.utils.fetch(me, {
+      method: 'POST',
+      url: data.utils.getServerBaseUrl() + "webapp/productCollections/myProductCollections",
+      type:'json',
+      body: {offset: 1,length: 20}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.data) {
+          data.productCollect = response.data.data;
+          if(response.data.data.length < 1) {
+            data.productLength = 0;
+          }else{
+            data.productLength=response.data.data.length;
+          }
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+  //店铺收藏
+  var getShopCollection = function(me) {
+    data.utils.fetch(me, {
+      method: 'POST',
+      url: data.utils.getServerBaseUrl() + "webapp/shopCollections/myShopCollections",
+      type:'json',
+      body: {offset: 1,length: 20}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.data) {
+          data.shopCollect = response.data.data;
+          if(response.data.data.length < 1) {
+            data.shopLength = 0;
+          }else{
+            data.shopLength=response.data.data.length;
+          }
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+   //取消商品收藏
+ var cancelProductCollection = function(id, me) {
+    var ids = [];
+    ids.push(id);
+    data.utils.fetch(me, {
+      method: 'POST',
+      url: data.utils.getServerBaseUrl() + "webapp/productCollections/cancelProductCollection",
+      type:'json',
+      body: {ids:JSON.stringify(ids)}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          modal.toast({'message': '取消商品收藏成功', 'duration': 1});
+          getProductCollection(me);
+        }else{
+          modal.toast({'message': '取消店铺收藏失败', 'duration': 1});
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+   //取消店铺收藏
+ var cancleShopCollection = function(id, me) {
+    data.utils.fetch(me, {
+      method: 'POST',
+      url: data.utils.getServerBaseUrl() + "webapp/shopCollections/cancleShopCollection",
+      type:'json',
+      body: {id:id}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          modal.toast({'message': '取消店铺收藏成功', 'duration': 1});
+          getShopCollection(me);
+        }else{
+          modal.toast({'message': '取消店铺收藏失败', 'duration': 1});
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+      data:data,
+      created: function() {
+          var bundleUrl = this.$getConfig().bundleUrl;
+          var index = data.utils.getParameterByName('index', bundleUrl);
+          this.$on('naviBar.leftItem.click',function(e){
+            data.utils.pop(this);
+          });
+          this.checkTab(index);
+      },
+      init:function () {
+        var headerHeight =  data.utils.getRealHeight(this, 88);
+        this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight;
+
+      },
+      methods: {
+        checkTab: function(index) {
+          if(index == 0) {
+            getProductCollection(this);
+          }else{
+            getShopCollection(this);
+          }
+          this.tabIndex = index;
+        },
+        toProduct: function (e) {
+          var v=e.target.attr.ds.relate_Id;
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + v);
+        },
+        cancelCollect: function (e) {
+          var v=e.target.attr.ds.id;
+          cancelProductCollection(v, this);
+        },
+        cancelShopCollect: function (e) {
+          var v=e.target.attr.ds.id;
+          cancleShopCollection(v, this);
+        },
+        toShop: function (e) {
+          var v=e.target.attr.ds.relate_Id;
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'shopHome.js?id=' + v);
+        }
+      }
+    };
+</script>

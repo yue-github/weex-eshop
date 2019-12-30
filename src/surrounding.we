@@ -1,0 +1,425 @@
+<style>
+  .content {
+    background-color: #f5f5f5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .bg-blue{
+    background-color:#51C6E7;
+  }
+
+  .bg-green{
+    background-color:#87B14B;
+  }
+
+  .bg-purple{
+    background-color:#CB7194;
+  }
+
+  .surrounding-bg-l{
+    width:400px;
+    height:200px;
+    margin-top:50px;
+    margin-bottom:50px;
+    margin-left:20px;
+    opacity: 0.9;
+  }
+
+  .surrounding-bg-r{
+    width:400px;
+    height:200px;
+    margin-top:50px;
+    margin-bottom:50px;
+    margin-right:20px;
+    margin-left:20px;
+    opacity: 0.9;
+  }
+
+  .row-end{
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .row-start{
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .note-border{
+    margin:5px;
+    border-style:solid;
+    border-width:1px;
+    border-color:#ffffff;
+    width:390px;
+    height:190px;
+  }
+
+  .surround-title{
+    width: 315px;
+    height: 60px;
+    overflow: hidden;
+    font-size:28px;
+    color:#ffffff;
+    margin-top:5px;
+    margin-left:10px;
+  }
+
+  .surround-summary{
+    font-size:20px;
+    color:#ffffff;
+    margin-top:5px;
+    margin-left:10px;
+    height:100px;
+  }
+
+  .surround-value{
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: flex-end;
+    /*margin-top:5px;*/
+  }
+
+  .surround-start-end{
+    flex-direction:row;
+    justify-content: flex-start;
+    align-items:flex-end;
+    padding-bottom: 5px;
+    margin-left:10px;
+  }
+
+  .surround-money{
+    font-size:28px;
+    color:#ffffff;
+  }
+
+  .surround-unit{
+    font-size:24px;
+    color:#ffffff;
+  }
+
+  .surround-width{
+    width:150px;
+  }
+
+  .surround-text{
+    text-align:center;
+    margin-top:5px;
+    margin-bottom:5px;
+    font-size:28px;
+    border-style:solid;
+    border-width:1px;
+    border-color:#ffffff;
+    color:#ffffff;
+    margin-right:20px;
+  }
+
+.product-panel {
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  padding-left: 6px; 
+  padding-right: 6px;
+}
+
+.product-item {
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-top: 20px;
+  padding-bottom: 15;
+  border-top-width: 1px;
+  border-top-color: #d9d9d9;
+  border-bottom-width: 1px;
+  border-bottom-color: #d9d9d9;
+  border-left-width: 1px;
+  border-left-color: #d9d9d9;
+  border-right-width: 1px;
+  border-right-color: #d9d9d9;
+  border: 1px solid #d9d9d9;
+}
+
+.product-image {
+  width: 345px;
+  height: 320px;
+}
+
+.product-name {
+  width: 315px;
+  height: 60px;
+  line-height: 30px;
+  overflow: hidden;
+  color: #333;
+  font-size: 24px;
+  margin-top: 15px;
+}
+
+.product-txt {
+  flex-direction: row; 
+  margin-top: 15px; 
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.product-price {
+  font-size: 24px;
+  color: #F49601;
+  margin-right: 10px;
+}
+
+.product-note {
+  font-size: 20px;
+  color: #999999;
+}
+
+.adv-image {
+  width: 750px;
+  height: 70px;
+}
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="周边游" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="content">
+
+      <!-- start:头部 -->
+      <div repeat="data in recommendOne">
+
+        <div repeat="item in data.productList">
+          <image src="{{item.recommendPic}}" style="width:750px;height:300px;position: absolute;"></image>
+          <div class="{{$index%2 == 0?'row-end':'row-start'}}">
+            <div class="surrounding-bg-r bg-blue">
+              <div class="note-border">
+                <text class="surround-title">{{item.name}}</text>
+                <text class="surround-summary">{{item.summary}}</text>
+                <div class="surround-value">
+                  <div class="surround-start-end">
+                    <text class="surround-money">&nbsp;&nbsp;￥{{utils.toDecimal2(item.suggestedRetailUnitPrice)}}&nbsp;&nbsp;</text>
+                    <text class="surround-unit">{{item.upc}}</text> 
+                  </div>
+                  <div class="surround-width" onclick="toRecommendOne" ds="{{item}}">
+                    <text class="surround-text">立即抢购</text>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- end:头部 -->
+
+      <!-- start: 产品分类 -->
+      <div repeat="data in recommendTwo">
+        <!-- start: 分类栏 -->
+        <div style="background-color: #EAEAEA;padding-top:20px;padding-bottom:20px;">
+          <text style="padding-left:20px;font-size:32px;color:#000000;border-left-style:solid;border-left-width:5px;border-left-color:#FDE314;">{{data.positionName}}</text>
+        </div>
+        <!-- end: 分类栏 -->
+        <!-- start: 分类产品 -->
+        <div>
+          <div class="product-panel">
+            <div class="product-item" onclick="toRecommendTwo" ds="{{item}}" repeat="item in data.productList">
+              <image class="product-image"  src="{{item.recommendPic}}"></image>
+              <div style="padding-left: 15; padding-right: 15;">
+                <text class="product-name">{{item.name}}</text>
+                <div class="product-txt">
+                  <text class="product-price">
+                    ￥{{utils.toDecimal2(item.suggestedRetailUnitPrice)}}
+                  </text>
+                  <div if="{{item.originUnitPrice}}" style="flex-direction: row;">
+                    <text class="product-price" style="color:#666666;font-size:20px;margin-top:4px;text-decoration: line-through;">
+                      ￥{{utils.toDecimal2(item.originUnitPrice)}}
+                    </text>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <!-- end: 分类产品 -->
+
+        <!--begin 广告-->
+        <!-- <cell>
+          <div style="margin-top: 20;">
+            <image class="adv-image" src="http://192.168.1.120:8081/images/adv_05.jpg"></image>
+          </div>
+        </cell> -->
+        <!--end 广告-->
+
+      </div>
+      <!-- end: 产品分类 -->
+
+      <!-- start: 产品分类 -->
+      <div repeat="data in recommendThree">
+        <!-- start: 分类栏 -->
+        <div style="background-color: #EAEAEA;padding-top:20px;padding-bottom:20px;">
+          <text style="padding-left:20px;font-size:32px;color:#000000;border-left-style:solid;border-left-width:5px;border-left-color:#EB5E67;">{{data.positionName}}</text>
+        </div>
+        <!-- end: 分类栏 -->
+        <!-- start: 分类产品 -->
+        <div>
+          <div class="product-panel">
+            <div class="product-item" onclick="toRecommendThree" ds="{{item}}" repeat="item in data.productList">
+              <image class="product-image"  src="{{item.recommendPic}}"></image>
+              <div style="padding-left: 15; padding-right: 15;">
+                <text class="product-name">{{item.name}}</text>
+                <div class="product-txt">
+                  <text class="product-price">
+                    ￥{{utils.toDecimal2(item.suggestedRetailUnitPrice)}}
+                  </text>
+                  <div style="flex-direction: row;margin-left:20px;">
+                    <text class="product-price" style="color:#666666;font-size:20px;margin-top:4px;text-decoration: line-through;">
+                      ￥{{utils.toDecimal2(item.originUnitPrice)}}
+                    </text>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <!-- end: 分类产品 -->
+
+        <!--begin 广告-->
+        <!-- <cell>
+          <div style="margin-top: 20;">
+            <image class="adv-image" src="http://192.168.1.120:8081/images/adv_05.jpg"></image>
+          </div>
+        </cell> -->
+        <!--end 广告-->
+
+      </div>
+      <!-- end: 产品分类 -->
+
+    </scroller>
+  </wxc-navpage>
+</template>
+
+<script>
+  require('weex-components');
+  var stream = require('@weex-module/stream');
+
+  var data = {recommendOne:[],recommendTwo: [],recommendThree: []};
+
+  data.utils = require('./js-kit/utils');
+
+  //制保留2位小数，如：2，会在2后面补上00.即2.00    
+    function toDecimal2(x) {    
+        var f = parseFloat(x);    
+        if (isNaN(f)) {    
+            return false;    
+        }    
+        var f = Math.round(x*100)/100;    
+        var s = f.toString();    
+        var rs = s.indexOf('.');    
+        if (rs < 0) {    
+            rs = s.length;    
+            s += '.';    
+        }    
+        while (s.length <= rs + 2) {    
+            s += '0';    
+        }    
+        return s;    
+    }
+
+  //获取推荐位置1
+  var getPositionOne = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/surrounding/getPositionOne",
+      type:'json'
+    }, function(response) {
+      if(response.data && response.data.error == 0) {
+        for(var i = 0; i < response.data.data.length; i++) {
+          for(var k = 0; k < response.data.data[i].productList.length; k++) {
+            response.data.data[i].productList[k].suggestedRetailUnitPrice = toDecimal2(response.data.data[i].productList[k].suggestedRetailUnitPrice);
+            response.data.data[i].productList[k].originUnitPrice = toDecimal2(response.data.data[i].productList[k].originUnitPrice);
+          }
+        }
+        data.recommendOne = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+  //获取推荐位置2
+  var getPositionTwo = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/surrounding/getPositionTwo",
+      type:'json'
+    }, function(response) {
+      if(response.data && response.data.error == 0) {
+        for(var i = 0; i < response.data.data.length; i++) {
+          for(var k = 0; k < response.data.data[i].productList.length; k++) {
+            response.data.data[i].productList[k].suggestedRetailUnitPrice = toDecimal2(response.data.data[i].productList[k].suggestedRetailUnitPrice);
+            response.data.data[i].productList[k].originUnitPrice = toDecimal2(response.data.data[i].productList[k].originUnitPrice);
+          }
+        }
+        data.recommendTwo = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+  //获取推荐位置3
+  var getPositionThree = function(me) {
+    data.utils.fetch(me, {
+      method: 'POST',
+      url: data.utils.getServerBaseUrl() + "webapp/surrounding/getPositionThree",
+      type:'json'
+    }, function(response) {
+      if(response.data && response.data.error == 0) {
+        for(var i = 0; i < response.data.data.length; i++) {
+            for(var k = 0; k < response.data.data[i].productList.length; k++) {
+              response.data.data[i].productList[k].suggestedRetailUnitPrice = toDecimal2(response.data.data[i].productList[k].suggestedRetailUnitPrice);
+              response.data.data[i].productList[k].originUnitPrice = toDecimal2(response.data.data[i].productList[k].originUnitPrice);
+            }
+          }
+        data.recommendThree = response.data.data;
+      }      
+    },function(response){
+
+    });
+  };
+
+  module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+      getPositionOne(this);
+      getPositionTwo(this);
+      getPositionThree(this);
+    },
+    methods: {
+      toRecommendOne: function (e) {
+        var v = e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + v);
+      },
+      toRecommendTwo: function (e) {
+        var v = e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + v);
+      },
+      toRecommendThree: function (e) {
+        var v = e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + v);
+      }
+    }
+  };
+  
+
+</script>

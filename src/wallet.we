@@ -1,0 +1,225 @@
+<style>
+  .bg-grey{
+    background-color: #EAEAEA;
+  }
+  .mg-t-l-20{
+    margin-left:20px;
+    margin-top:20px;
+  }
+
+  .wallet-bg{
+    width:710px;
+    height:220px;
+    position: absolute;
+  }
+
+  .height-220{
+    height:220px;
+  }
+
+  .wallet-title{
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-top:10px;
+    margin-left:10px;
+  }
+
+  .wallet-icon{
+    
+    width:24px;
+    height:24px;
+  }
+
+  .wallet-item{
+    font-size:24px;
+    margin-left:5px;
+  }
+
+  .wallet-price{
+    text-align:center;
+    font-size:40px;
+    margin-top:20px;
+    color:#EB5D69;
+  }
+
+  .width-710{
+    width:710px;
+  }
+
+  .row-content{
+    flex-direction: row;
+    justify-content: center;
+    margin-top:20px;
+  }
+
+  .wallet-button{
+    width:90px;
+    height:60px;
+    background-color:#FDE314;
+    margin-right:25px;
+  }
+
+  .wallet-details{
+    width:190px;
+    height:60px;
+    background-color:#FDE314;
+    margin-right:25px;
+  }
+
+  .wallet-text{
+    text-align:center;
+    padding: 10px;
+    font-size:24px;
+    margin-top:5px;
+    color:#ffffff;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="我的钱包" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="bg-grey" style="height:{{serverHeight}}">
+      <!-- start: 账户余额 -->
+      <div class="mg-t-l-20">
+        <image class="wallet-bg" src="{{'src/images/wallet.jpg'}}"></image>
+        <div class="height-220">
+          <div class="wallet-title">
+            <image class="wallet-icon" style="margin-bottom:3px;" src="{{'src/images/wallet_icon.png'}}"></image>
+            <text class="wallet-item">账户余额（元）</text>
+          </div>
+          <div class="width-710">
+            <text class="wallet-price">￥{{utils.toDecimal2(info.money)}}</text>
+          </div>
+          <div class="row-content">
+          <!--   <div class="wallet-button" onclick="toWithdraw">
+              <text class="wallet-text">提现</text>
+            </div>
+            <div class="wallet-button" onclick="toRecharge">
+              <text class="wallet-text">充值</text>
+            </div> -->
+            <div class="wallet-button" style="width:120px;" onclick="toWithDrawDetails">
+              <text class="wallet-text">提现明细</text>
+            </div>
+            <div class="wallet-button" style="width:120px;" onclick="toRechargeDetails">
+              <text class="wallet-text">充值明细</text>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end: 账户余额 -->
+
+      <!-- start: 我的银行卡 -->
+      <div class="mg-t-l-20">
+        <image class="wallet-bg" src="{{'src/images/wallet.jpg'}}"></image>
+        <div class="height-220">
+          <div class="wallet-title">
+            <image class="wallet-icon"  style="margin-bottom:3px;" src="{{'src/images/wallet_icon.png'}}"></image>
+            <text class="wallet-item">我的银行卡</text>
+          </div>
+          <div class="width-710">
+            <text class="wallet-price">{{info.bankNum}}</text>
+          </div>
+          <div class="row-content">
+            <div class="wallet-button" onclick="toBankCards">
+              <text class="wallet-text">查看</text>
+            </div>
+            <div class="wallet-button" onclick="toAddCard">
+              <text class="wallet-text">添加</text>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end: 我的银行卡 -->
+
+      <!-- start: 我的银行卡 -->
+      <div class="mg-t-l-20">
+        <image class="wallet-bg" src="{{utils.getImageBaseUrl() + 'images/wallet.jpg'}}"></image>
+        <div class="height-220">
+          <div class="wallet-title">
+            <image class="wallet-icon"  style="margin-bottom:3px;" src="{{'src/images/wallet_icon.png'}}"></image>
+            <text class="wallet-item">我的金币</text>
+          </div>
+          <div class="width-710">
+            <text class="wallet-price">{{info.goldNum}}</text>
+          </div>
+          <div class="row-content">
+            <div class="wallet-details" onclick="toGold">
+              <text class="wallet-text">查看金币明细</text>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end: 我的银行卡 -->
+    </scroller>
+  </wxc-navpage>
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+
+ var data = {
+    info: {money: 0,bankNum: 0,bankNum: 0}
+  };
+
+ data.utils = require('./js-kit/utils');
+
+ //获取我的钱包
+ var getBalance = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/wallet/balance",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        data.info = response.data.info;
+      }
+    },function(response){
+
+    });
+  };
+
+  
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+      var headerHeight =  data.utils.getRealHeight(this, 88);
+      this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight;
+
+      getBalance(this);
+    },
+    methods: {
+      //充值
+      toWithdraw: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'withdraw.js');
+      },
+      toRecharge: function () {
+        modal.toast({'message': '充值功能暂时关闭', 'duration': 1});
+        //this.$openURL(this.utils.getAppBaseUrl(this) + 'recharge.js');
+      },
+      toWithDrawDetails: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'withdrawDetails.js');
+      },
+      toRechargeDetails: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'rechargeDetails.js');
+      },
+      toBankCards: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'bankCards.js');
+      },
+      toAddCard: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'addCard.js');
+      },
+      toGold: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'gold.js');
+      }
+    }
+  };
+</script>

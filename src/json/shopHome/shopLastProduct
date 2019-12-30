@@ -1,0 +1,10 @@
+{"error": 0, "totalPage": 10,"totalRow": 5, "data": 
+	[
+		{"id": 1,"mainPic":"http://192.168.1.120:8081/images/product_01.jpg","name": "超级水蜜桃1","summary":"特大特甜","suggestedRetailUnitPrice": 50,"shopName":"花果山"},
+		{"id": 2,"mainPic":"http://192.168.1.120:8081/images/product_01.jpg","name": "超级水蜜桃2","summary":"特大特甜","suggestedRetailUnitPrice": 50,"shopName":"花果山"},
+		{"id": 3,"mainPic":"http://192.168.1.120:8081/images/product_01.jpg","name": "超级水蜜桃3","summary":"特大特甜","suggestedRetailUnitPrice": 50,"shopName":"花果山"},
+		{"id": 4,"mainPic":"http://192.168.1.120:8081/images/product_01.jpg","name": "超级水蜜桃4","summary":"特大特甜","suggestedRetailUnitPrice": 50,"shopName":"花果山"},
+		{"id": 5,"mainPic":"http://192.168.1.120:8081/images/product_01.jpg","name": "超级水蜜桃5","summary":"特大特甜","suggestedRetailUnitPrice": 50,"shopName":"花果山"},
+		{"id": 6,"mainPic":"http://192.168.1.120:8081/images/product_01.jpg","name": "超级水蜜桃6","summary":"特大特甜","suggestedRetailUnitPrice": 50,"shopName":"花果山"}
+	]
+}

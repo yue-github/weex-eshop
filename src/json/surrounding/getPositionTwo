@@ -1,0 +1,8 @@
+{"error": 0, "data":[
+	{"positionName":"推荐位置2","productList": [
+		{"id": 1,"name": "苹果1", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/product_01.jpg","summary": "2天一夜免费晚"},
+		{"id": 2,"name": "苹果2", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/product_01.jpg","summary": "2天一夜免费晚"},
+		{"id": 3,"name": "苹果3", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/product_01.jpg","summary": "2天一夜免费晚"},
+		{"id": 4,"name": "苹果4", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/product_01.jpg","summary": "2天一夜免费晚"}
+	]}
+]}

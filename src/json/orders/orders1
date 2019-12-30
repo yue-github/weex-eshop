@@ -1,0 +1,10 @@
+{"error": 0, "data": [
+	{"shop_id":1,"shopName": "店铺名称1", "shopLogo": "shangdiantupian","deliveryPrice": 15, "totalPayable": 1001,"status": 1,"order_code": "123456789006", "productList": [
+		{"product_id": 1,"productName": "超级水蜜桃1","mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","selectProterties": "特大","amount": 30,"suggestedRetailUnitPrice": 66,"totalPrice": 1980},
+		{"product_id": 2,"productName": "超级水蜜桃2","mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","selectProterties": "特大","amount": 30,"suggestedRetailUnitPrice": 66,"totalPrice": 1980}
+	]},
+	{"shop_id":2,"shopName": "店铺名称2", "shopLogo": "shangdiantupian","deliveryPrice": 15,"totalPayable": 1001,"status": 1,"order_code": "123456789006", "productList": [
+		{"product_id": 3,"productName": "超级水蜜桃3","mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","selectProterties": "特大","amount": 30,"suggestedRetailUnitPrice": 66,"totalPrice": 1980},
+		{"product_id": 4,"productName": "超级水蜜桃4","mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","selectProterties": "特大","amount": 30,"suggestedRetailUnitPrice": 66,"totalPrice": 1980}
+	]}
+]}

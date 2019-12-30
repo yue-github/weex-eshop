@@ -1,0 +1,505 @@
+<style>
+.content{
+  background-color: #EAEAEA;
+}
+.addr_item{
+  padding:30px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+  margin-top: 30px;
+}
+.top{
+  flex-direction: column;
+  justify-content: center;
+}
+.addr_name{
+  margin-bottom: 10px;
+}
+.addr_name_txt{
+  font-size: 32px;
+  color: #454545;
+}
+.addr_detail_txt{
+  font-size: 32px;
+  color: #666666;
+}
+.dv{
+  border-bottom-color: #ccc;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  height: 1px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.img{
+  width:38px;
+  height:38px;
+}
+.addr_opt{
+  flex-direction: row;
+  justify-content: space-between;
+}
+.addr_opt_item{
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.addr_opt_item{
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.mgl{
+  margin-left: 25px;
+}
+.opt_name_txt{
+  font-size:32px;
+  color:#767676;
+  margin-left: 5px;
+}
+.add_btn{
+  background-color: #FDE314;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 60px;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.add_btn_txt{
+  color: white;
+  font-size: 38px;
+}
+.header-title{
+  color:#ffffff;
+  font-size:36px;
+}
+.header{
+  flex-direction: row;
+  justify-content: center;
+  background-color: #EB5D69;
+  height:88px;
+  align-items: center;
+  color: #ffffff;
+}
+
+.item-txt {
+  font-size: 32px;
+  color: #555;
+}
+
+.input{
+  height: 40px;
+  font-size:32px;
+  width:710px;
+  margin-left:20px;
+}
+
+.input-text{
+  height:60px;
+  width:600px;
+  font-size:32px;
+  margin-left:10px;
+  margin-top: 5px;
+}
+
+.item{
+  height:90px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.red{
+  color:#FDE314;
+  font-size:32px;
+  margin-right: 5px;
+}
+
+.buttons{
+  margin-top:80px;
+  border-width:1px;
+  border-style:solid;
+  border-color:#EB5E68;
+  width:710px;
+  background-color:#EB5E68;
+  margin-left:20px;
+  color:white;
+  border-radius:0px;
+}
+.dropdown{
+  margin-top: -25px;
+  height: 90px;
+  /*justify-content: center;*/
+  /*align-content: stretch;*/
+  /*position: relative;*/
+  /*z-index: 100;*/
+}
+.add_btn{
+  width: 710px;
+  background-color: #FDE314;
+  margin-left: 20px;
+  margin-top: 80px;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.add_btn_txt{
+  color: white;
+  font-size: 38px;
+}
+.input-border{
+  background-color: #ffffff;
+  width:750px;
+  padding-left:20px;
+  flex-direction: row;
+  justify-content: flex-start;
+  border-bottom-style:solid;
+  border-bottom-width:2px;
+  border-bottom-color: #DDDDDD;
+}
+.content {
+  background-color: #f5f5f5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.user-icon{
+    width:30px;
+    height:34px;
+    margin-top:20px;
+  }
+
+  .input-text{
+    height:60px;
+    width:650px;
+    font-size:32px;
+    margin-left:10px;
+    margin-top: 5px;
+  }
+
+  .mg-t-20{
+    margin-top: 20px;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="收货地址" title-color="white" left-item-title="返回" left-item-color="white">
+  <scroller class="content">
+  <!-- <div class="content"> -->
+    <!-- start: 输入框 -->
+    <div class="input-border item">
+      <text class="item-txt">收货人</text>
+      <text class="red">*</text>
+      <text class="item-txt">：</text>
+      <input class="input-text" value="{{address.contacts}}" autofocus="true" oninput="rchange($event, 'contacts')" type="text" placeholder="请输入收货人姓名">
+    </div>
+
+    <div class="input-border item">
+      <text class="item-txt">联系电话</text>
+      <text class="red">*</text>
+      <text class="item-txt">：</text>
+      <input class="input-text" value="{{address.phone}}" oninput="rchange($event, 'phone')"  type="text" placeholder="请输入收货人的联系电话">
+    </div>
+
+    <div onclick="selectProvince" class="input-border item" style="height:{{pheight}}">
+      <text class="item-txt">所在省</text>
+      <text class="red">*</text>
+      <text class="item-txt">：</text>
+      <text class="item-txt">{{provinceTxt}}</text>
+    </div>
+
+    <div onclick="selectCity" class="input-border item" style="height:{{cheight}}">
+      <text class="item-txt">所在市</text>
+      <text class="red">*</text>
+      <text class="item-txt">：</text>
+      <text class="item-txt">{{cityTxt}}</text>
+    </div>
+
+    <div onclick="selectDistrict" class="input-border item" style="height:{{dheight}}">
+        <text class="item-txt">所在区</text>
+        <text class="red">*</text>
+        <text class="item-txt">：</text>
+      <text class="item-txt">{{districtTxt}}</text>
+    </div>
+
+    <div class="input-border item">
+      <text class="item-txt">详细地址</text>
+      <text class="red">*</text>
+      <text class="item-txt">：</text>
+      <input class="input-text" value="{{address.detailedAddress}}" oninput="rchange($event, 'detailedAddress')" type="text" placeholder="详细街道细致到门牌号哦">
+    </div>
+    <!-- end: 输入框 -->
+
+    <!-- start: 提交按钮 -->
+    <div class="pd-b20">
+      <div class="add_btn" onClick="submit()"><text class="add_btn_txt">保存</text></div>
+    </div>
+    <!-- end: 提交按钮 -->
+
+  <!-- </div> -->
+  <by-select title="选择省" sid="{{address.province_id}}" id="province" sname="province" sdata="{{provinces}}"></by-select>
+  <by-select title="选择市" sid="{{address.city_id}}" id="city" sname="city" sdata="{{cities}}"></by-select>
+  <by-select title="选择区" sid="{{address.district_id}}" id="district" sname="district" sdata="{{districts}}"></by-select>
+</scroller>
+</wxc-navpage>
+
+</template>
+
+<script>
+require('weex-components');
+require('./by-components/by-select.we');
+var data = {
+  address: {contacts: "", phone: "", province_id: 0, city_id: 0, district_id: 0, detailedAddress: ""}, 
+  provinces: [], 
+  cities: [], 
+  districts: [],
+  provinceTxt: '请选择',
+  cityTxt: '请选择',
+  districtTxt: '请选择',
+  pheight: 90,
+  cheight: 90,
+  dheight: 90,
+  inAddr:''
+};
+data.utils = require('./js-kit/utils');
+var modal = require('@weex-module/modal');
+
+//获取地址
+var getAddress = function(id, me) {
+  if(id) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/editAddress/get",
+      type:'json',
+      body: {id: id}
+    }, function(response) {
+      if(response.data && response.data.error === 0) {
+        data.address = response.data.address;
+        
+        getProvinces(me);
+      }
+    },function(response){
+
+    });
+  } else {
+    getProvinces(me);
+  }
+}
+
+var getProvinces = function(me) {
+  data.utils.fetch(me,{
+    method: 'post',
+    url: data.utils.getServerBaseUrl() + "webapp/addresses/provinces",
+    type:'json',
+    body: {}
+  }, function(response) {
+    if(response.data && response.data.error === 0) {
+      data.provinces = response.data.provinces;
+      if(data.address.id) {
+        me.provinceTxt = data.address.province;
+      } else {
+        me.provinceTxt = '请选择';
+      }
+      
+      getCities(me);
+    }
+  },function(response){
+
+  });
+}
+
+var getCities = function(me, t) {
+  data.utils.fetch(me,{
+    method: 'post',
+    url: data.utils.getServerBaseUrl() + "webapp/addresses/cities",
+    type:'json',
+    body: {provinceId: data.address.province_id}
+  }, function(response) {
+    if(response.data && response.data.error === 0) {
+      data.cities = response.data.cities;
+      if(data.address.id && t != 1) {
+        me.cityTxt = data.address.city;
+      } else {
+        me.cityTxt = '请选择';
+        me.districtTxt = '请选择';
+      }
+      
+      getDistricts(me);
+    }
+  },function(response){
+
+  });
+}
+
+var getDistricts = function(me, t) {
+  data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/addresses/districts",
+      type:'json',
+      body: {cityId: data.address.city_id}
+    }, function(response) {
+      if(response.data && response.data.error === 0) {
+        data.districts = response.data.districts;
+        if(data.address.id && t != 1) {
+          me.districtTxt = data.address.district;
+        } else {
+          me.districtTxt = '请选择';
+        }
+      }
+    },function(response){
+
+    });
+}
+
+module.exports = {
+  data: data,
+  created: function() {
+      this.$on('naviBar.leftItem.click',function(e){
+        data.utils.pop(this);
+      });
+  },
+  init: function() {
+    var bundleUrl = this.$getConfig().bundleUrl;
+    var addressId = data.utils.getParameterByName('addressId', bundleUrl);
+    getAddress(addressId, this);
+  },
+  ready: function () {
+    var me = this;
+
+    me.$on('provinceclick', function (e) {
+      me.provinceTxt = e.detail.name;
+      me.address.province_id = e.detail.id;
+
+      me.address.city_id = null;
+      getCities(me, 1);
+    }.bind(this));
+
+    me.$on('cityclick', function (e) {
+      me.cityTxt = e.detail.name;
+      me.address.city_id = e.detail.id;
+
+      this.address.district_id = null;
+      getDistricts(me, 1);
+    }.bind(this));
+
+    me.$on('districtclick', function (e) {
+      me.districtTxt = e.detail.name;
+      this.address.district_id = e.detail.id;
+    }.bind(this));
+},
+methods: {
+      selectProvince: function() {
+        this.$vm('province').show();
+      },
+      selectCity: function() {
+        this.$vm('city').show();
+      },
+      selectDistrict: function() {
+        this.$vm('district').show();
+      },
+      rchange: function (e, m) {
+        this.address[m] = e.value;
+      },
+      getBackUrl: function() {
+        var url = this.utils.getAppBaseUrl(this) + 'addresses.js?t=1';
+
+        if(this.type) {
+          url += "&type=1"+'&addr='+this.inAddr;
+        }
+
+        if(this.productId) {
+          url += "&id=" + this.productId + "&priceId=" + this.priceId + "&amount=" + this.amount;
+        }
+
+        return url;
+      },
+      submit: function() {
+        var me = this;
+        var bundleUrl = this.$getConfig().bundleUrl;
+        this.type = data.utils.getParameterByName('type', bundleUrl);
+        this.productId = data.utils.getParameterByName('productId', bundleUrl);
+        this.priceId = data.utils.getParameterByName('priceId', bundleUrl);
+        this.amount = data.utils.getParameterByName('amount', bundleUrl);
+         this.inAddr = data.utils.getParameterByName('addr', bundleUrl);
+
+        if(!data.address.contacts) {
+            modal.toast({'message': '收货人姓名不能为空', 'duration': 1});
+            return;
+          }
+          if(!data.address.phone) {
+            modal.toast({'message': '联系电话不能为空', 'duration': 1});
+            return;
+          }
+
+          if(!(/^1(3|4|5|7|8)\d{9}$/.test(data.address.phone))){ 
+              modal.toast({'message': '手机号码有误，请重填', 'duration': 1});
+              return false; 
+          } 
+          if(!data.address.province_id) {
+            modal.toast({'message': '省份不能为空', 'duration': 1});
+            return;
+          }
+          if(!data.address.city_id) {
+            modal.toast({'message': '市区不能为空', 'duration': 1});
+            return;
+          }
+          if(!data.address.district_id) {
+            modal.toast({'message': '辖区不能为空', 'duration': 1});
+            return;
+          }
+          if(!data.address.detailedAddress) {
+            modal.toast({'message': '收货详细地址不能为空', 'duration': 1});
+            return;
+          }
+
+        if(this.address.id) {
+          //修改
+          data.utils.fetch(this,{
+            method: 'post',
+            url: data.utils.getServerBaseUrl() + "webapp/addresses/updateAddress",
+            type:'json',
+            body: me.address
+          }, function(response) {
+            if(response.data && response.data.error == 0 ) {
+              modal.toast({'message': '修改地址成功', 'duration': 1});
+              
+              me.$openURL(me.getBackUrl());
+            }
+          },function(response){
+
+          });
+        } else {
+          // address: {contacts: "", phone: "", province_id: 0, city_id: 0, district_id: 0, detailedAddress: ""}, 
+          
+          //添加
+          data.utils.fetch(this,{
+            method: 'post',
+            url: data.utils.getServerBaseUrl() + "webapp/addresses/save",
+            type:'json',
+            body: {
+              contacts: me.address.contacts, 
+              phone: me.address.phone, 
+              province_id: me.address.province_id, 
+              city_id: me.address.city_id, 
+              district_id: me.address.district_id, 
+              detailedAddress: me.address.detailedAddress
+            }
+          }, function(response) {
+            if(response.data && response.data.error == 0 ) {
+              me.utils.toast({'message': '添加地址成功', 'duration': 1},function () {
+                me.$openURL(me.getBackUrl());     
+              });
+            }
+          },function(response){
+
+          });
+        }
+        
+      }
+    }
+  }
+  </script>

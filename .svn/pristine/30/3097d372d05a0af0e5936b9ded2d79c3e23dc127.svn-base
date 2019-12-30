@@ -1,0 +1,403 @@
+<style>
+  .bg-grey{
+    background-color: #EAEAEA;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .row {
+    margin-top: 20px;
+    width: 750px;
+    background-color: #ffffff;
+  }
+  .item {
+    margin-top: 20px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+  }
+
+  .orders{
+    background-color: #EAEAEA;
+  }
+
+  .list{
+    background-color: #EAEAEA;
+  }
+
+  .item-title {
+    height: 70px;
+    border-bottom: 1px solid #d9d9d9;
+    border-bottom-width: 1px; 
+    border-bottom-color: #d9d9d9;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .shop-name {
+    font-size: 26px;
+    color: #333333;
+  }
+
+  .status {
+    font-size: 26px;
+    color: #F49601;
+  }
+
+  .item-product {
+    height: 180px;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color: #d9d9d9;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction: row;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .product-image {
+    width: 136px;
+    height: 136px;
+  }
+
+  .product-r {
+    flex: 1;
+    margin-left: 20px;
+  }
+
+  .p-info1 {
+    height: 62px;
+    overflow-wrap: hidden;
+    overflow:hidden;
+  }
+
+  .product-name {
+    font-size: 26px;
+    color: #333333;
+  }
+
+  .p-info2 {
+    margin-top: 9px;
+  }
+
+  .product-attr {
+    font-size: 22px;
+    color: #666666;
+  }
+
+  .product-price {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 9px;
+  }
+
+  .p-price {
+    color: #F49601;
+    font-size: 24px;
+  }
+
+  .p-num {
+    font-size: 22px;
+    color: #666666;
+  }
+
+  .p-info3{
+    flex-direction: row;
+    justify-content: flex-end;
+    /*margin-top:20px;*/
+    margin-bottom:20px;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color:#d9d9d9;
+    margin-left:20px;
+    margin-right:20px;
+    padding-bottom:20px;
+  }
+
+  .font-24{
+    font-size:24px;
+  }
+
+  .mg-l-20{
+    margin-left:20px;
+  }
+
+  .mg-r-20{
+    margin-right: 20px;
+  }
+
+  .font-grey-2{
+    color:#666666;
+  }
+
+  .prince-red{
+    color:#F49601;
+  }
+
+  .item-money{
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-left:20px;
+    margin-right:20px;
+    padding-bottom:20px;
+  }
+
+  .bottons{
+    width:140px;
+    height:40px;
+    text-align: center;
+    background-color:#EB5D69;
+    font-size:28px;
+    color:#ffffff;
+    padding-top:3px;
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .tabs {
+    height: 70px;
+    background-color: #ffffff;
+      flex-direction: row;
+  }
+
+  .tab {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-bottom-width: 5px;
+  }
+
+  .tab-text {
+    font-size: 32px;
+    color: #333333;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="退货退款" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller style="height: {{serverHeight}}">
+      
+      <div class="tabs">
+        <div class="tab" style="border-bottom-color: {{tabIndex == 0 ? '#FDE314' : '#ffffff'}};" onclick="checkTab(0)">
+          <text class="tab-text">退货</text>
+        </div>
+        <div class="tab" style="border-bottom-color: {{tabIndex == 1 ? '#FDE314' : '#ffffff'}};" onclick="checkTab(1)">
+          <text class="tab-text">退款</text>
+        </div>
+      </div>
+      <!-- end: 导航 -->
+
+      <!-- start: 退货 -->
+      <div class="orders" if="{{tabIndex == 0}}">
+        <div class="list">
+
+          <div class="row" repeat="back in backs">
+            <div class="item">
+              <div class="item-title">
+                <text class="shop-name">{{back.shopName}}</text>
+                <text class="status">{{back.status}}</text>
+              </div>
+
+              <div class="item-product" onclick="toProduct" ds="{{back}}">
+                <div class="product-l">
+                  <image class="product-image" src="{{back.mainPic}}"></image>
+                </div>
+
+                <div class="product-r">
+                  <div class="p-info1">
+                    <text class="product-name">{{back.productName}}</text>
+                  </div>
+                  <div class="p-info2">
+                    <text class="product-attr">{{back.summary}}</text>
+                  </div>
+                  <div class="product-price">
+                    <text class="p-price">￥{{back.actualUnitPrice}}</text>
+                    <text class="p-num">x{{back.refundAmount}}</text>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-info3">
+              <text class="font-24 font-grey-2">交易金额：</text>
+              <text class="font-24 font-grey-2">￥{{back.tradeCash}}</text>
+              <text class="font-24 font-grey-2 mg-l-20">退款金额：</text>
+              <text class="font-24 prince-red mg-r-20">￥{{back.refundCash}}</text>
+            </div>
+
+            <!-- <div class="item-money" onclick="toBacks" ds="{{back}}">
+              <text class="bottons">申请退货</text>
+            </div> -->
+          </div>
+
+        </div>
+      </div>
+      <!-- end: 退货 -->
+
+      <!-- start: 退货 -->
+      <div class="orders" if="{{tabIndex == 1}}">
+        <div class="list">
+
+          <div class="row" repeat="item in refunds">
+            <div class="item">
+              <div class="item-title">
+                <text class="shop-name">{{item.shopName}}</text>
+                <text class="status">{{item.status}}</text>
+              </div>
+
+              <div class="item-product" onclick="toProducts" ds="{{item}}">
+                <div class="product-l">
+                  <image class="product-image" src="{{item.mainPic}}"></image>
+                </div>
+
+                <div class="product-r">
+                  <div class="p-info1">
+                    <text class="product-name">{{item.productName}}</text>
+                  </div>
+                  <div class="p-info2">
+                    <text class="product-attr">{{item.summary}}</text>
+                  </div>
+                  <div class="product-price">
+                    <text class="p-price">￥{{item.actualUnitPrice}}</text>
+                    <text class="p-num">x{{item.refundAmount}}</text>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-info3">
+              <text class="font-24 font-grey-2">交易金额：</text>
+              <text class="font-24 font-grey-2">￥{{item.tradeCash}}</text>
+              <text class="font-24 font-grey-2 mg-l-20">退款金额：</text>
+              <text class="font-24 prince-red mg-r-20">￥{{item.refundCash}}</text>
+            </div>
+
+            <!-- <div class="item-money" onclick="toRefund" ds="{{item}}">
+              <text class="bottons">申请退款</text>
+            </div> -->
+          </div>
+
+        </div>
+      </div>
+      <!-- end: 退货 -->
+
+
+    </scroller>
+  </wxc-navpage>
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+
+ var data = {
+    backs:[],
+    refunds: [],
+    tabIndex: 0,
+    isShow: false
+  };
+
+  var backsMap = {
+    0:"进行中",
+    1:"审核通过",
+    2:"审核不通过",
+    3:"已收货",
+    4:"已退款"
+  }
+
+  var refundMap = {
+    0:"进行中",
+    1:"审核通过",
+    2:"审核不通过",
+    3:"确认已退款"
+  }
+
+ data.utils = require('./js-kit/utils');
+
+ //退货列表
+ var getBacks = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/backs/getBacks",
+      type:'json',
+      body: {offset:0,length:10}
+    }, function(response) {
+      if(response.data) {
+        for(var i = 0; i < response.data.data.length; i++) {
+          response.data.data[i].status = backsMap[response.data.data[i].status];
+        }
+        data.backs = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+  //退款列表
+ var getRefunds = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/backs/getRefunds",
+      type:'json',
+      body: {offset: 0,length:20}
+    }, function(response) {
+      if(response.data) {
+        for(var i = 0; i < response.data.data.length; i++) {
+          response.data.data[i].status = refundMap[response.data.data[i].status];
+        }
+        data.refunds = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+        var headerHeight =  data.utils.getRealHeight(this, 88);
+        this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight;
+
+        var bundleUrl = this.$getConfig().bundleUrl;
+        var type = data.utils.getParameterByName('type', bundleUrl);
+        this.checkTab(type);
+    },
+    init:function () {
+      
+    },
+    methods: {
+      checkTab: function(index) {
+        if(index == 0) {
+          getBacks(this);
+        }else{
+          getRefunds(this);
+        }
+        this.tabIndex = index;
+      },
+      toBacks: function (e) {
+        var v = e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'refund.js?productOrderId=' + v);
+      },
+      toRefund: function (e) {
+        var v = e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'refund.js?productOrderId=' + v);
+      },
+      toProduct: function (e) {
+        var id = e.target.attr.ds.productId;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + id);
+      },
+      toProducts: function (e) {
+        var id = e.target.attr.ds.productId;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + id);
+      }
+    }
+  };
+</script>

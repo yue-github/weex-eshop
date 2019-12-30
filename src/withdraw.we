@@ -1,0 +1,448 @@
+<style>
+  .header{
+    flex-direction: row;
+    justify-content: center;
+    background-color: #FDE314;
+    height:88px;
+    align-items: center;
+    color: #ffffff;
+  }
+  .lg_top{
+    height: 65px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .bg-grey{
+    height: 60px;
+    background-color:#EAEAEA;
+  }
+  .pl20{
+    padding-left: 20px;
+  }
+
+  .font-red{
+    color:#F49601;
+  }
+
+  .lg_top_txt{
+    font-size:28px;
+  }
+
+  .submit{
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    font-size:36px;
+  }
+
+  /*.options {
+    position: absolute;
+    top: -181;
+    width: 750;
+    background-color: #fff;
+    transform-origin: center center;
+
+  }*/
+
+  .icon-curr-flag{
+    width: 32;
+    height: 32;
+  }
+
+  .banner-image {
+  width: 750px;
+  height: 350px;
+  }
+  .bg-item{
+    width: 750px;
+    background-color: #f5f5f5;
+    padding-top:10;
+    padding-left:20;
+  }
+
+  .item-rigth{
+    margin-left:500px;
+    font-size:24px;
+    color:#3E44FE;
+    border-style:dashed;
+    border-color:#3E44FE;
+    border-width:1px;
+  }
+
+  .list {
+    flex-direction: column;
+    width: 750;
+    height: 1200;
+    background-color: #dddddd;
+  }
+
+  .cell {
+    background-color: #dddddd;
+    flex-direction: column;
+    width: 750;
+  }
+  .buttons{
+    border-width:1px;
+    border-style:solid;
+    border-color:#EB5E68;
+    width:700px;
+    background-color:#FDE314;
+    margin-left:25px;
+    color:white;
+    border-radius:0px;
+    height: 100px;
+    text-align: center;
+    font-size: 36px;
+    padding-top: 30px;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+
+  .input{
+    height: 60px;
+    font-size:24px;
+    width:710px;
+    margin-top:15px;
+    padding-top:5px;
+    padding-bottom: 5px;
+    padding-left:10px;
+    margin-left:20px;
+    border-width:1px;
+    border-style:solid;
+    border-color:#EAEAEA;
+  }
+
+  .text{
+    height:90px;
+  }
+
+  .balance{
+    margin-top:30px;
+    margin-left:25px;
+    font-size:26px;
+  }
+
+  .note{
+    color:#fff;
+    font-size:26px;
+    width:150px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin-top:20px;
+    margin-bottom: 20px;
+    margin-right:20px;
+    padding-right:5px;  
+    background:#FDE314;
+    border-radius:5px;
+  }
+
+  .add{
+    color:#EB5E68;
+    font-size:26px;
+    margin-right:20px;
+  }
+
+  .pd-b20{
+    margin-top: 80px;
+    padding-bottom:20px;
+  }
+
+  .content{
+    /*background-color:#EAEAEA;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="提现" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="content">
+      <div>
+      <!-- start: 顶部logo -->
+      <div>
+        <image class="banner-image" src="{{utils.getImageBaseUrl() + 'images/withdraw_banner.png'}}"></image>
+      </div>
+      <!-- end: 顶部logo -->
+
+      <!-- start: 账户余额 -->
+        <div class="bg-grey">
+          <div class="lg_top pl20"><text class="lg_top_txt">账户余额</text></div>
+        </div>
+        <div>
+          <div class="text" style="flex-direction: row;justify-content: space-between;">
+            <text class="font-red balance">￥{{utils.toDecimal2(walletAmount)}}</text>
+            <text class="note">提现说明</text>
+          </div>
+        </div>
+      <!-- end: 账户余额 -->
+
+      <!-- start: 提现金额 -->
+        <div class="bg-grey">
+          <div class="lg_top pl20"><text class="lg_top_txt">提现金额</text><text class="lg_top_txt" style="color:red">*</text></div>
+        </div>
+        <div>
+          <div class="text">
+            <input class="input" type="text" value="{{submitData.money}}" onchange="vchange($event, 'money')" placeholder="请输入提现金额">
+          </div>
+        </div>
+      <!-- end: 提现金额 -->
+
+      <!-- start: 提现方式 -->
+      <div class="bg-grey">
+        <div class="lg_top pl20">
+          <text class="lg_top_txt">提现方式</text>
+          <text class="lg_top_txt" style="color:red">*</text>
+        </div>
+      </div>
+      <div>
+        <div class="text" onclick="selectEvent" style="height:{{height}}">
+          <!-- <we-select sname="event" sdata="{{eventTypes}}"></we-select> -->
+          <text style="font-size:28px;color:#999999;margin-top:20px;margin-bottom:20px;padding-left:20px;">{{eventText}}</text>
+        </div>
+      </div>
+      <!-- <div>
+        <div class="text" style="height:{{height}}">
+          <we-select sname="accountType" sdata="{{withdrawTypes}}"></we-select>
+        </div>
+      </div> -->
+      <!-- end: 充值方式 -->
+
+      <!-- start: 支付宝账号 -->
+      <div if="{{submitData.accountType == 1}}">
+        <div class="bg-grey">
+          <div class="lg_top pl20"><text class="lg_top_txt">支付宝账号</text><text class="lg_top_txt" style="color:red">*</text></div>
+        </div>
+        <div>
+          <div class="text">
+            <input class="input" type="text" value="{{submitData.aplipayAccount}}" onchange="vchange($event, 'aplipayAccount')" placeholder="支付宝账号">
+          </div>
+        </div>
+      </div>
+      
+      <!-- end: 支付宝账号 -->
+
+      <!-- start: 微信账号 -->
+      <div if="{{submitData.accountType == 2}}">
+        <div class="bg-grey">
+          <div class="lg_top pl20"><text class="lg_top_txt">微信账号</text><text class="lg_top_txt" style="color:red">*</text></div>
+        </div>
+        <div>
+          <div class="text">
+            <input class="input" type="text" value="{{submitData.weixinAccount}}" onchange="vchange($event, 'weixinAccount')" placeholder="微信账号">
+          </div>
+        </div>
+      </div>
+      
+      <!-- end: 微信账号 -->
+
+      <!-- start: 银行卡号 -->
+      <div if="{{submitData.accountType == 3}}">
+        <div class="bg-grey">
+          <div class="lg_top pl20" style="flex-direction: row;justify-content: space-between;">
+          <text class="lg_top_txt">银行卡号</text>
+          <text onclick="toAddbank" class="add">+添加账户</text>
+          </div>
+        </div>
+        <div>
+          <div class="text" onclick="selectbankCard_id" style="height:{{height}}">
+            <text style="font-size:28px;color:#999999;margin-top:20px;margin-bottom:20px;padding-left:20px;">{{bankCard_name}}</text>
+          </div>
+        </div>
+      </div>
+    
+      <!-- end: 银行卡号 -->
+
+      <!-- start: 提现备注 -->
+      <div class="bg-grey">
+        <div class="lg_top pl20"><text class="lg_top_txt">提现备注</text>
+   </div>
+      </div>
+      <div>
+        <div style="height:180px;">
+            <input class="input" type="text" value="{{submitData.note}}" onchange="vchange($event, 'money')" placeholder="提现备注">
+        </div>
+      </div>
+      <!-- end: 提现备注 -->
+
+      <!-- start: 提交按钮 -->
+      <div class="pd-b20" onclick="submit()">
+        <text class="buttons">确认提现</text>
+      </div>
+       <!-- end: 提交按钮 -->
+
+      </div>
+
+      <by-select title="提现方式" height="{{hheight}}" sid="{{submitData.event}}" id="accountType" sname="accountType" sdata="{{withdrawTypes}}"></by-select>
+      <by-select title="银行卡号" height="{{hheight}}" sid="{{submitData.event}}" id="bankCard_id" sname="bankCard_id" sdata="{{myBankCardList}}"></by-select>
+    </scroller>
+  </wxc-navpage>
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ require('./by-components/by-select.we');
+ var stream = require('@weex-module/stream');
+  var modal = require('@weex-module/modal');
+
+ var data = {
+    eventText: '请选择',
+    walletAmount: "",
+    submitData: {accountType: 0},
+    withdrawTypes: [],
+    height: 90,
+    myBankCardList:[{id:"",bankName:""}],
+    bankCard_name:"请选择"
+  };
+
+  data.utils = require('./js-kit/utils');
+
+  data.withdrawTypes = [
+    {id: 1, name: "支付宝"},
+    {id: 2, name: "微信"},
+    {id: 3, name: "银行卡"}
+  ]
+
+ //获取账户余额
+ var getWalletAmount = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/withdraw/myWalletAmount",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        data.walletAmount = response.data.walletAmount;
+      }
+    },function(response){
+
+    });
+  };
+  //获取银行卡信息
+  var getbanks=function(me){
+     data.utils.fetch(me, {
+          method: 'post',
+          url: data.utils.getServerBaseUrl() + "webapp/withdraw/myBankCardList",
+          type:'json',
+           body:{offset:1,length:10}
+        }, function(response) {
+          if(response.data) {
+        
+            var dataLength=response.data.data.length;
+            for(var i=0;i<dataLength;i++){
+             response.data.data[i].name="**********"+response.data.data[i].accoutNumber;
+            }
+            data.myBankCardList = response.data.data;
+          }
+        },function(response){
+
+        });
+  }
+
+
+  //申请提现
+ var getWithDraw = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/withdraw/submit",
+      type:'json',
+      body: data.submitData
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error==0) {
+            me.utils.toast({'message': '申请提现成功', 'duration': 1},function () {
+              me.$openURL(me.utils.getAppBaseUrl(me) + 'withdrawDetails.js');
+            });
+        }else{
+          modal.toast({'message': '申请提现失败', 'duration': 1});
+        }
+      }
+      
+    },function(response){
+
+    });
+  };
+
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    ready: function (){
+      var me = this;
+      this.$on('accountTypeclick', function (e) {
+        me.eventText = e.detail.name;
+        me.submitData.accountType = e.detail.id;
+      }.bind(this));
+       this.$on('bankCard_idclick', function (e) {
+       me.bankCard_name = e.detail.name;
+        me.submitData.bankCard_id = e.detail.id;
+      }.bind(this));
+
+      // this.$on('accountTypeview', function (e) {
+      //   this.height = (this.withdrawTypes.length + 1) * 90;
+      // }.bind(this));
+
+      // this.$on('accountTypechange', function (e) {
+      //   this.height = 90;
+      //   this.submitData.accountType = e.detail.id;
+      // }.bind(this));
+    },
+    init:function () {
+      getWalletAmount(this);
+      getbanks(this);
+    },
+    methods: {
+      vchange: function (e, m) {
+        this.submitData[m] = e.value;
+      },
+      submit: function () {
+        if(data.submitData.money > data.walletAmount) {
+          modal.toast({'message': '余额不足', 'duration': 1});
+          return;
+        }
+         if(data.submitData.accountType==1) {
+            if(!data.submitData.aplipayAccount) {
+                modal.toast({'message': '请输入支付宝账号', 'duration': 1});
+                return;
+            }
+        }
+          if(data.submitData.accountType==2) {
+            if(!data.submitData.weixinAccount) {
+                modal.toast({'message': '请输入微信账号', 'duration': 1});
+                return;
+            }
+        }
+          if(data.submitData.accountType==3) {
+            if(!data.submitData.bankCard_id) {
+                modal.toast({'message': '请输入银行卡账号', 'duration': 1});
+                return;
+            }
+        }
+      
+        getWithDraw(this);
+      },
+      selectEvent: function() {
+        this.$vm('accountType').show();
+      },
+        selectbankCard_id: function() {
+        this.$vm('bankCard_id').show();
+      },
+      toAddbank:function(){
+        var me=this;
+       me.$openURL(me.utils.getAppBaseUrl(me) + 'addCard.js&type=1'); 
+      }
+    }
+  };
+</script>

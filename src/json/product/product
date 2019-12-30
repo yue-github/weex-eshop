@@ -1,0 +1,5 @@
+{"error": 0,"product":{"id": 1,"name":"超级水蜜桃","summary":"特大特甜特好吃","actualUnitPrice": 100,"suggestedRetailUnitPrice":150,"note":"水蜜桃啊啊啊","storeAmount": 10,"pics": [
+	{"path":"http://192.168.1.120:8081/images/banner01.jpg"},
+	{"path":"http://192.168.1.120:8081/images/banner01.jpg"},
+	{"path":"http://192.168.1.120:8081/images/banner01.jpg"}
+]}}

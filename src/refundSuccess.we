@@ -1,0 +1,54 @@
+<style>
+	.bg-grey{
+    background-color:#EDEDED;
+  }
+  .header{
+    flex-direction: row;
+      justify-content: center;
+      background-color: #EB5D69;
+      height:88px;
+      align-items: center;
+      color: #ffffff;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+
+  .success{
+    width:152px;
+    height:152px;
+    margin-top:340px;
+    margin-left:300px;
+  }
+
+  .success-text{
+    font-size: 36px;
+    text-align:center;
+    margin-top:20px;
+  }
+</style>
+
+<template>
+	<wxc-navpage data-role="none" height="88" background-color="#EB5D69" title="退款成功" title-color="white" left-item-title="返回" left-item-color="white">
+        <scroller class="bg-grey">
+          <!-- start: 付款成功 -->
+            <div>
+              <image class="success" src="http://192.168.1.120:8081/images/paySuccess.png"></image>
+              <text class="success-text">恭喜您，退款成功！</text>
+            </div>
+          <!-- end: 付款成功 -->
+        </scroller>
+    </wxc-navpage>
+	
+</template>
+
+<script>
+  require('weex-components');
+  module.exports = {
+    data: {
+      
+    },
+    
+  }
+</script>

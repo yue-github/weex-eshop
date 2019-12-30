@@ -1,0 +1,15 @@
+{"error": 0, "saleAttrs":[
+	{"propertyId": 1,"propertyName":"季节","propertyValueList": [
+		{"propertyValueName":"红色","propertyValueId":10},
+		{"propertyValueName":"黑色","propertyValueId":11},
+		{"propertyValueName":"蓝色","propertyValueId":12}
+	]},
+	{"propertyId": 2,"propertyName":"包装方式","propertyValueList": [
+		{"propertyValueName":"套餐1","propertyValueId":20},
+		{"propertyValueName":"套餐2","propertyValueId":21}
+	]},
+	{"propertyId": 3,"propertyName":"储存方法","propertyValueList": [
+		{"propertyValueName":"X","propertyValueId":30},
+		{"propertyValueName":"XL","propertyValueId":31}
+	]}
+]}

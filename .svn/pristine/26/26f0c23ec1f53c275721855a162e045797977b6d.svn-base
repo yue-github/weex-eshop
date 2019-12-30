@@ -1,0 +1,245 @@
+<style>
+  .bg-grey{
+ 	 background-color:#EDEDED;
+   
+  }
+  .header{
+    flex-direction: row;
+      justify-content: center;
+      background-color: #EB5D69;
+      height:88px;
+      align-items: center;
+      color: #ffffff;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+
+  .coupons-image{
+    position: absolute;
+    margin-top:20px;
+    margin-left:25px;
+    padding-bottom: 50px;
+    border-radius: 5px;
+    width:710px;
+    height:280px; 
+  }
+
+  .item{
+    width:700px;
+    height:280px;
+    margin-top:20px;
+    margin-left:20px;
+    margin-bottom: 20px;
+
+  }
+
+  .item-row{
+    flex-direction: row;
+    justify-content: flex-start;
+	background-color:white;
+  }
+
+  .row{
+    flex-direction:row;
+  }
+
+  .item-left{
+    align-items: flex-start;
+  }
+
+  .text-left{
+    text-align:left;
+  }
+
+  .text-right{
+    text-align:right;
+  }
+
+  .font-white{
+    color:#ffffff;
+  }
+
+  .coupon-name{
+    font-size: 28px;
+    margin-left:50px;
+    margin-top:20px;
+    width:300px;
+  }
+
+  .coupon-use{
+    font-size: 28px;
+    margin-top:20px;
+    width:300px;
+  }
+
+  .coupon-money{
+    margin-left:50px;
+    margin-top:35px;
+    width:300px;
+    font-size:60px;
+  }
+
+  .coupon-value{
+    font-size: 28px;
+    margin-top:60px;
+    width:300px;
+  }
+
+  .coupon-time{
+    font-size: 28px;
+    margin-left:20px;
+    margin-top:55px;
+    padding-bottom: 20px;
+    color:#666666;
+    width:430px;
+  }
+
+  .coupon-status{
+    font-size: 28px;
+    margin-top:55px;
+    width:200px;
+  }
+
+  .font-red{
+    color:#ED5E4E;
+  }
+
+  .font-blue{
+    color:#009AF4;
+  }
+
+  .font-grey{
+    color:#999798;
+  }
+
+  .image{
+    width:710px;
+    height:280px;
+    position: absolute;
+  }
+    .shoppingEmpty{
+    width:227px;
+    height:227px;
+    margin-top:150px;
+    margin-left:260px;
+  }
+
+  .success-text{
+    font-size: 36px;
+    text-align:center;
+    margin-top:50px;
+    color:#999999;
+  }
+  .font-ededed{
+  	 color:#999999;
+  	 font-family: 'Open Sans', sans-serif;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="我的优惠券" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller if="{{dataLength==0}}">
+       <div>
+        <image class="shoppingEmpty" src="{{ 'src/images/icon_list_empty.png'}}"></image>
+        <text class="success-text">亲，你没有优惠劵记录！</text>
+      </div>
+    </scroller>
+
+    <list if="{{dataLength>0}}" class="bg-grey"  style="height: {{serverHeight}};">
+    <div>  
+    <!-- start: 顶部logo -->
+    <div>
+      <div class="item" repeat="{{coupons}}">
+        <div class="coupons-image-grey item-row">
+          <image if="{{is_used==0}}" class="image" src="{{utils.getImageBaseUrl() + 'images/coupons_01.png'}}"></image>
+          <image if="{{is_used==1}}"  class="image" src="{{utils.getImageBaseUrl() + 'images/coupons_03.png'}}"></image>
+          <div class="item-left">
+            <div class="item-row">
+              <text class="coupon-name text-left font-ededed">我的折扣券</text>
+              <text class="coupon-use text-right font-ededed">立即使用></text>
+            </div>
+            <div class="row">
+              <text class="coupon-money text-left font-ededed">{{percentageDiscount}}折</text>
+              <text class="coupon-value text-right font-ededed">{{couponTitle}}</text>
+            </div>
+            <div class="row">
+              <text class="coupon-time text-left">有效期:{{depositTime  }}—{{expirationTime}}</text>
+                <text if="{{isUsed==0}}"  class="coupon-status text-right font-red">未使用</text>
+               <text if="{{isUsed==1}}"  class="coupon-status text-right font-grey">已使用</text>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+    <!-- end: 顶部logo -->
+
+    
+
+    </div>
+    </list>
+  </wxc-navpage>
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+ var storage = require('@weex-module/storage');
+
+ storage.getItem("token", function(e) {
+    // alert(e.data);
+  });
+
+ var data = {coupons:[],dataLength:0,depositTime:[],expirationTime:[]};
+
+ data.utils = require('./js-kit/utils');
+
+ //获取优惠券
+ var getCoupons = function(me) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/coupons/getMyCoupons",
+      type:'json',
+      body: {length: 5,offset:1}
+    }, function(response) {
+      if(response.data) {
+      	
+        data.dataLength=response.data.length;
+        for(var i = 0; i < response.data.data.length; i++) {
+          var discount = 100/response.data.data[i].percentageDiscount;
+          response.data.data[i].percentageDiscount = response.data.data[i].value*0.1;
+          response.data.data[i].couponTitle = response.data.data[i].title;
+          response.data.data[i].depositTime = response.data.data[i].startDate;
+          response.data.data[i].expirationTime = response.data.data[i].endDate;
+        }
+        data.coupons = response.data.data;
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+       var headerHeight =  data.utils.getRealHeight(this, 88);
+      var footerHeight =  data.utils.getRealHeight(this, 0);
+      this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight - footerHeight;
+      getCoupons(this);
+    },
+    methods: {
+
+    }
+  };
+
+</script>

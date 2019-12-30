@@ -1,0 +1,64 @@
+<template>
+    <wxc-navpage data-role="none" height="88" background-color="#EB5D69" title="图文详情" title-color="white" left-item-title="商品" left-item-color="white" >
+        <div class="wrapper">
+            <web class="web" id="webview" src='http://service.eebin.com/detail.html?id={{productId}}' onpagestart="startload" onpagefinish="finishload" onerror="failload"></web>
+        </div>
+    </wxc-navpage>
+</template>
+
+<style>
+    .wrapper { 
+        width: 750; 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0;
+    }
+    .web { 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0; 
+    }
+    .toolbar { 
+        align-items: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 88px;
+        background-color: #eb5d68;
+        flex-direction: row; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        right: 0;  
+    }
+    .back {
+        width: 16px; 
+        height: 30px; 
+        margin-right: 28px;
+      }
+</style>
+
+<script>
+    require('weex-components');
+    var data = {};
+    data.utils = require('./js-kit/utils');
+    module.exports = {
+        data: data,
+        created: function() {
+          this.$on('naviBar.leftItem.click',function(e){
+            data.utils.pop(this);
+            // me.$openURL(data.utils.getAppBaseUrl(this) + 'product.js?id=' + me.productId);
+          });
+        },
+        init: function() {
+             var bundleUrl = this.$getConfig().bundleUrl;
+             this.productId = data.utils.getParameterByName('id', bundleUrl);
+        },
+        methods: {
+            
+        }
+    }
+</script>

@@ -1,0 +1,73 @@
+<template>
+	<!-- start: 导航栏 -->
+    <div class="selectDiv">
+      <div style="width:150px" class="{{item.id==current?'is-select':'no-select '}}" ds="{{item}}" repeat="item in categoryName" onclick="selectColor">
+        <text  class="select-title theme-color {{item.id==current?'theme-color':'grey-color'}}">{{item.name}}</text>
+      </div>
+    </div>
+    <!-- end: 导航栏 -->
+
+    <!-- <input value="22" style="font-size:30"></input> -->
+  
+</template>
+
+<style>
+	.is-select{
+	    width:150px;
+	    height:90px;
+	    background-color: white;
+	    border-bottom-style: solid;
+	    border-bottom-width:2px;
+	    border-bottom-color: #D9D9D9;
+	    border-left-style: solid;
+	    border-left-width:7px;
+	    border-left-color: #FDE314;
+	}
+
+	.no-select{
+	    width:150px;
+	    height:90px;
+	    background-color: #F6F6F6;
+	    border-bottom-style: solid;
+	    border-bottom-width:2px;
+	    border-bottom-color: #D9D9D9;
+	    border-left-style: solid;
+	    border-left-width:2px;
+	    border-left-color: #ffffff;
+	}
+
+	.select-title{
+	color:red;
+	    text-align: center;
+	    font-size:28px;
+	    margin-top:30px;
+  	}
+  	.theme-color{
+	    color: #FDE314;
+	   
+  	}
+
+  	.grey-color{
+    	color: #000;
+  	}
+	
+</style>
+
+<script>
+  // require('weex-components');
+  module.exports = {
+    data: {
+    	color: '#eb5d68',
+    	current: 0,
+    	categoryName:[]
+    },
+    methods: {
+    	selectColor: function (e) {
+    		this.$dispatch('selectColor',e.target.attr.ds);
+    	}
+    }
+  }
+</script>
+
+<style>
+</style>

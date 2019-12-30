@@ -1,0 +1,207 @@
+<template>
+	<!--begin 推荐产品-->
+	  <cell>
+	    <div class="recommend-panel" repeat="{{ds in recommends}}">
+	      <div class="recommend-title" > 
+	       <!--<div class="title-line"  resize="contain"></div>-->
+	        <text class="recommend-name" >{{ds.name}}</text>
+	        <image class="title-lineImage" resize="stretch" src="{{utils.getImageBaseUrl()+'images/home_background.png'}}"></image>
+	        <!--<div class="title-line"></div>-->
+	      </div>
+	      
+		  <div class="product-big">
+		      <div class="product-panel">
+		        <div onclick="toProduct" ds="{{item}}" class="product-item" repeat="{{item in ds.products}}">
+		          <image class="product-image"  src="{{item.mainPic}}"></image>
+		          <div style="padding-left: 15; padding-right: 15;">
+		            <text class="product-name">{{item.name}}</text>
+		            <div class="product-txt">
+		              <text class="product-price-icon" style="color:{{color}}">
+		                ￥
+		              </text>
+		              <text class="product-price" style="color:{{color}};font-size:35px;">
+		                {{utils.toDecimal2(item.suggestedRetailUnitPrice)}}
+		              </text>
+		              <div if="{{item.originUnitPrice}}" class="through-price" style="flex-direction: row;">
+			              <text class="product-price" style="color:{{throughColor}};text-decoration: line-through;">
+			                ￥{{utils.toDecimal2(item.originUnitPrice)}}
+			              </text>
+		              </div>
+		    
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		 </div>
+		 
+	     <div style="margin-top: 20;" if="{{ds.advs}}" repeat="{{item in ds.advs}}">
+	        <image class="adv-image" src="{{item.recommendPic}}"></image>
+	      </div>
+	    </div>
+	  </cell> 
+	<!--end 推荐产品-->
+
+	<!-- <input value="22" style="font-size:30"></input> -->
+  
+</template>
+
+<style>
+	.recommend-panel {
+	  margin-top: 20px;  
+	  padding-bottom: 20px; 
+	  background-color: #f5f5f5; 
+	}
+
+	.recommend-title {
+	  flex-direction: row; 
+	  align-items: center; 
+	  justify-content: center;
+	  height: 80;
+	  
+	}
+	.title-lineImage{
+		width:700px;
+		height:70px;
+		position:absolute;
+		top:10px;
+		left:0px;
+	}
+	.recommend-name {
+	  color: #F7B148; 
+	  font-size: 28;
+	}
+
+	.title-line {
+	  width: 80px;
+	  margin-left: 20px;
+	  margin-right: 20px;
+	  border-top-width: 1px;
+	  border-top-color: #eb5d68;
+	  border-bottom-width: 1px;
+	  border-bottom-color: #eb5d68;
+	  border-left-width: 1px;
+	  border-left-color: #eb5d68;
+	  border-right-width: 1px;
+	  border-right-color: #eb5d68;
+	  border: 1px solid #eb5d68;
+	  height: 1px;
+	}
+
+	
+
+	.product-txt {
+	  flex-direction: row; 
+	  margin-top: 15px; 
+	  align-items: center;
+	  justify-content: flex-start;
+	}
+
+	.product-image {
+	  width: 372px;
+	  height: 347px;
+	}
+
+	.product-note {
+	  font-size: 20px;
+	  color: #999999;
+	}
+
+	.product-name {
+	  color: #000;
+	  font-size: 28px;
+	  margin-top: 15px;
+	  width: 315px;
+	  height: 75px;
+	  line-height: 35px;
+	  overflow: hidden;
+	}
+
+	.product-price {
+	  font-size: 24px;
+	  color: #eb5d68;
+	  margin-right: 10px;
+	}
+
+	.product-price-icon {
+	  font-size: 20px;
+	  color: #eb5d68;
+	  margin-right: 5px;
+	  margin-top: 3px;
+	}
+
+	.through-price{
+		text-decoration: line-through;
+	}
+
+	.product-through-price {
+	  font-size: 24px;
+	  color: #eb5d68;
+	  margin-right: 10px;
+	}
+
+	.product-price-through-icon {
+	  font-size: 20px;
+	  color: #eb5d68;
+	  margin-right: 5px;
+	  margin-top: 3px;
+	}
+	.product-panel {
+	  flex-direction: row;
+	  flex-wrap: wrap;
+	  -webkit-flex-wrap: wrap;
+	  -moz-flex-wrap: wrap;
+	  -ms-flex-wrap: wrap;
+	  -o-flex-wrap: wrap;
+	  /*padding-left: 6px; 
+	  padding-right: 6px;*/
+	  margin-left:-5px;
+	}
+	.product-item {
+	  background-color:white;
+	  /*margin-left: 8px;
+	  margin-right: 8px;*/
+	  margin-top: 8px;
+	  padding-bottom: 15;
+	  /*
+	  border-top-width: 1px;
+	  border-top-color: #d9d9d9;
+	  border-bottom-width: 1px;
+	  border-bottom-color: #d9d9d9;
+	  border-left-width: 1px;
+	  border-left-color: #d9d9d9;
+	  border-right-width: 1px;
+	  border-right-color: #d9d9d9;
+	  border: 1px solid #d9d9d9;
+	  */
+	  width:372px;
+	  margin-left:5px;
+	}
+	
+	.adv-image {
+	  width: 750px;
+	  height: 70px;
+	}
+	
+</style>
+
+<script>
+  // require('weex-components');
+  var data = {
+    	color: '#F49601',
+    	recommends:[],
+    	throughColor: '#666666'
+    };
+    
+  data.utils = require('../js-kit/utils');
+  module.exports = {
+    data: data,
+    methods: {
+    	toProduct: function (e) {
+    		this.$dispatch('toProduct',e.target.attr.ds);
+    	}
+    }
+  }
+</script>
+
+<style>
+</style>

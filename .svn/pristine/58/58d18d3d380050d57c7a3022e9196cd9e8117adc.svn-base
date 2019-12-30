@@ -1,0 +1,58 @@
+<template>
+    <div class="wrapper" >
+        <div style="height:500;">
+            <text>text</text>
+        </div>
+        <we-dropdown class="dropdown" status-id="0" sdata={{sdata}}>
+          
+        </we-dropdown>
+         <div style="height:50;">
+            <text>text</text>
+        </div>
+    </div>
+
+</template>
+
+<style>
+    .dropdown{
+        justify-content: center;
+        align-content: stretch;
+        position: relative;
+        z-index: 100;
+    }
+    .wrapper{
+        justify-content:flex-start;
+        flex-direction: column;
+        position: relative;
+    }
+
+</style>
+
+<script>
+    require('./we-dropdown.we');
+
+    module.exports = {
+        data: {
+            sdata: [
+                {id: '0', name: 'All'},
+                {id: '1', name: 'Doing'},
+                {id: '2', name: 'Done'},
+                {id: '4', name: 'Does'}
+            ],
+
+        },
+        ready: function () {
+            //this.screenHeight = this.$getConfig().env.deviceHeight ;
+            this.$on('statuschange', function (e) {
+                var detail = e.detail;
+                this.selectChange(detail);
+            }.bind(this));
+        },
+
+        methods: {
+            selectChange: function (data) {
+                //alert(data.id + ":" + data.name);
+            }
+        }
+    }
+</script>

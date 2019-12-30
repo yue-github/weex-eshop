@@ -1,0 +1,115 @@
+<template>
+    <scroller class="content" if="{{showDetail == false}}">
+      <div style="height:500;">
+        <text>content</text>
+      </div>
+      <loading class="loading" onLoading="handleLoading" display="{{displayLoading}}">
+        <text style="color:#eee;">加载更多...</text>
+      </loading>
+    </scroller>
+   <!--  <div class="wrapper" if="{{showDetail == true}}">
+        <div class="toolbar" append = "tree">
+            <wxc-button type="primary" size="small" value="back" onclick="goback"
+                    style="margin-left:30px;width:210px; margin-top:5px; margin-bottom:5px"></wxc-button>
+            <wxc-button type="primary" size="small" value="forward" onclick="goforward"
+                    style="margin-left:30px;width:210px; margin-top:5px; margin-bottom:5px"></wxc-button>
+            <wxc-button type="primary" size="small" value="refresh" onclick="refresh"
+                    style="margin-left:30px;width:210px; margin-top:5px; margin-bottom:5px"></wxc-button>        
+        </div>
+        <web class="web" id="webview" src='http://eshop.bayou-tech.cn/loyee-eshop/detail.html?id=208&code=9' onpagestart="startload" onpagefinish="finishload" onerror="failload"></web>
+    </div> -->
+</template>
+
+<style>
+    .wrapper { 
+        width: 750; 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0;
+    }
+    .web { 
+        position: absolute; 
+        top: 200; 
+        left: 0; 
+        right: 0; 
+        bottom: 0; 
+        margin-top: 0;  
+        margin-bottom: 70;
+    }
+    .toolbar { 
+        flex-direction: row; 
+        position: fixed; 
+        bottom: 0; 
+        left: 0; 
+        right: 0;  
+        height: 70;
+    }
+
+    .content {
+      background-color: #f5f5f5;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin-bottom: 80px;
+    }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+</style>
+
+<script>
+    require('weex-components');
+    var data = {
+          displayLoading: 'show',
+          showDetail: false
+        };
+    data.utils = require('./js-kit/utils');
+    module.exports = {
+        data: data,
+        methods: {
+            goback: function() {
+                var $webview = require('@weex-module/webview');
+                var webElement = this.$el('webview');
+                $webview.goBack(webElement.ref);           
+             },
+            goforward: function() {
+                var $webview = require('@weex-module/webview');
+                var webElement = this.$el('webview');
+                $webview.goForward(webElement.ref); 
+            },
+            refresh: function() {
+                var $webview = require('@weex-module/webview');
+                var webElement = this.$el('webview');
+                $webview.reload(webElement.ref); 
+            },
+            startload: function(e) {
+
+            },
+            finishload: function(e) {
+
+            },
+            failload: function(e) {
+
+            },
+            handleLoading: function (e) {
+              var vm = this
+              vm.displayLoading = 'show'
+              this.$call('modal', 'toast', {
+                message: 'loading.'
+              })
+              setTimeout(function () {
+                // vm.simLoadingData(vm.cnt++)
+                vm.displayLoading = 'hide';
+                vm.$openURL(vm.utils.getAppBaseUrl(vm) + 'product.js?id=208');
+              }, 500);
+            }
+        }
+    }
+</script>

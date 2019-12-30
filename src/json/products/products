@@ -1,0 +1,6 @@
+{"error": 0, "data":[
+	{"id": 1,"name": "产品名称1","suggestedRetailUnitPrice": 101,"summary": "特甜超大水蜜桃","mainPic": "http://192.168.1.120:8081/images/product_01.jpg","shopName": "花果山1"},
+	{"id": 2,"name": "产品名称2","suggestedRetailUnitPrice": 102,"summary": "特甜超大水蜜桃","mainPic": "http://192.168.1.120:8081/images/product_01.jpg","shopName": "花果山2"},
+	{"id": 3,"name": "产品名称3","suggestedRetailUnitPrice": 103,"summary": "特甜超大水蜜桃","mainPic": "http://192.168.1.120:8081/images/product_01.jpg","shopName": "花果山3"},
+	{"id": 4,"name": "产品名称4","suggestedRetailUnitPrice": 104,"summary": "特甜超大水蜜桃","mainPic": "http://192.168.1.120:8081/images/product_01.jpg","shopName": "花果山4"}
+]}

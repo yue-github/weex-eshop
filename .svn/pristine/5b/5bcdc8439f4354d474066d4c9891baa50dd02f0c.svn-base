@@ -1,0 +1,672 @@
+<style>
+	.bg-grey{
+		background-color: #EDEDED;
+	}
+	.list {
+		
+	}
+	.touch {
+		touch-action: none;
+	}
+
+	.row {
+		width: 750;
+	}
+
+	.tabs {
+		height: 70px;
+		background-color: #ffffff;
+		flex-direction: row;
+	}
+
+	.tab {
+		flex: 1;
+		align-items: center;
+		justify-content: center;
+		border-bottom-width: 5px;
+	}
+
+	.orders {
+
+	}
+
+	.item {
+		margin-top: 20px;
+		background-color: #ffffff;
+	}
+
+	.item-title {
+		height: 70px;
+		border-bottom: 1px solid #d9d9d9;
+		border-bottom-width: 1px; 
+		border-bottom-color: #d9d9d9;
+		margin-left: 20px;
+		margin-right: 20px;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.tab-text {
+		font-size: 28px;
+		color: #333333;
+	}
+
+	.item-product {
+		height: 200px;
+		border-bottom: 1px solid #d9d9d9;
+		border-bottom-width: 1px; 
+		border-bottom-color: #d9d9d9;
+		margin-left: 20px;
+		margin-right: 20px;
+		flex-direction: row;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+
+	.item-price {
+		height: 60px;
+		border-bottom: 1px solid #d9d9d9;
+		border-bottom-width: 1px; 
+		border-bottom-color: #d9d9d9;
+		margin-left: 20px;
+		margin-right: 20px;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: center;
+	}
+
+	.item-bar {
+		height: 80px;
+		margin-left: 20px;
+		margin-right: 20px;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: center;
+	}
+
+	.btn {
+		background-color: #FDE314;
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
+	.btn-text {
+		color: #ffffff;
+		font-size: 26px;
+	}
+
+	.shop-name {
+		font-size: 26px;
+		color: #333333;
+	}
+
+	.status {
+		font-size: 26px;
+		color: #F49601;
+	}
+
+	.text {
+		font-size: 22px;
+		color: #666666;
+
+	}
+
+	.price {
+		font-size: 24px;
+		color: #F49601;
+		padding-right: 5px;
+
+	}
+
+	.product-image {
+		width: 136px;
+		height: 136px;
+	}
+
+	.product-price {
+		flex-direction: row;
+		justify-content: space-between;
+		margin-top: 6px;
+	}
+
+	.product-r {
+		flex: 1;
+		margin-left: 20px;
+	}
+
+	.product-attr {
+		font-size: 22px;
+		color: #666666;
+	}
+
+	.product-name {
+		font-size: 26px;
+		color: #333333;
+	}
+
+	.p-price {
+		color: #F49601;
+		font-size: 24px;
+	}
+
+	.p-price-icon {
+		color: #eb5d68;
+		font-size: 20px;
+	}
+
+	.p-num {
+		font-size: 22px;
+		color: #666666;
+	}
+
+	.p-info1 {
+		height: 70px;
+		overflow:hidden;
+	}
+
+	.p-info2 {
+		margin-top: 6px;
+	}
+	.success{
+	width:152px;
+	height:152px;
+	margin-top:340px;
+	margin-left:300px;
+	}
+
+	.success-text{
+	font-size: 36px;
+	text-align:center;
+	margin-top:20px;
+	color:#999999;
+	}
+
+	.mg-l-20{
+	    margin-left: 20px;
+    }
+    .tishi{
+    	font-size: 32px;
+    	padding-top:20px;
+    	padding-left:20px;
+    	padding-bottom:20px;
+    	color:#333;
+    	text-align:center;
+    }
+    .loading {
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    background-color: rgba(234, 234, 234, 0);
+	}
+    .nav {
+    	height: 80px;
+    	background-color: #FDE314;
+	    display: flex;
+   		flex-direction: row;
+   		justify-content: center;
+	    align-items: center;
+	    padding-left: 20px;
+	    padding-right: 20px;
+    }
+    .nav-left {
+    	color: #ffffff;
+    }
+    .nav-center {
+    	color: #ffffff;
+    	font-weight: bold;
+    }
+</style>
+
+<template>
+	<scroller class='touch'>
+	<!-- <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="我的订单" title-color="white" left-item-title="返回" left-item-color="white"> -->
+		<div class='nav'>
+			<!-- <text class='nav-left'>返回</text> -->
+			<text class='nav-center'>我的订单</text>
+			<!-- <text style="opacity:0">返回</text> -->
+		</div>
+		<div class="bg-grey">
+			<div class="tabs">
+				<div class="tab" style="border-bottom-color: {{tabIndex == 0 ? '#FDE314' : '#ffffff'}};" onclick="checkTab(0)">
+					<text class="tab-text">全部订单</text>
+				</div>
+				<div class="tab" style="border-bottom-color: {{tabIndex == 1 ? '#FDE314' : '#ffffff'}};" onclick="checkTab(1)">
+					<text class="tab-text">待付款</text>
+				</div>
+				<div class="tab" style="border-bottom-color: {{tabIndex == 2 ? '#FDE314' : '#ffffff'}};" onclick="checkTab(2)">
+					<text class="tab-text">待发货</text>
+				</div>
+				<div class="tab" style="border-bottom-color: {{tabIndex == 3 ? '#FDE314' : '#ffffff'}};" onclick="checkTab(3)">
+					<text class="tab-text">待收货</text>
+				</div>
+				<div class="tab" style="border-bottom-color: {{tabIndex == 4 ? '#FDE314' : '#ffffff'}};" onclick="checkTab(4)">
+					<text class="tab-text">待评价</text>
+				</div>
+			</div>
+			<div class="orders">
+				<div class="list">
+					<div class="row" if="{{orders == ''}}"> 
+						<div class="item">
+							<text class="tishi">{{tishi}}</text>
+						</div>
+					</div>
+						<div class="row" repeat="data in orders">
+							<div class="item">
+								<div class="item-title">
+									<text class="shop-name">{{data.shopName}}</text>
+									<text class="shop-name">{{data.updated_at}} </text>
+									<text class="status">{{data.status}} </text>
+								</div>
+								<div class="item-product"  repeat="obj in data.productOrders">
+									<div class="product-l">
+										<image class="product-image" src="{{utils.getAbsolutePath(obj.mainPic)}}"></image>
+									</div>
+									<div class="product-r" onclick="toOrderDetails" ds="{{data}}">
+										<div class="p-info1">
+											<text class="product-name">{{obj.product_name}}</text>
+										</div>
+										<div class="p-info2">
+											<text class="product-attr">{{obj.selectProterties}}</text>
+										</div>
+										<div class="product-price">
+											<text class="p-price">￥{{utils.toDecimal2(obj.actualUnitPrice)}}</text>
+											<text class="p-num">x{{obj.unitOrdered}}</text>
+										</div>
+									</div>
+								</div>
+								<div class="item-price">
+									<text class="text">
+										合计：
+									</text>
+
+									<text class="price">
+										￥{{utils.toDecimal2(data.totalPayable)}}
+									</text>
+
+									<text class="text">
+										(含运费￥{{utils.toDecimal2(data.deliveryPrice)}})
+									</text>
+								</div>
+								<div class="item-bar">
+									<div onclick="cancelOrder" ds="{{data}}" class="btn mg-l-20" if="{{data.status=='待付款'}}"><text class="btn-text">取消订单</text></div>
+									<div onclick="toPay" ds="{{data}}" class="btn mg-l-20" if="{{data.status=='待付款'}}"><text class="btn-text">立即付款</text></div>
+									<div class="btn" onclick="toGet" ds="{{data}}" if="{{data.status=='待收货'}}"><text class="btn-text">确认收货</text></div>
+									<div class="btn" onclick="toComment($event, $index)" ds="{{data}}" if="{{data.status=='待评价' && data.status!='订单完成'}}"><text class="btn-text">去评价</text></div>
+									<div class="btn" if="{{data.status=='已取消'}}" style="background-color: #ffffff;"><text class="btn-text" style="color:#333333;">订单已关闭</text></div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+		<loading class="loading" onLoading="onloading" display="{{loadinging}}">
+		  <text class="indicator-text"></text>
+		</loading>
+	</scroller>
+	<!-- </wxc-navpage> -->
+</template>
+
+<script>
+	require('weex-components');
+	var stream = require('@weex-module/stream');
+	var modal = require('@weex-module/modal');
+
+	var data = {
+		loadinging: 'hide',
+		tabIndex: 0,
+		isShow: false,
+		orders: [],
+		orderempty:1,
+		info:{},
+		offset: '0',
+		length: 10,
+		finished: false,
+		status: -1,
+		totalRow: 0,
+		tishi: '',
+	}
+
+	data.utils = require('./js-kit/utils');
+	
+	//订单状态
+	var statusMap = {
+		"1":"待付款",
+		"2":"待发货",
+		"3":"待收货",
+		"4":"待评价",
+		"5":"已评价",
+		"6":"已取消",
+		"7":"订单完成"
+	}
+
+	//获取订单
+	var getOrders = function(status, me) {
+	    data.utils.fetch(me,{
+	      method: 'post',
+	      url: data.utils.getServerBaseUrl() + "webapp/orders/many",
+	      type:'json',
+	      body: {"length":data.length,"status":status,"offset":data.offset}
+	    }, function(response) {
+	    	if(response.data && response.data.error == 0) {
+	    		var orders = response.data.orders;
+	    		if (response.data.totalRow <= 0) {
+	    			data.tishi = '没记录';
+	    		}
+	    		data.finished = (orders.length == 0) ? true : false;
+		    	for(var i = 0; i < orders.length; i++) {
+		    		response.data.orders[i].status = statusMap[orders[i].status];
+		    	}
+		      	data.orders = data.orders.concat(response.data.orders);
+	    	}
+	    	
+	    },function(response){
+
+	    });
+	  };
+
+
+	//获取我的钱包
+ 	var getBalance = function(me) {
+	    data.utils.fetch(me, {
+	      method: 'post',
+	      url: data.utils.getServerBaseUrl() + "webapp/wallet/balance",
+	      type:'json'
+	    }, function(response) {
+	      if(response.data) {
+	        data.info = response.data.info;
+	      }
+	    },function(response){
+
+	    });
+	};
+
+  //公众号微信支付
+  var toWxPay = function(me,orderId) {
+    data.utils.fetch(me,{
+        method: 'post',
+        url: data.utils.getServerBaseUrl() + "webapp/orders/getWxJsApiParameters",
+        type:'json',
+        body:{orderId:orderId}
+      }, function(response) {
+        if(response.data.error == 0) {
+            function jsApiCall()
+            {
+                WeixinJSBridge.invoke(
+                    'getBrandWCPayRequest',
+                    response.data.data,
+                    function(res){
+                        if (res.err_msg == "get_brand_wcpay_request:ok") {
+                          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmSuccess.js');
+                        }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmCancel.js');
+                        }else{
+                          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmFaile.js');
+                        }
+                    }
+                );
+            }
+
+            var weixinPay = function() {
+                if (typeof WeixinJSBridge == "undefined")
+                {
+
+                    if (document.addEventListener)
+                    {
+                        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                    }
+                    else if (document.attachEvent)
+                    {
+                        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                    }
+
+                }
+                else
+                {	
+                    jsApiCall();
+                }
+            };
+
+            weixinPay();
+        }
+      },function(response){
+
+      });
+  }
+
+  // order.tradeNo是订单号
+  var toAlipay = function(order, me) {
+    var alipay = require('@weex-module/alipay');
+    alipay.pay(order.price, order.tradeNo+"", function(resp) {
+      if (resp.result == 0) {
+      	payChangeStatus(me, order.tradeNo);
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmSuccess.js');
+      }else if(resp.result == 1){
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmCancel.js');
+      }else{
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmFaile.js');
+      }
+      // modal.toast({'message': resp.result, 'duration': 1});
+    });
+  }
+
+  //@注 前端改变支付状态
+  var payChangeStatus = function (me, tradeNo) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/orders/payOrderByTradeNo",
+      type:'json',
+      body: {tradeNo: tradeNo}
+    }, function(response) {
+      if(response.data) {
+        //modal.toast({'message': 'error=' + response.data.error, 'duration': 1});
+      }
+    },function(response){
+
+    });
+  }
+
+  // order.tradeNo是订单号
+  var toWXAppPay = function(order, me) {
+    var wxpay = require('@weex-module/wxpay');
+    wxpay.pay(me.utils.getServerBaseUrl()+'pc/comfirmOrder/wxpayCallback', order.price, order.tradeNo, function(resp) {
+      if (resp.result == 0) {
+          me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmSuccess.js');
+      }else if(resp.result == 1){
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmCancel.js');
+      }else{
+        me.$openURL(me.utils.getAppBaseUrl(me) + 'comfirmFaile.js');
+      }
+      // // modal.toast({'message': resp.result, 'duration': 1});
+    });
+  }
+  //银联支付
+  var unionPay=function(order,me){
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/orders/unionpay",
+      type:'json',
+      body: {tradeCode:order.order_code}
+    }, function(response) {
+        if(response.data){
+          	$('#weex').append(response.data.payInfo);
+        }
+    });
+  }
+
+  //去支付
+  var actionPay = function(order, me) {
+      if(order.payType == 2) {
+          toAlipay({price: order.totalPayable, tradeNo: order.order_code}, me);
+      } else if(order.payType == 1) {
+        if(me.isWebPlatform) {
+          toWxPay(me, order.id);
+        } else {
+        	toWXAppPay({price: order.totalPayable, tradeNo: order.order_code}, me);
+        }
+        
+      } else if(order.payType == 3) {
+		unionPay(order,me);
+        // $('#weex').append(response.data.payInfo);
+      }
+  }
+	module.exports = {
+		data: data,
+		init: function () {
+			var me = this;
+			var headerHeight =  data.utils.getRealHeight(this, 8);
+			var footerHeight =  data.utils.getRealHeight(this, 8);
+			this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight - footerHeight;
+			
+			getBalance(me);
+		},
+		created: function() {
+			this.isWebPlatform = data.utils.isWebPlatform(this);
+	        this.isAndroidPlatform = data.utils.isAndroidPlatform(this);
+	        this.isIosPlatform = data.utils.isIosPlatform(this);
+
+	        this.$on('naviBar.leftItem.click',function(e){
+	        	this.$openURL(this.utils.getAppBaseUrl(this) + 'index.js?index=3');
+	        	//this.$openURL(this.utils.getAppBaseUrl(this) + 'home.js?index=3');
+	        });
+	        var bundleUrl = this.$getConfig().bundleUrl;
+      		var status = data.utils.getParameterByName('status', bundleUrl);
+
+      		if(status == undefined || status == null) {
+      			status = 0;
+      		}
+ 			this.checkTab(status);
+	    },
+		methods: {
+			checkTab: function(index) {
+				this.offset = '0';
+				this.orders = [];
+				this.finished = false;
+				this.loadinging = 'hide';
+				if(index == 0) {
+					this.status = -1;
+					getOrders(-1, this);
+				}else if(index == 1) {
+					this.status = 1;
+					getOrders(1, this);
+				}else if(index == 2) {
+					this.status = 2;
+					getOrders(2, this);
+				}else if(index == 3) {
+					this.status = 3;
+					getOrders(3, this);
+				}else if(index == 4) {
+					this.status = 4;
+					getOrders(4, this);
+				}
+				this.tabIndex = index;
+			},
+			toOrderDetails: function (e) {
+				var v=e.target.attr.ds.id;
+        		this.$openURL(this.utils.getAppBaseUrl(this) + 'orderDetails.js?id=' + v);
+			},
+			toComment: function (datas, v, tId) {
+				var me = this;
+				var yId = tId
+			
+				
+				modal.confirm({
+	              'message': '是否跳转评价页面',
+	              'okTitle': '确定',
+	              'cancelTitle': '取消'
+	            }, function(result) {
+	                if(result == '确定') {
+	                    me.$openURL(me.utils.getAppBaseUrl(me) + 'comment.js?productOrderId=' + yId);	
+	                }
+	            });
+					
+			},
+			toPay: function (e) {
+				var me = this;
+				var ds = e.target.attr.ds;
+				
+				if(ds.payType == 4 && ds.totalPayable > data.info.money) {
+					modal.toast({'message': '账户余额不足，请及时充值', 'duration': 1});
+				}
+
+				if(me.isWebPlatform && ds.payType == 2) {
+					modal.toast({'message': '微信端不支持支付宝支付，请进入订单详情修改支付方式', 'duration': 1});
+				}
+
+				actionPay(ds, me);
+			},
+			toGet: function (e) {
+				var me = this;
+				var id = e.target.attr.ds.id;
+
+				modal.confirm({
+	              'message': '是否确认收货',
+	              'okTitle': '确定',
+	              'cancelTitle': '取消'
+	            }, function(result) {
+	                if(result == '确定') {
+	                    data.utils.fetch(me,{
+						  method: 'post',
+						  url: data.utils.getServerBaseUrl() + "webapp/orders/receive",
+						  type:'json',
+						  body: {orderId: id}
+						}, function(response) {
+							if(response.data) {
+							    me.utils.toast({'message': '确定收货', 'duration': 1},function () {
+							      me.$openURL(me.utils.getAppBaseUrl(me) + 'orders.js?status=4');	
+							    });
+							}
+						},function(response){
+
+						});
+	                }
+	            });
+			},
+			cancelOrder: function (e) {
+				var me = this;
+				var id = e.target.attr.ds.id;
+
+				modal.confirm({
+	              'message': '是否取消订单',
+	              'okTitle': '确定',
+	              'cancelTitle': '取消'
+	            }, function(result) {
+	                if(result == '确定') {
+	                    data.utils.fetch(me,{
+						  method: 'post',
+						  url: data.utils.getServerBaseUrl() + "webapp/orders/cancel",
+						  type:'json',
+						  body: {orderId: id}
+						}, function(response) {
+							if(response.data) {
+							    modal.toast({'message': '订单已关闭', 'duration': 1});
+							    me.checkTab(me.tabIndex);
+							}
+						},function(response){
+
+						});
+	                }
+	            });
+			},
+			onloading (event) {
+				var me = this;
+	          	if(!data.finished) {
+	              	me.loadinging = 'show';
+	              	me.$call('modal', 'toast', {
+		                message: '加载中...'
+	              	});
+	              	me.offset = parseInt(me.offset) + me.length;
+	              	getOrders(me.status, me);
+	              	setTimeout(function () {
+		                me.loadinging = 'hide';
+		            }, 1000);
+	          	} else {
+	          		me.loadinging = 'hide';
+	          	}
+		    },
+		}
+	};
+</script>

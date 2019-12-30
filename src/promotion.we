@@ -1,0 +1,487 @@
+<style>
+  .content {
+    background-color: #f5f5f5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .refresh {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .list {
+
+  }
+
+  .body {
+    background-color: #f5f5f5;
+  }
+
+  .header {
+    position: sticky;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 88px;
+    background-color: #eb5d68;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    flex-direction: row;
+    height: 97px;
+    width: 750px;
+    background-color: #eb5d68;
+  }
+
+  .slider {
+   flex-direction: row;
+   width: 750px;
+   height: 315px;
+ }
+
+ .indicator {
+   width: 750px;
+   height: 315px;
+   margin-top: 140px;
+   itemSelectedColor: #eb5d68;
+ }
+
+.floor-title {
+  font-size: 28px;
+}
+
+.product-item {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
+  padding-bottom: 15;
+  border-top-width: 1px;
+  border-top-color: #d9d9d9;
+  border-bottom-width: 1px;
+  border-bottom-color: #d9d9d9;
+  border-left-width: 1px;
+  border-left-color: #d9d9d9;
+  border-right-width: 1px;
+  border-right-color: #d9d9d9;
+  border: 1px solid #d9d9d9;
+}
+
+.product-image {
+  width: 345px;
+  height: 320px;
+}
+
+.product-name {
+  color: #333;
+  font-size: 24px;
+  margin-top: 15px;
+}
+
+.product-price {
+  font-size: 24px;
+  color: #eb5d68;
+  margin-right: 10px;
+}
+
+.product-note {
+  font-size: 20px;
+  color: #999999;
+}
+
+.title-line {
+  width: 80px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-top-width: 1px;
+  border-top-color: #eb5d68;
+  border-bottom-width: 1px;
+  border-bottom-color: #eb5d68;
+  border-left-width: 1px;
+  border-left-color: #eb5d68;
+  border-right-width: 1px;
+  border-right-color: #eb5d68;
+  border: 1px solid #eb5d68;
+  height: 1px;
+}
+
+.logo {
+  width: 104px; 
+  height: 20px; 
+  margin-right: 28px; 
+}
+
+.search-panel {
+  flex: 1; 
+  border-radius: 10px;
+  flex-direction: row; 
+  align-items: center; 
+  background-color: #fff;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.search-input {
+  flex: 1;
+  height: 50px; 
+  border-radius: 10px; 
+  font-size: 24px; 
+  color: #999;
+}
+
+.search-icon {
+  width: 38px; 
+  height: 38px;
+}
+
+.recommend-panel {
+  margin-top: 20px;  
+  padding-bottom: 20px; 
+  background-color: #fff; 
+}
+
+.recommend-title {
+  flex-direction: row; 
+  align-items: center; 
+  justify-content: center;
+  height: 50; 
+  border-bottom: 1px solid #d9d9d9;
+  border-bottom-width: 1px; 
+  border-bottom-color: #d9d9d9;
+}
+
+.product-panel {
+  flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  padding-left: 6px; 
+  padding-right: 6px;
+}
+
+.product-txt {
+  flex-direction: row; 
+  margin-top: 15px; 
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recommend-name {
+  color: #eb5d68; 
+  font-size: 28;
+}
+
+.activity-bg{
+  background-color:#8B72C3;
+}
+
+.activity-title{
+  font-size:32px;
+  margin-top:30px;
+  text-align:center;
+  color:#ffffff;
+}
+
+.activity-summary{
+  font-size:32px;
+  margin-top:10px;
+  margin-bottom:30px;
+  color:#EAE507;
+  text-align:center;
+}
+
+.comment-product-between{
+  flex-direction: row;
+  justify-content: space-between;
+  background-color:#ffffff;
+}
+
+.comment-product-title{
+  width: 300px;
+  overflow: hidden;
+  height: 80px;
+  line-height: 40px;
+  color:#000000;
+  font-size:32px;
+  margin-left:20px;
+  margin-right:20px;
+}
+
+.comment-product-summary{
+  color:#999999;
+  font-size:28px;
+  margin-top:10px;
+  margin-left:20px;
+  margin-right:20px;
+}
+
+.comment-product-price{
+  color:#F49601;
+  font-size:48px;
+  margin-top:10px;
+  margin-left:10px;
+  margin-right:20px;
+}
+
+.comment-product-price-icon{
+  color:#F49601;
+  font-size:36px;
+  margin-top:20px;
+  margin-left:20px;
+  margin-bottom: 4px;
+}
+
+.comment-product-to{
+  border-style:solid;
+  border-width:2px;
+  border-color:#F49601;
+  width:140px;
+  height:40px;
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-left:20px;
+  margin-right:20px;
+}
+
+.comment-product-text{
+  font-size:28px;
+  text-align:center;
+  color:#F49601;
+}
+
+.comment-product-image{
+  width:375px;
+  height:347px;
+
+}
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="优惠活动" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="content">
+
+    <!--begin 轮播图-->
+    <div>
+     <slider class="slider" append="tree" interval="3000" auto-play="true">
+      <indicator class="indicator"></indicator>
+      <slider-page pheight="315" repeat="{{sliders}}"></slider-page>
+    </slider>
+  </div>
+  <!--end 轮播图-->
+  
+  <div repeat="data in promotions">
+    <!-- start: 活动 -->
+    <div class="activity-bg">
+      <text class="activity-title">{{data.promotionTitle}}</text>
+      <text class="activity-summary">{{data.promotionDescription}}</text>
+    </div>
+    <!-- end: 活动 -->
+
+    <!-- start: 置顶产品 -->
+    <div class="comment-product-between" repeat="item in data.products" onclick="toProduct" ds="{{item}}">
+      <image if="{{$index%2==0}}" class="comment-product-image" src="{{item.mainPic}}"></image>
+      <div style="align-items: center;justify-content: center;width:375;height:347px;">
+        <div>
+          <text class="comment-product-title">{{item.name}}</text>
+          <text class="comment-product-summary">{{item.summary}}</text>
+          <div style="flex-direction: row;justify-content:flex-start;align-items:flex-end;">
+            <div style="flex-direction: row;justify-content:flex-start;align-items:flex-end;">
+              <text class="comment-product-price-icon">￥</text>
+              <text class="comment-product-price">{{utils.toDecimal2(item.suggestedRetailUnitPrice)}}</text>
+            </div>
+            <div if="{{item.originUnitPrice}}" style="flex-direction: row;justify-content:flex-start;align-items:flex-end;">
+              <text class="comment-product-price" style="color:#666666;text-decoration: line-through;font-size:38px;">￥{{utils.toDecimal2(item.originUnitPrice)}}</text>
+            </div>
+          </div>
+          <div class="comment-product-to">
+            <text class="comment-product-text">立即抢购</text>
+          </div>
+        </div>
+      </div>
+      <image if="{{$index%2>0}}"  class="comment-product-image" src="{{item.mainPic}}"></image>
+    </div>
+
+    <!-- <div class="comment-product-between">
+      <image class="comment-product-image" src="http://192.168.1.120:8081/images/promotion_01.jpg"></image>
+      <div>
+        <text class="comment-product-title">新鲜红肉红心火龙果</text>
+        <text class="comment-product-summary">清新兰香 甜而不腻</text>
+        <text class="comment-product-price">￥9.9</text>
+        <a class="comment-product-to">
+          <text class="comment-product-text">立即抢购</text>
+        </a>
+      </div>
+    </div> -->
+  </div>
+  
+
+  
+  <!-- end: 置顶产品 -->
+
+<!--begin 推荐产品-->
+<div class="recommend-panel" repeat="data in recommendProduct">
+  <div class="recommend-title">
+    <div class="title-line"></div>
+    <text class="recommend-name">{{data.positionName}}</text>
+    <div class="title-line"></div>
+  </div>
+
+  <div class="product-panel">
+
+    <div class="product-item" onclick="toProduct" ds="{{item}}" repeat="item in data.productList">
+      <image class="product-image"  src="{{item.recommendPic}}"></image>
+      <div style="padding-left: 15; padding-right: 15;">
+        <text class="product-name">{{item.name}}</text>
+        <div class="product-txt">
+          <text class="product-price">
+            ￥{{utils.toDecimal2(item.suggestedRetailUnitPrice)}}
+          </text>
+          <text class="product-note">
+            <!-- 10人付款 -->
+          </text>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--end 推荐产品-->
+
+</scroller>
+</wxc-navpage>
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+
+ var data = {
+    sliders: [],
+    promotions: [],
+    recommendProduct: []
+ };
+
+ data.utils = require('./js-kit/utils');
+
+ var formatParam = function(obj) {
+    var vJson = "";     
+    for(var name in obj){
+       vJson += name+"="+obj[name]+"&";  
+    }
+    return vJson.substring(0,vJson.length-1);
+  };
+
+  //制保留2位小数，如：2，会在2后面补上00.即2.00    
+    function toDecimal2(x) {    
+        var f = parseFloat(x);    
+        if (isNaN(f)) {    
+            return false;    
+        }    
+        var f = Math.round(x*100)/100;    
+        var s = f.toString();    
+        var rs = s.indexOf('.');    
+        if (rs < 0) {    
+            rs = s.length;    
+            s += '.';    
+        }    
+        while (s.length <= rs + 2) {    
+            s += '0';    
+        }    
+        return s;    
+    }
+
+  //获取轮播图
+  var getBanners = function() {
+    stream.fetch({
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/promotion/banners",
+      type:'json'
+    }, function(response) {
+      var banners = response.data.advertisements;
+      var sliders = [];
+
+      for(var i = 0; i < banners.length; i++) {
+        var item  = banners[i];
+        sliders.push({items: [{image: item.path, link: item.url}]});
+      }
+
+      data.sliders = sliders;
+    },function(response){
+
+    });
+  };
+
+  //获取促销活动
+  var getPromotion = function() {
+    stream.fetch({
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/promotion/promotions",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        for(var i = 0; i < response.data.promotions.length; i++) {
+          for(var k = 0; k < response.data.promotions[i].products.length; k++) {
+            response.data.promotions[i].products[k].suggestedRetailUnitPrice = toDecimal2(response.data.promotions[i].products[k].suggestedRetailUnitPrice);
+            response.data.promotions[i].products[k].originUnitPrice = toDecimal2(response.data.promotions[i].products[k].originUnitPrice);
+          }
+        }
+        data.promotions = response.data.promotions;
+      }
+    },function(response){
+
+    });
+  };
+
+  //获取推荐位置
+  var getRecommendProduct = function() {
+    stream.fetch({
+      method: 'POST',
+      url: data.utils.getServerBaseUrl() + "webapp/promotion/recommendsProduct",
+      type:'json'
+    }, function(response) {
+      data.recommendProduct = response.data.data;
+    },function(response){
+
+    });
+  };
+
+  module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+      getBanners();
+      getPromotion();
+      getRecommendProduct();
+    },
+    methods: {
+      toProduct: function (e) {
+        var ds=e.target.attr.ds;
+        if(ds.is_sale == 1) {
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + ds.id);
+        }else{
+          modal.toast({'message': '该商品已下架', 'duration': 1});
+          return;
+        }
+        
+      }
+    }
+  };
+
+</script>

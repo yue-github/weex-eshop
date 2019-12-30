@@ -1,0 +1,247 @@
+<style>
+  .lg_top{
+    height: 45px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .content{
+    background-color: #ffffff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .lg-header{
+    height: 60px;
+  }
+
+  .lg-time{
+    font-size:32px;
+    margin-top: 10px;
+  }
+
+  .bg-grey{
+    background-color:#EAEAEA;
+  }
+  .pl20{
+    padding-left: 20px;
+  }
+
+  .font-red{
+    color:#FDE314;
+  }
+
+  .lg_top_txt{
+    margin-top:40px;
+    margin-bottom: 20px;
+    height: 50px;
+    font-size:32px;
+  }
+
+  .lg_top_time{
+    height: 60px;
+    margin-top: 40px;
+     font-size:24px;
+     color:#999999;
+  }
+
+  .input{
+    height:50px;
+    width:700px;
+    border-style:solid;
+    border-width: 2px;
+    border-color:#f5f5f5;
+  }
+
+  .submit{
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    font-size:36px;
+  }
+
+  .icon-curr-flag{
+    width: 32;
+    height: 32;
+  }
+
+  .banner-image {
+  width: 750px;
+  height: 350px;
+  }
+  .bg-item{
+    width: 750px;
+    background-color: #f5f5f5;
+    padding-top:10px;
+    padding-left:20px;
+  }
+
+  .item-rigth{
+    height: 60px;
+    margin-top:40px;
+    text-align: right;
+    font-size:28px;
+    color:#999999;
+    margin-right:20px;
+  }
+
+  .item-rigth-grey{
+    margin-top: 10px;
+    font-size:24px;
+    color:#999999;
+    margin-right:20px;
+  }
+
+  .item-rigth-red{
+    margin-top: 10px;
+    text-align: right;
+    font-size:24px;
+    color:#FDE314;
+    margin-right:20px;
+  }
+
+  .list {
+    flex-direction: column;
+    width: 750;
+    height: 1200;
+    background-color: #dddddd;
+  }
+
+  .cell {
+    background-color: #dddddd;
+    flex-direction: column;
+    width: 750;
+  }
+  .submit-div{
+    background-color:#EB5E68;
+    width:700px;
+    margin-left:25px;
+  }
+  .header{
+    color:#ffffff;
+    font-size:36px;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+
+  .item-bottom{
+    height:100px;
+    border-bottom-width:2px;
+    border-bottom-style:solid;
+    border-bottom-color:#EAEAEA;
+  }
+  .success{
+    width:152px;
+    height:152px;
+    margin-top:50px;
+    margin-left:300px;
+  }
+  
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="提现明细" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="content">
+    <div>
+    <!-- start: 顶部logo -->
+    <div>
+      <image class="banner-image" src="{{'src/images/withdraw_banner.png'}}"></image>
+    </div>
+    <!-- end: 顶部logo -->
+
+    <!-- start: 账户余额 -->
+      <div if="{{withDrawLength == 0}}" style="flex-direction: column;justify-content: center;">
+        <image class="success" src="{{'src/images/icon_list_empty.png'}}"></image>
+        <text style="width:750px;text-align:center;font-size: 36px;color:#000;margin-top:20px;">暂无提现明细</text>
+      </div>
+    <!-- end: 账户余额 -->
+
+    <!-- start: 账户余额 -->
+      <div if="{{withDrawLength > 0}}" class="item-bottom" repeat="item in withdrawDetails">
+        <div class="lg_top pl20" style="flex-direction:row;justify-content: space-between;">
+          <text class="lg_top_txt font-red">￥{{utils.toDecimal2(item.money)}}</text>
+          <text class="item-rigth">到账账户：{{item.bankName}}</text>
+        </div>
+        <div class="lg_top pl20" style="flex-direction:row;justify-content: space-between;">
+          <text class="lg_top_time">{{item.created_at}}</text>
+          <text class="item-rigth-red">{{item.status}}</text>
+        </div>
+      </div>
+    <!-- end: 账户余额 -->
+
+    </div>
+    </scroller>
+  </wxc-navpage>
+  
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+
+ var statusMap = {
+  0:"提交申请",
+  1:"通过申请",
+  2:"拒绝申请",
+  3:"已转账"
+ }
+ var data = {
+  withdrawDetails:[],
+  withDrawLength: 0
+};
+
+ data.utils = require('./js-kit/utils');
+
+ //获取提现明细
+ var getwithdrawDetails = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/withdrawDetails/withDrawList",
+      type:'json',
+      body: {offset: 1, length: 10}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          for(var i = 0; i < response.data.data.length; i++) {
+            response.data.data[i].status = statusMap[response.data.data[i].status]; 
+            if(response.data.data[i].accountType == 1) {
+              response.data.data[i].bankName = response.data.data[i].aplipayAccount;
+            }else if(response.data.data[i].accountType == 2) {
+              response.data.data[i].bankName = response.data.data[i].weixinAccount;
+            }
+          }
+          if(response.data.data.length < 1) {
+            data.withDrawLength = 0;
+          }else{
+            data.withDrawLength = response.data.data.length;
+          }
+          data.withdrawDetails = response.data.data;
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+      getwithdrawDetails(this);
+    },
+    methods: {
+
+    }
+  };
+</script>

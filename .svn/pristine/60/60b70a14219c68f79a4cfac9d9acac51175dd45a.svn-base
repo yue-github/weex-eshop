@@ -1,0 +1,8 @@
+{"error": 0, "data":[
+	{"positionName":"推荐位置3","productList": [
+		{"id": 1,"name": "雪梨1", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/product_01.jpg","summary": "2天一夜免费晚"},
+		{"id": 2,"name": "雪梨2", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/product_01.jpg","summary": "2天一夜免费晚"},
+		{"id": 3,"name": "雪梨3", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/product_01.jpg","summary": "2天一夜免费晚"},
+		{"id": 4,"name": "雪梨4", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/product_01.jpg","summary": "2天一夜免费晚"}
+	]}
+]}

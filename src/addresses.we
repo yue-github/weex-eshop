@@ -1,0 +1,361 @@
+<style>
+	.content{
+		/*background-color: #EAEAEA;*/
+        background-color: #EAEAEA;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+	}
+	.addr_item{
+		padding-bottom: 20px;
+		padding-top:20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		flex-direction: column;
+		justify-content: center;
+		background-color: #fff;
+		margin-top: 30px;
+	}
+	.top{
+		flex-direction: column;
+		justify-content: center;
+	}
+	.addr_name{
+		margin-bottom: 10px;
+	}
+	.addr_name_txt{
+		font-size: 32px;
+		color: #454545;
+	}
+	.addr_detail_txt{
+		font-size: 32px;
+		color: #666666;
+	}
+	.dv{
+		border-bottom-color: #ccc;
+		border-bottom-width: 1px;
+		border-bottom-style: solid;
+		height: 1px;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	.img{
+		width:38px;
+		height:38px;
+	}
+	.addr_opt{
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.addr_opt_item{
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+	.addr_opt_item{
+		flex-direction: row;
+		justify-content: flex-end;
+	}
+	.mgl{
+		margin-left: 25px;
+	}
+	.opt_name_txt{
+		font-size:32px;
+		color:#767676;
+		margin-left: 5px;
+	}
+	.add_btn{
+		width: 710px;
+    	background-color: #FDE314;
+    	margin-left: 20px;
+    	margin-top: 80px;
+    	flex-direction: row;
+		justify-content: center;
+		padding-top: 20px;
+		padding-bottom: 20px;
+        margin-bottom: 20px;
+	}
+	.add_btn_txt{
+		color: white;
+		font-size: 38px;
+	}
+	  .shoppingEmpty{
+    width:227px;
+    height:227px;
+    margin-top:150px;
+    margin-left:260px;
+  }
+
+  .success-text{
+    font-size: 36px;
+    text-align:center;
+    margin-top:50px;
+    color:#999999;
+  }
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(234, 234, 234, 0);
+    height: 50;
+  }
+</style>
+
+<template>
+    <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="我的地址" title-color="white" left-item-title='返回' left-item-color="{{titleColor}}">
+	
+        <scroller class="content">
+        	
+        	<!-- start: 地址列表 -->
+        	<div if="{{dataLength>0}}" class="addr_item" repeat="item in addresses" ds="{{item}}" onclick="toOrder">
+        		<div class="top">
+        			<div class="addr_name"><text class="addr_name_txt">{{item.contacts}} {{item.phone}}</text></div>
+        			<div class="addr_detail"><text  class="addr_detail_txt">{{item.province}}{{item.city}}{{item.district}}{{item.detailedAddress}}</text></div>
+        		</div>
+        		<div class="dv"></div>
+        		<div class="bottom">
+        			<div class="addr_opt">
+        				<div class="addr_opt_item" if="{{item.is_default == true}}" ds="{{item}}" onClick="setDefault">
+	        				<image class="img" src="{{'src/images/icon-is-default.png'}}"></image>
+	        				<text class="opt_name_txt">默认地址</text>
+        				</div>
+                        <div class="addr_opt_item" if="{{item.is_default == false}}" ds="{{item}}" onClick="setDefault">
+                            <image class="img" src="{{utils.getImageBaseUrl() + 'images/icon-no-default.png'}}"></image>
+                            <text class="opt_name_txt">默认地址</text>
+                        </div>
+        				<div class="addr_opt_item">
+	        				<div class="addr_opt_item" ds="{{item}}" onClick="editAddress">
+		        				<image class="img" src="{{utils.getImageBaseUrl() + 'images/icon_edit.png'}}"></image>
+		        				<text class="opt_name_txt">编辑</text>
+	        				</div>
+	        				<div class="addr_opt_item mgl" ds="{{item}}" onClick="remove">
+		        				<image class="img" src="{{utils.getImageBaseUrl() + 'images/icon_delete.png'}}"></image>
+		        				<text class="opt_name_txt">删除</text>
+	        				</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        	<!-- end: 地址列表 -->
+
+            <div if="{{dataLength==0}}">
+                <image class="shoppingEmpty" src="{{utils.getImageBaseUrl() + 'images/icon_list_empty.png'}}"></image>
+                <text class="success-text">亲，你没有地址记录！</text>
+            </div>
+
+        	<!-- start:添加按钮 -->
+        	<div class="add_btn" onclick="addAddress()"><text class="add_btn_txt">添加</text></div>
+        	<!-- end:添加按钮 -->
+        	<loading  class="loading" onLoading="handleLoading" display="{{displayLoading}}">
+		         <text style="color:#eee;"> . </text>
+		    </loading>
+        </scroller>
+    </wxc-navpage>
+	
+</template>
+
+<script>
+  require('weex-components');
+  var stream = require('@weex-module/stream');
+  var data={
+  	displayLoading: 'hide',
+  	pageNumber:6,
+  	finished: false
+  }
+  var formatParam = function(obj) {
+      var vJson = "";     
+      for(var name in obj){
+         vJson += name+"="+obj[name]+"&";  
+      }
+      return vJson.substring(0,vJson.length-1);
+    };
+
+ var data = {
+ 			addresses:[],
+ 			dataLength:1,
+ 			 titleColor: '#ffffff',
+ 			 inAddr:'',
+ 			 displayLoading: 'hide',
+  			 pageNumber:1,
+  			 finished: false,
+  			 PageNumberLength:5,
+  			 tempOffset:0
+ 	};
+
+ data.utils = require('./js-kit/utils');
+ var modal = require('@weex-module/modal');
+
+ var getAddresses = function(me,pageNumber) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/addresses/many",
+      type:'json',
+      body:{offset:data.tempOffset,length:(data.PageNumberLength*data.pageNumber)}
+    }, function(response) {
+    	if(response.data) {
+    		if(response.data.addresses){
+	    		data.dataLength=response.data.addresses.length;
+	    		data.addresses = response.data.addresses;
+	    		data.finished = data.PageNumberLength >= response.data.totalRow ? true:false;
+	    	
+	    	}
+    	}
+    },function(response){
+
+    });
+  };
+
+    //删除地址
+    var deleteAddress = function (me, id) {
+        data.utils.fetch(me,{
+          method: 'post',
+          url: data.utils.getServerBaseUrl() + "webapp/addresses/remove",
+          type:'json',
+          body:{addressId: id}
+        }, function(response) {
+            if(response.data) {
+                modal.toast({'message': '地址删除成功', 'duration': 1});
+                getAddresses(me,data.pageNumber);
+            }
+        },function(response){
+
+        });
+    }
+
+ module.exports = {
+    data: data,
+    created: function() {
+    
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+        // var headerHeight =  data.utils.getRealHeight(this, 88);
+        // this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight;
+
+    	var bundleUrl = this.$getConfig().bundleUrl;
+    	this.type = data.utils.getParameterByName('type', bundleUrl);
+    	this.productId = data.utils.getParameterByName('id', bundleUrl);
+    	this.priceId = data.utils.getParameterByName('priceId', bundleUrl);
+        this.amount = data.utils.getParameterByName('amount', bundleUrl);
+        this.inAddr = data.utils.getParameterByName('addr', bundleUrl);
+
+        if(this.inAddr == 1) {
+            data.titleColor = '#ffffff';
+        }else{
+            data.titleColor = '#ffffff';
+        }
+
+      	getAddresses(this,data.pageNumber);
+    },
+    methods: {
+        getBackUrl: function() {
+        var id=e.target.attr.ds.id;
+         var url = this.utils.getAppBaseUrl(this) + 'comfirm.js';
+            if(this.type == 1) {
+                if(!this.productId){
+                    url+='?addressId=' + id;
+                }else{
+                    url+='?addressId='+ id + '&id=' + this.productId + '&priceId=' + this.priceId + '&amount=' + this.amount;
+                }
+            }
+        return url;
+      },
+    	setDefault: function (e) {
+            var me = this;
+    		var id=e.target.attr.ds.id;
+
+    		data.utils.fetch(this,{
+	          method: 'post',
+	          url: data.utils.getServerBaseUrl() + "webapp/addresses/setDefault",
+	          type:'json',
+	          body:{addressId: id}
+	        }, function(response) {
+                if(response.data) {
+                    if(response.data.error == 0) {
+                        getAddresses(me,data.pageNumber);
+                    }
+                }
+	        },function(response){
+
+	        });
+    	},
+    	remove: function (e) {
+    		var me = this;
+    		var id=e.target.attr.ds.id;
+
+            modal.confirm({
+              'message': '是否删除该地址',
+              'okTitle': '确定',
+              'cancelTitle': '取消'
+            }, function(result) {
+                if(result == '确定') {
+                    deleteAddress(me, id);
+                }
+            });
+
+    		
+    	},
+    	editAddress: function (e) {
+           // alert(this.inAddr);
+    		var v=e.target.attr.ds.id;
+    		if(this.type == 1) {
+        		if(this.productId) {
+        			this.$openURL(this.utils.getAppBaseUrl(this) + 'editAddress.js?addressId=' + v + '&type=1' + '&productId=' + this.productId + '&priceId=' + this.priceId + '&amount=' + this.amount+'&addr='+this.inAddr);
+        		}else{
+        			this.$openURL(this.utils.getAppBaseUrl(this) + 'editAddress.js?addressId=' + v + '&type=1'+'&addr='+this.inAddr);
+        		}
+        	}else{
+        		this.$openURL(this.utils.getAppBaseUrl(this) + 'editAddress.js?addressId=' + v);
+        	}
+        	
+    	},
+    	addAddress: function (e) {
+    		if(this.type == 1) {
+        		if(this.productId) {
+        			this.$openURL(this.utils.getAppBaseUrl(this) + 'editAddress.js?type=1' + '&productId=' + this.productId + '&priceId=' + this.priceId + '&amount=' + this.amount+'&addr='+this.inAddr);
+        		}else{
+        			this.$openURL(this.utils.getAppBaseUrl(this) + 'editAddress.js?type=1'+'&addr='+this.inAddr);
+        		}
+        	}else{
+        		this.$openURL(this.utils.getAppBaseUrl(this) + 'editAddress.js');
+        	}
+    	},
+    	toOrder: function(e) {
+    		var id=e.target.attr.ds.id;
+        	if(this.type == 1) {
+        		if(!this.productId) {
+        			this.$openURL(this.utils.getAppBaseUrl(this) + 'comfirm.js?addressId=' + id);
+        		}else{
+        			this.$openURL(this.utils.getAppBaseUrl(this) + 'comfirm.js?addressId=' + id + '&id=' + this.productId + '&priceId=' + this.priceId + '&amount=' + this.amount);
+        		}
+        	}
+    	},
+    	handleLoading: function (e) {
+    	  var me = this
+          if(!data.finished) {
+              me.displayLoading = 'show';
+              me.$call('modal', 'toast', {
+                message: '加载中...'
+              });
+              me.displayLoading = 'hide';
+              data.PageNumberLength=data.PageNumberLength +5;
+              if(data.type){
+                getAddresses(me,data.pageNumber);
+              }else{
+                getAddresses(me,data.pageNumber);
+              }
+          }else{
+            me.displayLoading = 'show';
+              me.$call('modal', 'toast', {
+                message: '没有更多加载'
+              });
+              me.displayLoading = 'hide';
+          }
+    	},
+
+    }
+  };
+</script>

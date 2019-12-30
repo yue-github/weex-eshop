@@ -1,0 +1,571 @@
+<style>
+	.content{
+		background-color: #EAEAEA;
+		flex-direction: column;
+	}
+	.info{
+		flex-direction: column;
+		background-color:#FDE314;
+		height:300px;
+        border-bottom-left-radius: 60px;
+        border-bottom-right-radius: 60px;		
+	}
+	.photoImg {
+	    width: 150px; 
+	    height: 150px; 
+	    /*margin-right: 28px; */
+        border-radius: 75px;
+        margin-top:35px;
+     
+	}
+	.name{
+		margin-top:30px;
+		margin-bottom: 10px;
+	}
+	.summary{
+		margin-bottom: 40px;
+	}
+	.nameTxt{
+		font-size: 36px;
+	}
+	.summaryTxt{
+		color: white;
+		font-size: 30px;
+	}
+	.myOrders{
+		flex-direction: column;
+		background-color: white;
+		margin-top:100px
+	}
+	.orderTitle{
+		flex-direction: row;
+		justify-content: space-between;
+		height:92px;
+		align-items: center;
+		border-bottom-width: 1px;
+		border-bottom-color: #E6E6E6;
+		border-bottom-style: solid;
+		padding-left:30px;
+		padding-right: 30px;
+	}
+	.myOrderTxt{
+		font-size: 30px;
+		color:#000000;
+	}
+	.moreOrderTxt{
+		font-size: 24px;
+		color: #666666;
+	}
+	.orderList{
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		padding-left:30px;
+		padding-right: 30px;
+	}
+	.orderListItem{
+		padding-top: 20px;
+		margin-bottom: 20px;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.orderImage{
+		width:45px;
+		height:45px;
+		padding-bottom: 5px;
+		margin-bottom: 10px;
+	}
+	.orderListItemTxt{
+		font-size: 26px;
+		color:#454545;
+	}
+	.funcList{
+		flex-direction: row;
+		justify-content: flex-start;
+		background-color:white;
+	}
+	.funcItem{
+		flex-direction: column;
+		/*
+		border-bottom-style: solid;
+		border-bottom-color: #EAEAEA;
+		border-bottom-width: 1px;
+		border-right-style: solid;
+		border-right-color: red;
+		border-right-width: 1px;*/
+		flex:1;
+		align-items: center;
+		/*height:200px;
+		justify-content: center;*/
+		padding-bottom:50px
+	}
+	.funcItemImage{
+		width:45px;
+		height:40px;
+		padding-bottom: 5px;
+	}
+	.mgt{
+		margin-top: 30px;
+		padding-top:55px;
+	}
+	.mgb{
+		margin-bottom: 80px;
+	}
+	.funcItemTxt{
+		font-size: 26px;
+        margin-top:15px;
+		color:#454545;
+		/*position: relative;*/
+	}
+
+	.status-num{
+		width:35px;
+		height:35px;
+        line-height: 35px;
+        padding: 0px;
+        text-align: center;
+		font-size:26px;
+		background-color: #EB5D69;
+		border-radius: 20px;
+		text-align: center;
+		color: #ffffff;
+		position: absolute;
+		right: 0px;
+		top: 5px;
+	}
+	.photo{
+		position:relative;
+	}
+	.nameTxt{
+		position:absolute;
+		left:190px;
+		top:55px;
+	}
+	.dengji{
+		position:absolute;
+		left:190px;
+		top:120px;
+		color:white;
+		font-size:26px;
+	}
+	.tongbi{
+		position:absolute;
+		left:380px;
+		top:120px;
+		color:white;
+		font-size:28px;
+	}
+    .f_list {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    .f_item {
+        flex-direction: row;
+        justify-content: space-between;
+        color: #454545;
+        padding: 30px;
+        background-color: #ffffff;
+		border-width: 1px;
+		border-color: #eaeaea;
+    }
+	.no_update_f_item {
+        flex-direction: row;
+        justify-content: space-between;
+        color: #454545;
+        padding: 30px;
+        background-color: #ffffff;
+		border-width: 1px;
+		border-color: #eaeaea;
+		display: none;
+    }
+    .f_left {
+        flex-direction: row;
+        align-items: center;
+		background-color: #ffffff;
+    }
+    .fl_image {
+        width: 45px;
+        height: 45px;
+        margin-right: 30px;
+
+    }
+    .fl_txt {
+        font-size: 32px;
+    }
+    .f_right {
+        flex-direction: row;
+        align-items: center;
+		background-color: #ffffff;
+    }
+    .fr_txt {
+        font-size: 28px;
+    }
+    .info_box {
+        background: #ffffff;
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-top: 20px;
+        border-radius: 20px;
+        padding-bottom: 60px;
+        position: relative;
+    }
+    .info_img {
+        justify-content: center;
+        flex-direction: row;
+    }
+    .m_name {
+        justify-content: center;
+        flex-direction: row;
+        font-size: 40px;
+        color: #434343;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .m_note {
+        justify-content: center;
+        flex-direction: row;
+        font-size: 30px;
+        color: #B4B4B4;
+    }
+    .m_edit {
+        width: 70px;
+        flex-direction: column;
+        justify-content: center;
+        top: 20px;
+        position: absolute;
+        right: 30px;
+    }
+    .edit_img {
+        width: 60px;
+        height: 60px;
+    }
+    .edit_txt {
+        color: #B4B4B4;
+        margin-top: 10px;
+        font-size: 30px;
+    }
+	.no-update {
+		display: none;
+	}
+</style>
+
+<template>
+	<wxc-navpage style="border-bottom:1px;border-width:1px;border-color:white;" data-role="none" height="88" background-color="#FDE314" title="个人中心" title-color="white" right-item-title="设置" right-item-src="{{'src/images/shezhi.png'}}" right-item-color="white">
+        <list class="content" style="height: {{serverHeight}}">
+        	<!-- start:个人信息 -->
+        	<cell class="info">
+        		<!-- <div class="photo">
+        			<image class="photoImg" src="{{info.headImg}}" onclick="toMySet(e)"></image>
+        			<text class="nameTxt">用户名:{{info.nickName}}</text>
+        			<text class="dengji">等级:{{info.grade}}</text>
+        			<text class="tongbi">通币:{{info.golds}}</text>
+    			</div> -->
+        		<!--<div class="name"><text class="nameTxt">{{info.nickName}}</text></div>-->
+        		<!--<div class="summary"><text class="summaryTxt">{{info.note}}</text></div>-->
+                <div class="info_box">
+                    <div class="info_img"><image class="photoImg" src="{{info.headImg}}" onclick="toMySet(e)"></image></div>
+                    <text class="m_name">{{info.nickName}}</text>
+                    <text class="m_note">{{info.note}}</text>
+                    <div class="m_edit" onclick="toInfoEdit">
+                        <image class="edit_img" src="{{utils.getImageBaseUrl()+'images/center_icon_edit.png'}}"></image>
+                        <text class="edit_txt">编辑</text>
+                    </div>
+                </div>
+        	</cell>
+        	<!-- end:个人信息 -->
+
+        	<!-- start:我的订单 -->
+        	<cell class="myOrders">
+        		<div class="orderTitle">
+        			<div><text class="myOrderTxt">我的订单</text></div>
+        			<div onclick="toOrders(0)"><text class="moreOrderTxt">查看全部订单 &gt;</text></div>
+        		</div>
+        		<div class="orderList">
+        			<div class="orderListItem" onclick="toOrders(1)">
+        				<image class="orderImage" src="{{utils.getImageBaseUrl()+'images/center_icon_09.png'}}"></image>
+        				<text class="orderListItemTxt">待付款 </text>
+        				<text class="status-num" if="{{info.status1>0}}">{{info.status1}}</text>
+        			</div>
+        			<div class="orderListItem" onclick="toOrders(3)">
+        				<image class="orderImage" src="{{utils.getImageBaseUrl()+'images/center_icon_08.png'}}"></image>
+        				<text class="orderListItemTxt">待收货</text>
+        				<text class="status-num" if="{{info.status3>0}}">{{info.status3}}</text>
+        			</div>
+        			<div class="orderListItem" onclick="toOrders(4)">
+        				<image class="orderImage" src="{{utils.getImageBaseUrl()+'images/center_icon_11.png'}}"></image>
+        				<text class="orderListItemTxt">待评价</text>
+        				<text class="status-num" if="{{info.status4>0}}">{{info.status4}}</text>
+        			</div>
+        	   <!-- 
+			   		<div class="orderListItem" onclick="toRefund">
+        				<image class="orderImage" src="{{utils.getImageBaseUrl()+'images/center_icon_12.png'}}"></image>
+        				<text class="orderListItemTxt">退款/售后</text>
+        				<text class="status-num" if="{{info.status5>0}}">{{info.status5}}</text>
+        			</div> 
+				-->
+        			<div class="orderListItem" onclick="toOrders(0)">
+        				<image class="orderImage" src="{{utils.getImageBaseUrl()+'images/center_icon_07.png'}}"></image>
+        				<text class="orderListItemTxt">全部订单</text>
+        				<text class="status-num" if="{{info.status2>0}}">{{info.status2}}</text>
+        			</div>
+        		</div>
+        	</cell>
+        	<!-- end:我的订单 -->
+
+            <cell class="f_list">
+           <!-- 
+		   		<div class="f_item" onclick="toPoints">
+                    <div class="f_left">
+                        <image class="fl_image" src="{{utils.getImageBaseUrl()+'images/center_icon_04.png'}}"></image>
+                        <text class="fl_txt">我的积分</text>
+                    </div>
+                    <div class="f_right">
+                        <text class="fr_txt">更多 &gt;</text>
+                    </div>
+                </div> 
+				
+                <div class="f_item" onclick="toCoupons">
+                    <div class="f_left">
+                        <image class="fl_image" src="{{utils.getImageBaseUrl()+'images/center_icon_01.png'}}"></image>
+                        <text class="fl_txt">我的优惠券</text>
+                    </div>
+                    <div class="f_right">
+                        <text class="fr_txt">更多 &gt;</text>
+                    </div>
+                </div>
+			-->
+                <div class="f_item" onclick="toProductCollections">
+                    <div class="f_left">
+                        <image class="fl_image" src="{{utils.getImageBaseUrl()+'images/center_icon_06.png'}}"></image>
+                        <text class="fl_txt">收藏</text>
+                    </div>
+                    <div class="f_right">
+                        <text class="fr_txt">查看我的收藏 &gt;</text>
+                    </div>
+                </div>
+                <div class="f_item" onclick="toAddress">
+                    <div class="f_left">
+                        <image class="fl_image" src="{{utils.getImageBaseUrl()+'images/center_icon_00.png'}}"></image>
+                        <text class="fl_txt">收货地址</text>
+                    </div>
+                    <div class="f_right">
+                        <text class="fr_txt">编辑收货地址 &gt;</text>
+                    </div>
+                </div>
+				
+				 <div class="f_item" onclick="goMyShop()">
+                    <div class="f_left">
+                        <image class="fl_image" src="{{'https://bayou.coral3.com/'+'img/shop.png'}}"></image>
+                        <text class="fl_txt">商家管理</text>
+                    </div>
+                </div>
+				 <div class="{{isUpdate}}" onclick="downLoad('android')">
+                    <div class="f_left">
+                        <image class="fl_image" src="{{'https://bayou.coral3.com/'+'img/update.png'}}"></image>
+                        <text class="fl_txt">检查更新</text>
+                    </div>
+                </div>
+				
+			<!--
+                <div class="f_item" onclick="toJiFengShangCheng">
+                    <div class="f_left">
+                        <image class="fl_image" src="{{utils.getImageBaseUrl()+'images/center_icon_jfsc.png'}}"></image>
+                        <text class="fl_txt">积分商城</text>
+                    </div>
+                    <div class="f_right">
+                        <text class="fr_txt">积分兑换礼品 &gt;</text>
+                    </div>
+                </div>
+			-->
+            </cell>
+
+        	<!-- start:功能列表 -->
+        	<!-- <cell class="funcList mgt">
+        		<div class="funcItem" onclick="toWallet">
+        			<image class="funcItemImage" src="{{utils.getImageBaseUrl()+'images/center_icon_03.png'}}"></image>
+    				<text class="funcItemTxt">我的钱包</text>
+        		</div>
+        		<div class="funcItem" onclick="toShoppingCart">
+        			<image class="funcItemImage" src="{{utils.getImageBaseUrl()+'images/center_icon_02.png'}}"></image>
+    				<text class="funcItemTxt">我的购物车</text>
+        		</div>
+        		<div class="funcItem" onclick="toCoupons">
+        			<image class="funcItemImage" src="{{utils.getImageBaseUrl()+'images/center_icon_01.png'}}"></image>
+    				<text class="funcItemTxt">我的优惠券</text>
+        		</div>
+        		<div class="funcItem" onclick="toAddress">
+        			<image class="funcItemImage" src="{{utils.getImageBaseUrl()+'images/center_icon_00.png'}}"></image>
+    				<text class="funcItemTxt">我的地址</text>
+        		</div>
+        	</cell>
+        	<cell class="funcList">
+        		<div class="funcItem" onclick="toPoints">
+        			<image class="funcItemImage" src="{{utils.getImageBaseUrl()+'images/center_icon_04.png'}}"></image>
+    				<text class="funcItemTxt">我的积分</text>
+        		</div>
+        		<div class="funcItem" onclick="toProductCollections">
+        			<image class="funcItemImage" src="{{utils.getImageBaseUrl()+'images/center_icon_06.png'}}"></image>
+    				<text class="funcItemTxt">我的收藏</text>
+        		</div>
+        		<div class="funcItem" onclick="toCash">
+        			<image class="funcItemImage" src="{{utils.getImageBaseUrl()+'images/center_icon_12.png'}}"></image>
+    				<text class="funcItemTxt">我的现金券</text>
+        		</div>
+                <div class="funcItem" onclick="sign">
+                    <image class="funcItemImage" src="{{utils.getImageBaseUrl()+'images/sign.png'}}"></image>
+                    <text class="funcItemTxt">签到</text>
+                </div>
+        	</cell> -->
+        	<!-- end:功能列表 -->
+        </list>
+    </wxc-navpage>
+	
+</template>
+
+<script>
+  require('weex-components');
+  var stream = require('@weex-module/stream');
+  var modal = require('@weex-module/modal');
+
+ var data = {
+	 info:{},
+	 };
+ data.utils = require('./js-kit/utils');
+ 
+ //获取个人信息
+ var getCenterInfo = function(me) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/center/info",
+      type:'json'
+    }, function(response) {
+        var imgUrl = me.utils.getImageBaseUrl();
+    	if(response.data&&response.data.info) {
+    		if(response.data.info.headImg == data.utils.getImageBaseUrl() + '' || response.data.info.headImg == null) {
+    			response.data.info.headImg = data.utils.getImageBaseUrl() + 'images/header.png';
+    		}
+    		data.info = response.data.info;
+    	}
+    },function(response){
+        
+    });
+  };
+
+  //签到
+  var signDay = function (me) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/points/sign",
+      type:'json'
+    }, function(response) {
+        if(response.data){
+            if(response.data.error == -1) {
+                modal.toast({'message': '今天已签到', 'duration': 1});
+            }else if(response.data.error == 0){
+                modal.toast({'message': '签到成功', 'duration': 1});
+            }else{
+                modal.toast({'message': '签到失败', 'duration': 1});
+            }
+        }
+        
+    },function(response){
+
+    });
+  }
+
+ module.exports = {
+    data:data,
+    created: function() {
+		
+        this.$on('naviBar.rightItem.click',function(e){
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'modify.js');
+        });
+        this.$on('naviBar.rightItem.click',function(e){
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'modify.js');
+        });
+    },
+    init:function () {
+		
+		if (this.$getConfig().env.platform === "Web") {
+			this.isUpdate = 'no_update_f_item';
+		} else {
+			this.isUpdate = 'f_item';
+		}
+        var headerHeight =  data.utils.getRealHeight(this, 88);
+        var footerHeight =  data.utils.getRealHeight(this, 88);
+        this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight -footerHeight;
+
+        var me = this;
+    	this.utils = require('./js-kit/utils');
+        
+        var bundleUrl = this.$getConfig().bundleUrl;
+    	var autoLoad = data.utils.getParameterByName('autoLoad', bundleUrl);
+        // if(autoLoad != 'f') {
+            getCenterInfo(me);
+        // }
+    },
+    methods: {
+		// 去我的商铺
+		goMyShop(){
+			this.$openURL(this.utils.getAppBaseUrl(this) + 'myShop.js');
+		},
+    	toOrders: function(status) {
+    		this.$openURL(this.utils.getAppBaseUrl(this) + 'orders.js?status=' + status);
+    	},
+    	toWallet: function () {
+    		this.$openURL(this.utils.getAppBaseUrl(this) + 'wallet.js');
+    	},
+    	toShoppingCart: function () {
+    		this.$openURL(this.utils.getAppBaseUrl(this) + 'shoppingCart.js');
+    	},
+    	toCoupons: function () {
+    		this.$openURL(this.utils.getAppBaseUrl(this) + 'coupons.js');
+    	},
+    	toAddress: function () {
+    		this.$openURL(this.utils.getAppBaseUrl(this) + 'addresses.js');
+    	},
+		downLoad: function (e) {
+				if (e == 'android') {
+					this.utils.toast({ 'message': '检查更新......', 'duration': 2 },  () => {
+				 			this.utils.toast({ 'message': '当前已经是最新版本', 'duration': 1 })
+	      			});
+				} else {
+					
+				}
+			 
+			// if(e=='android')
+    		// 	this.$openURL('https://bayou.coral3.com/app-release.apk');
+			// if(e=='ios')
+			// 	this.$openURL('https://bayou.coral3.com/app-release.ios.apk');
+    	},
+    	toPoints: function () {
+    		this.$openURL(this.utils.getAppBaseUrl(this) + 'points.js');
+    	},
+    	toProductCollections: function () {
+    		this.$openURL(this.utils.getAppBaseUrl(this) + 'productCollections.js?index=0');
+    	},
+    	toShopCollections: function () {
+    		this.$openURL(this.utils.getAppBaseUrl(this) + 'productCollections.js?index=1');
+    	},
+        toCash: function () {
+            this.$openURL(this.utils.getAppBaseUrl(this) + 'cash.js');
+        },
+        toRefund: function () {
+            this.$openURL(this.utils.getAppBaseUrl(this) + 'backs.js?type=0');
+        },
+        toInfoEdit: function() {
+            this.$openURL(this.utils.getAppBaseUrl(this) + 'modify.js');
+        },
+        toJiFengShangCheng: function () {
+            modal.toast({'message': '暂未开放，敬请期待', 'duration': 1});
+        },
+        sign: function () {
+            signDay(this);
+        },
+        toMySet:function(e){
+        	this.$openURL(this.utils.getAppBaseUrl(this) + 'modify.js');
+        }
+    }
+  };
+</script>

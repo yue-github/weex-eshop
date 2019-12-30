@@ -1,0 +1,224 @@
+<style>
+ .tabs {
+    height: 70px;
+    background-color: #FF7A7B;
+  	flex-direction: row;
+  	justify-content: space-between;
+  }
+  .tab {
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .tab-text {
+    font-size: 32px;
+    color: #ffffff;
+  }
+
+  .bg-logo{
+  	height: 580px;
+  	background-color:#FF7A7B;
+  	justify-content: center;
+  	align-items: center;
+  	border-width:0px;
+  }
+
+  .logo{
+  	width:345px;
+  	height:59px;
+  }
+
+  .triangle{
+  	width:29px;
+  	height:14px;
+  }
+
+  .input-border{
+  	width:710px;
+  	margin-left:20px;
+  	flex-direction: row;
+  	justify-content: flex-start;
+  	border-bottom-style:solid;
+  	border-bottom-width:2px;
+  	border-bottom-color: #DDDDDD;
+  }
+
+  .mg-t-20{
+  	margin-top:20px;
+  }
+
+  .user-icon{
+  	width:30px;
+  	height:34px;
+  	margin-top:20px;
+  }
+
+  .input-text{
+  	height:60px;
+  	width:650px;
+  	font-size:32px;
+  	margin-left:10px;
+    margin-top: 5px;
+  }
+
+  .input-code{
+  	height:60px;
+  	width:470px;
+  	font-size:32px;
+  	margin-left:10px;
+  }
+
+
+  .forget-border{
+  	flex-direction: row;
+  	justify-content: space-between;
+  	margin-top:30px;
+  	margin-right:20px;
+    margin-left:20px;
+  	margin-bottom:30px;
+  }
+
+  .forget-text{
+  	font-size:28px;
+  	color:#949494;
+  	border-bottom-style: solid;
+  	border-bottom-width:2px;
+  	border-bottom-color:#949494;
+  }
+
+  .submit-border{
+  	width:710px;
+  	margin-left:20px;
+  	margin-top:60px;
+  	background-color: #FDE314;
+  	height:90px;
+  	flex-direction: row;
+  	justify-content: center;
+  	align-items: center;
+  }
+
+  .submit{
+  	color:#ffffff;
+  	text-align:center;
+  	font-size:32px;
+  	border-color: #FF7B79;
+  }
+
+  .code-icon{
+	width:34px;
+	height:27px;
+	margin-top:20px;
+  }
+
+  .code-text{
+  	margin-top:25px;
+  	width:180px;
+  	height:60px;
+  	border-radius: 10px;
+  	text-align:center;
+  	flex-direction: row;
+  	justify-content: center;
+  	align-items: center;
+  	font-size:28px;
+    padding-top: 10px;
+  	color:#ffffff;
+  	background-color:#FF7A7B;
+  	border-color: #ffffff;
+  }
+</style>
+<template>
+
+   <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="登录" title-color="white" left-item-title="返回" left-item-color="white">
+        <!-- start: 输入框 -->
+        <div class="input-border mg-t-20">
+          <image src="{{utils.getImageBaseUrl()+'images/user.png'}}" class="user-icon"></image>
+          <input class="input-text" value="{{loginData.phone}}" autofocus="true" oninput="lchange($event, 'phone')" type="text" placeholder="输入账号">
+        </div>
+        <div class="input-border mg-t-20">
+          <image src="{{utils.getImageBaseUrl()+'images/password.png'}}" class="user-icon"></image>
+          <input class="input-text" value="{{loginData.password}}" oninput="lchange($event, 'password')" type="password" placeholder="输入密码">
+        </div>
+        <!-- end: 输入框 -->
+        <!-- start: 提交 -->
+        <div onclick="login()" class="submit-border">
+          <div>
+            <text class="submit">登录</text>
+          </div>
+        </div>
+      <!-- end: 提交 -->
+
+       <!-- start: 忘记密码 -->
+        <div>
+          <div class="forget-border">
+            <text class="forget-text" onclick="toregister">免费注册</text>
+            <text class="forget-text" onclick="toForgetPassword">忘记密码？</text>
+          </div>
+        </div>
+        <!-- end: 忘记密码 -->
+ </wxc-navpage>
+</template>
+
+<script>
+	 require('weex-components');
+   var stream = require('@weex-module/stream');
+   var storage = require('@weex-module/storage');
+   var modal = require('@weex-module/modal');
+
+   var data = {
+      loginData: {phone: "", password: ""}
+    };
+
+    data.utils = require('./js-kit/utils');
+
+	 module.exports = {
+	      data:data,
+        created: function() {
+          this.$on('naviBar.leftItem.click',function(e){
+            data.utils.pop(this);
+          });
+      },
+        init:function () {
+          this.utils = require('./js-kit/utils');
+        },
+	      methods: {
+          login: function () {
+             var phone=this.loginData.phone;
+             var password=this.loginData.password;
+            if(!phone){
+               modal.toast({'message': '用户名不可为空', 'duration': 1});
+               return false;
+            }
+            if(!password){
+               modal.toast({'message': '密码不可为空', 'duration': 1});
+               return false;
+            }
+            var me = this;
+            data.utils.fetch(this, {
+                method: 'POST',
+                url: data.utils.getServerBaseUrl() + "webapp/login/submit",
+                type:'json',
+                body: this.loginData
+            }, function(response) {
+                if(response.data && response.data.error === 0) {
+                  me.utils.toast({'message': '登录成功', 'duration': 1},function() {
+                    storage.setItem("token", response.data.token, function(e) {
+                      me.$openURL(me.utils.getAppBaseUrl(me) + 'index.js');
+                    });
+                  });
+                } else {
+                  modal.toast({'message': response.data.errmsg, 'duration': 1});
+                };
+            });
+          },
+          lchange: function (e, m) {
+            this.loginData[m] = e.value;
+          },
+          toForgetPassword: function () {
+            this.$openURL(this.utils.getAppBaseUrl(this) + 'forgetPassword1.js');
+          },
+          toregister: function () {
+            this.$openURL(this.utils.getAppBaseUrl(this) + 'register.js');
+          }
+	      }
+	    };
+</script>

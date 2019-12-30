@@ -1,0 +1,52 @@
+<template>
+	
+ 	<div id="byDatePanel" class="panel">
+		<div onclick="panelClick"><text>日期控件</text></div>
+    </div>
+</template>
+
+<style>
+	.panel {
+		background-color: #000;
+		position: absolute;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    /*visibility: {{panelVisibility}};*/
+		height: 2000;
+	}
+</style>
+
+<script>
+	var dom = require('@weex-module/dom');
+
+	module.exports = {
+		data: {
+			
+		},
+		computed: {
+			
+		},
+		methods: {
+			panelClick: function() {
+				dom.createBody({});
+				// d.addElement('div', {style: {backgroundColor: '#ffffff'}});
+				this.panelVisibility = this.panelVisibility == "hidden" ? "visible" : "hidden";
+				this._ids.byDatePanel.el.setClassStyle({visibility:this.panelVisibility});
+			}
+		},
+		created: function() {
+			
+		},
+		ready: function() {
+			//dom.scrollToElement(this.$el('byDatePanel'), {offset: 10});
+		},
+		init: function() {
+			this.panelVisibility = "hidden";
+			this.panelHeight = 1000;
+
+			
+		}
+	}
+</script>

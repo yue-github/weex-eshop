@@ -1,0 +1,398 @@
+<style>
+  .item{
+    height:90px;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .bg-grey{
+    background-color: #EAEAEA;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .item-top{
+    height:150px;
+    /*flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;*/
+  }
+
+   .row-start{
+    /*width:100px;*/
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left:10px;
+  }
+
+  .item-text {
+    font-size: 28px;
+    color: #000000;
+  }
+
+  .item-txt {
+    font-size: 28px;
+    color: #555;
+  }
+
+  .input{
+    height: 40px;
+    font-size:28px;
+    width:500px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left:20px;
+  }
+
+  .red{
+    color:#FDE314;
+  }
+
+  .buttons{
+    padding-top:30px;
+    margin-top:30px;
+    border-width:1px;
+    border-style:solid;
+    border-color:#EB5E68;
+    width:700px;
+    height:100px;
+    background-color:#FDE314;
+    margin-left:25px;
+    color:white;
+    border-radius:0px;
+    font-size: 36px;
+    text-align: center;
+  }
+
+  .mg-t-50{
+    margin-top: 50px;
+  }
+
+  .mg-t-20{
+    margin-top: 20px;
+  }
+
+  .quit{
+    padding-top:30px;
+    margin-top:30px;
+    border-width:1px;
+    border-style:solid;
+    border-color:#999999;
+    width:700px;
+    height:100px;
+    background-color:#999999;
+    margin-left:25px;
+    color:#000;
+    border-radius:0px;
+    font-size: 36px;
+    text-align: center;
+  }
+
+
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="修改个人信息" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="bg-grey">
+    <!-- statr: 头像 -->
+    <wxc-list-item if="{{!isWebPlatform}}" class="item-top">
+      <div style="flex-direction: row;justify-content: space-between;align-items: center;">
+        <div style="flex-direction: row;justify-content: flex-start;;align-items: center;">
+          <div class="row-start">
+              <text class="item-text">头像</text>
+              <text class="item-txt">：</text>
+            </div>
+            <image style="width:91px;height:91px;" src="{{modify.headImg}}"></image>
+        </div>
+        <text onclick="upload" style="font-size:28px;color:#32C3D6;margin-right:10px;">修改头像>></text>
+      </div>
+          
+      </wxc-list-item>
+    <!-- end: 头像 -->
+
+    <!-- start: 输入框 -->
+    <wxc-list-item class="item" style="margin-top:20px;">
+          <div class="row-start">
+            <text class="item-text">昵称</text>
+            <text class="item-txt">：</text>
+          </div>
+          <input class="input border" type="text" value="{{modify.nickName}}" oninput="vchange($event, 'nickName')" placeholder="请输入昵称">
+      </wxc-list-item>
+
+      <wxc-list-item class="item">
+          <div class="row-start">
+            <text class="item-text">真实姓名</text>
+            <!-- <text class="red">*</text> -->
+            <text class="item-txt">：</text>
+          </div>
+          <input class="input border" type="text" value="{{modify.name}}" oninput="vchange($event, 'name')" placeholder="请输入您的真实姓名">
+      </wxc-list-item>
+
+
+
+     <wxc-list-item class="item">
+          <div class="row-start">
+            <text class="item-text">性别</text>
+            <text class="red"></text>
+            <text class="item-txt">：</text>
+            <text class="input" onclick="selectGender">{{genderTxt}}</text>
+          </div>
+      </wxc-list-item>
+
+
+       <!-- <wxc-list-item class="item">
+          <div class="row-start">
+            <text class="item-text">出生日期</text>
+            <text class="red"></text>
+            <text class="item-txt">：</text>
+            <text onclick="cdate">选择</text>
+          </div>
+          
+      </wxc-list-item> -->
+
+      <wxc-list-item class="item">
+          <div class="row-start">
+            <text class="item-text">绑定手机</text>
+            <text class="red"></text>
+            <text class="item-txt">：</text>
+            <text class="input border">{{modify.mobilePhone}}</text>
+          </div>
+          <!-- <input class="input border" type="text" value="{{modify.mobilePhone}}" onchange="vchange($event, 'mobilePhone')" placeholder="请输入您的联系电话"> -->
+      </wxc-list-item>
+
+      <wxc-list-item style="height:90px;margin-top:20px;">
+          <div onclick="setSecret()" style="flex-direction: row;justify-content: space-between;align-items: center;margin-left:10px;">
+            <text class="item-text">设置支付密码</text>
+            <image style="width:16px;height:28px;" src="{{utils.getImageBaseUrl() + 'images/right_to.png'}}"></image>
+          </div>
+      </wxc-list-item>
+
+      <wxc-list-item style="height:90px;">
+          <div onclick="cancelBind()" style="flex-direction: row;justify-content: space-between;align-items: center;margin-left:10px;">
+            <text class="item-text">更换手机号码</text>
+            <image style="width:16px;height:28px;" src="{{utils.getImageBaseUrl() + 'images/right_to.png'}}"></image>
+          </div>
+      </wxc-list-item>
+      <wxc-list-item style="height:90px;">
+          <div onclick="toLoginSecret()" style="flex-direction: row;justify-content: space-between;align-items: center;margin-left:10px;">
+            <text class="item-text">修改登录密码</text>
+            <image style="width:16px;height:28px;" src="{{utils.getImageBaseUrl() + 'images/right_to.png'}}"></image>
+          </div>
+      </wxc-list-item>
+    <!-- end: 输入框 -->
+
+      <!-- start: 提交按钮 -->
+      <div class="mg-t-50" onclick="submit()">
+        <text class="buttons">保存</text>
+      </div>
+      <!-- end: 提交按钮 -->
+
+      <!-- start: 退出登录 -->
+      <div class="mg-t-20" style="margin-bottom: 20px;" onclick="quit()">
+        <text class="quit">退出登陆</text>
+      </div>
+      <!-- end: 退出登录 -->
+
+      <by-select id="gender" sname="gender" title="修改性别" height="150" sdata="{{gdata}}"></by-select>
+
+      <by-select id="head" sname="head" title="修改头像" height="150" sdata="{{hdata}}"></by-select>
+
+    </scroller>
+  </wxc-navpage>
+  
+  
+</template>
+
+<script>
+ require('weex-components');
+ require('./by-components/by-select.we');
+ require('./script/localResizeIMG.js')
+ var stream = require('@weex-module/stream');
+ var modal = require('@weex-module/modal');
+
+
+ var data = {
+    modify:{headImg: "",mobilePhone: ""},
+    isAndroidPlatform: false,
+    isWebPlatform: false,
+    isIosPlatform: false,
+    show: 1,
+    genderTxt: '未知',
+    gdata: [
+      {id: 0, name: '男'},
+      {id: 1, name: '女'}
+    ],
+    hdata: [
+      {id: 1, name: '拍照'},
+      {id: 2, name: '相册'},
+    ]
+  };
+
+  data.utils = require('./js-kit/utils');
+
+  //正则替换手机号码4-7位为*
+  var replacePhone = function (phone) {
+    var reg = /1(\d{2})\d{4}(\d{4})/g;
+    return phone = phone.replace(reg,"1$1****$2"); 
+  }
+
+ //获取个人信息
+ var getMyModify = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/modify/getInfo",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        data.modify = response.data.data;
+        data.modify.mobilePhone = replacePhone(response.data.data.mobilePhone);
+        me.genderTxt = me.gdata.filter(function(s){
+            return s.id == data.modify.gender;
+        })[0].name;
+      }
+    },function(response){
+
+    });
+  };
+
+  //获取修改个人信息
+ var editMyModify = function(me) {
+    // alert(JSON.stringify(data.modify.gender));
+    // return;
+    if(data.modify.gender == 0) {
+      data.modify.gender = '0';
+    }else{
+      data.modify.gender = '1';
+    }
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/modify/updateInfo",
+      type:'json',
+      body:data.modify
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          me.utils.toast({'message': '修改成功', 'duration': 1},function(){
+            me.$openURL(me.utils.getAppBaseUrl(me) + 'index.js?index=3');
+          }); 
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+  //退出登陆
+  var logout = function(me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/center/logout",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+           me.utils.toast({'message': '退出登陆成功', 'duration': 1},function(){
+            me.$openURL(me.utils.getAppBaseUrl(me) + 'login.js');
+          }); 
+        }
+      }
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+    data: data,
+    created: function() {
+
+      $('#weex').append('<input type="file" id="file" style="display:none;"/>');
+
+        var me = this;
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+
+        //修改姓别
+        this.$on('genderclick', function (e) {
+          me.genderTxt = e.detail.name;
+          me.modify.gender = e.detail.id;
+        }.bind(this));
+
+        //上传头像
+        // this.$on('headclick', function (e) {
+        //   var id = e.detail.id;
+
+        //   var upload = require('@weex-module/upload');
+        //   var reuslt = upload.upload(id, data.utils.getServerBaseUrl() + "admin/file/upload", function(resp) {
+        //     if(resp.error == 0) {
+        //       me.modify.headImg = resp.path;
+        //     }else{
+        //       modal.toast({'message': '上传图片失败', 'duration': 1});
+        //     }
+        //   });          
+        // }.bind(this));
+        
+    },
+    init:function () {
+      this.isWebPlatform = data.utils.isWebPlatform(this);
+      this.isAndroidPlatform = data.utils.isAndroidPlatform(this);
+      this.isIosPlatform = data.utils.isIosPlatform(this);
+      getMyModify(this);
+    },
+    methods: {
+      vchange: function (e, m) {
+        this.modify[m] = e.value;
+      },
+      submit: function () {
+        editMyModify(this);
+      },
+      //根据base 64 上传图片
+      upload: function() {
+        var me = this;
+          $('input:file').localResizeIMG({
+              width: 91,
+              quality: 0.8,
+              success: function (result) {
+                // alert(result.base64);
+                // console.log(result.base64);
+       
+                me.utils.fetch(me, {
+                  method: 'post',
+                  url: me.utils.getServerBaseUrl() + "admin/file/saveBase64",
+                  type:'json',
+                  body: {file: result.base64}
+                }, function(response) {
+                  var datas = JSON.stringify(response.data);
+                  if(response.data) {
+                    me.modify.headImg = JSON.parse(datas).path;
+                  }
+                });
+              }
+          });
+          $('#file').click();
+
+      },
+        
+      quit: function() {
+        logout(this);
+      },
+      cancelBind: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'cancelBind.js');
+      },
+      selectGender: function() {
+        this.$vm('gender').show();
+      },
+      setSecret: function () {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'setSecret.js');
+      },
+      toLoginSecret: function() {
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'updatePassword.js');
+      }
+    }
+  };
+</script>

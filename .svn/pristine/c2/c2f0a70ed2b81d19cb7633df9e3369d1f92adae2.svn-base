@@ -1,0 +1,86 @@
+<template>
+ 	<div style="flex:1;height:{{sheight}}">
+    	<div onclick="viewClick">
+    		<text class="select-text" style="font-size:{{fontSize}}">{{label}}</text>
+    	</div>
+    	<div class="viewContent" id="viewContent" style="background-color: #efefef;">
+    		<div class="select-item" ds="{{item}}" onclick="itemClick" repeat="item in sdata"><text style="font-size:{{fontSize}}">{{item.name}}</text></div>
+    	</div>
+    </div>
+</template>
+
+<style>
+	.viewContent {
+		visibility: hidden; 
+	}
+
+	.select-item {
+		margin-left: 20;
+		height: 90;
+		flex:1;
+		justify-content: center;
+	}
+
+	.select-text {
+		margin-left: 20;
+		color: #999;
+	}
+</style>
+
+<script>
+	require('weex-components');
+	module.exports = {
+		data: {
+			sname: 'select',
+			sheight: 90,
+			slabel: '请选择',
+			fontSize: 33,
+			sid: 0,
+			sdata: [
+				{id: 1, name: 'a'},
+				{id: 2, name: 'b'},
+				{id: 3, name: 'c'},
+				{id: 4, name: 'd'}
+			]
+		},
+		computed: {
+			label: {
+                get: function(){
+                	var me = this;
+                    var id = this.sid;
+                    var sd = this.sdata.filter(function(s){
+                        return s.id == id
+                    });
+
+                    if(sd.length > 0) {
+                    	return sd[0].name;
+                    }
+                    return me.slabel;
+                }
+            }
+		},
+		methods: {
+			viewClick: function() {
+				this.collapse();
+				this.$dispatch(this.sname + 'view');
+			},
+			itemClick: function(e) {
+				var ds = e.target.attr.ds;
+				//this.slabel = ds.name;
+				this.sid = ds.id;
+				this.collapse();
+				this.$dispatch(this.sname + 'change', ds);
+			},
+			collapse: function() {
+				this.current_showMask = !this.current_showMask;
+				var visibility = this.current_showMask? 'visible': 'hidden';
+				if(visibility == "hidden") {
+					this.sheight = 90;
+				} else {
+					this.sheight = this.sdata.length * 90;
+				}
+				this._ids.viewContent.el.setClassStyle({visibility:visibility});
+			}
+		}
+	}
+</script>

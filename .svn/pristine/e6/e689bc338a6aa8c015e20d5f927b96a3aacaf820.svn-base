@@ -1,0 +1,8 @@
+{"error": 0, "data": [
+	{"id": 1,"positionName": "乐驿自营1","productList": [
+		{"id":1,"name":"特产松茸干货1", "suggestedRetailUnitPrice":101, "recommendPic": "http://192.168.1.120:8081/images/product_01.jpg", "summary": "fdasfdasfdsafdsfsfdsafs"},
+		{"id":2,"name":"特产松茸干货2", "suggestedRetailUnitPrice":101, "recommendPic": "http://192.168.1.120:8081/images/product_01.jpg", "summary": "fdasfdasfdsafdsfsfdsafs"},
+		{"id":3,"name":"特产松茸干货3", "suggestedRetailUnitPrice":101, "recommendPic": "http://192.168.1.120:8081/images/product_01.jpg", "summary": "fdasfdasfdsafdsfsfdsafs"},
+		{"id":4,"name":"特产松茸干货4", "suggestedRetailUnitPrice":101, "recommendPic": "http://192.168.1.120:8081/images/product_01.jpg", "summary": "fdasfdasfdsafdsfsfdsafs"}
+	]}
+]}

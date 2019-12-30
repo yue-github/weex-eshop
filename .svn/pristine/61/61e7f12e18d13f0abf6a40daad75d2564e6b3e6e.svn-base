@@ -1,0 +1,225 @@
+<style>
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+  .header{
+    flex-direction: row;
+    justify-content: center;
+    background-color: #EB5D69;
+    height:88px;
+    align-items: center;
+    color: #ffffff;
+  }
+  .lg_top{
+    height: 65px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .bg-grey{
+    background-color:#EAEAEA;
+  }
+  .pl20{
+    padding-left: 20px;
+  }
+
+  .font-red{
+    color:#FDE314;
+  }
+
+  .lg_top_txt{
+    font-size:28px;
+  }
+
+  .lg_top_time{
+     font-size:24px;
+     color:#999999;
+  }
+
+  /*.options {
+    position: absolute;
+    top: -181;
+    width: 750;
+    background-color: #fff;
+    transform-origin: center center;
+
+  }*/
+
+  .icon-curr-flag{
+    width: 32;
+    height: 32;
+  }
+
+  .banner-image {
+    width: 750px;
+    height: 350px;
+  }
+  .bg-item{
+    width: 750px;
+    background-color: #f5f5f5;
+    padding-top:10px;
+    padding-left:20px;
+  }
+
+  .item-rigth{
+    width:570px;
+    text-align: right;
+    font-size:24px;
+    color:#999999;
+  }
+
+  .item-rigth-grey{
+    font-size:28px;
+    color:#999999;
+  }
+
+  .item-rigth-red{
+    justify-content: flex-end;
+    text-align: right;
+    font-size:28px;
+    color:#EB5D69;
+  }
+
+  .item-rigth-green{
+    text-align:right;
+    margin-bottom: 10px;
+    font-size:28px;
+    color:#078F29;
+  }
+
+  .list {
+    flex-direction: column;
+    width: 750;
+    height: 1200;
+    background-color: #dddddd;
+  }
+
+  .cell {
+    background-color: #dddddd;
+    flex-direction: column;
+    width: 750;
+  }
+  .submit-div{
+    background-color:#EB5E68;
+    width:700px;
+    margin-left:25px;
+  }
+  .header{
+    color:#ffffff;
+    font-size:36px;
+  }
+  .product_img{
+    width:88px;
+    height:88px;
+    margin-left: 20px;
+    /*position: absolute;*/
+    /*margin-top:20px;*/
+  }
+  .product_name{
+    margin-left:120px;
+    margin-top:50px;
+  }
+  .item-txt {
+    font-size: 36px;
+    color: #555;
+  }
+  .item-bottom{
+    height: 120px;
+    border-bottom-width:2px;
+    border-bottom-style:solid;
+    border-bottom-color:#EAEAEA;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .add-name{
+    font-size:32px;
+    margin-top:60px;
+  }
+
+  .add-title{
+    font-size:32px;
+    color:#000000;
+    margin-left:20px;
+  }
+
+  .col-end{
+    flex-direction: column;
+    /*justify-content: flex-end;*/
+    align-items:flex-end;
+    margin-right:20px;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#EB5D69" title="我的金币" title-color="white" left-item-title="返回" left-item-color="white">
+        <scroller>
+        <div>
+        <!-- start: 顶部logo -->
+        <div>
+          <image class="banner-image" src="http://192.168.1.120:8081/images/withdraw_banner.png"></image>
+        </div>
+        <!-- end: 顶部logo -->
+
+          <div>
+            <div class="item-bottom" repeat="item in goldDetailsList">
+              <!-- start: 签到 -->
+              <text class="add-title">{{item.source}}</text>
+              <div class="col-end">
+                <text class="{{item.amount> 0? 'item-rigth-red': 'item-rigth-green'}}">{{item.amount > 0 ? '+' : ''}}{{item.amount}}></text>
+                <text class="item-rigth-grey">{{item.created_at}}</text>
+              </div>
+              <!-- end: 签到 -->
+            </div>
+          </div>
+
+        </div>
+        </scroller>
+    </wxc-navpage>
+  
+</template>
+
+<script>
+  require('weex-components');
+  var stream = require('@weex-module/stream');
+
+ var data = {
+    goldDetailsList:[]
+  };
+
+  var souceMap = {
+    1: "支付订单抵扣"
+  }
+
+//获取金币明细列表
+ var getGoldDetails = function() {
+    stream.fetch({
+      method: 'GET',
+      url: "http://127.0.0.1:8081/json/goldDetails/goldDetails",
+      type:'json'
+    }, function(response) {
+      for(var i = 0;i < response.data.data.length; i++) {
+        response.data.data[i].source = souceMap[response.data.data[i].source];
+      }
+      data.goldDetailsList = response.data.data;
+    },function(response){
+
+    });
+  };
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+    },
+    init:function () {
+      getGoldDetails();
+    },
+    methods: {
+
+    }
+  };
+</script>

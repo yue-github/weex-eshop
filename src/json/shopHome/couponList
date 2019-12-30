@@ -1,0 +1,5 @@
+{"error": 0, "data": [
+	{"id":1,"type":1,"title":"满10块减500","discount":101},
+	{"id":2,"type":1,"title":"满11块减500","discount":102},
+	{"id":3,"type":2,"title":"满12块减500","discount":103}
+]}

@@ -1,0 +1,4 @@
+{"error": 0,"totalPages": 10,"totalRow":20, "data":[
+	{"shopName": "商店名称1","status": 1,"mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","product_name": "产品名称1", "selectProterties": "超大特甜","actualUnitPrice":50, "refundAmount": 49,"refundCash":99,"totalActualProductPrice":1000},
+	{"shopName": "商店名称1","status": 1,"mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","product_name": "产品名称1", "selectProterties": "超大特甜","actualUnitPrice":50, "refundAmount": 49,"refundCash":99,"totalActualProductPrice":1000}
+]}

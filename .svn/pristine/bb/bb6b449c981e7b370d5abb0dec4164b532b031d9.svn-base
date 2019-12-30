@@ -1,0 +1,476 @@
+<style>
+  .bg-grey{
+    background-color: #EDEDED;
+  }
+  .header {
+    flex-direction: row;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 88px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-bottom-width:1px;
+    border-bottom-color:#EDEDED;
+  }
+
+  .content {
+    background-color: #EDEDED;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .search-panel {
+    flex: 1; 
+    border-radius: 10px;
+    flex-direction: row; 
+    align-items: center; 
+    border-style:solid;
+    border-width:1px;
+    border-color:#DDDDDD;
+    background-color: #fff;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .search-input {
+    flex: 1;
+    height: 50px; 
+    border-radius: 10px; 
+    font-size: 26px; 
+    color: #999;
+  }
+
+ 
+  
+  .product-panel {
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+   	/*padding-left: 6px; 
+    padding-right: 6px;*/
+    margin-left:-5px;
+  }
+
+  .product-item {
+   /* margin-left: 8px;
+    margin-right: 8px;*/
+    margin-top: 8px;
+   /* margin-bottom: 15px;*/
+    padding-bottom: 15px;
+    border-top-width: 1px;
+    border-top-color: #d9d9d9;
+    border-bottom-width: 1px;
+    border-bottom-color: #d9d9d9;
+    border-left-width: 1px;
+    border-left-color: #d9d9d9;
+    border-right-width: 1px;
+    border-right-color: #d9d9d9;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    width:372px;
+    margin-left:5px;
+    overflow: hidden;
+  }
+
+  .product-image {
+    width: 372px;
+	height: 347px;
+  }
+
+  .product-name {
+    color: #333;
+    font-size: 24px;
+    padding-top: 15px;
+    width: 300px;
+    height: 76px;
+    line-height: 30px;
+    overflow: hidden;
+    /*border-bottom-color: #d9d9d9;
+    border-bottom-width: 1px;
+    border-bottom-color: #d9d9d9;*/
+  }
+
+  .product-txt {
+    flex-direction: row; 
+    margin-top: 15px; 
+    justify-content: space-between;
+    /*align-items: center;*/
+  }
+
+  .product-price {
+    font-size: 28px;
+    color: #F49601;
+    margin-right: 10px;
+  }
+
+  .product-price-icon {
+    font-size: 20px;
+    color: #F49601;
+    margin-right: 10px;
+    margin-bottom: 2px;
+  }
+
+  .product-note {
+    font-size: 24px;
+    color: #999999;
+  }
+  .discount{
+    color:#666666;
+    font-size:24px;
+    text-decoration:line-through;
+  }
+  .success{
+    width:152px;
+    height:152px;
+    margin-top:150px;
+    margin-left:300px;
+  }
+  .tiaojian{
+    width:750px;
+    height:72px;
+    background-color:#ffffff;
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(234, 234, 234, 0);
+    height: 50;
+  }
+   .search-icon {
+    width: 36px; 
+    height: 36px;
+  }
+  .search-iconHead{
+    width: 36px; 
+    height: 36px;
+  }
+  .search-iconHead2 {
+    width: 30px; 
+    height: 30px;
+    
+  }
+  .iconHead{
+  	flex-direction: row;
+  	justify-content:flex-start;
+  	
+  }
+  .iconHeadText{
+ 	flex:1;
+  	font-size:28px;
+  	color:#000;
+  	margin-top:20px;
+  	margin-bottom:20px;
+  	align-items: center;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="产品列表" title-color="white" left-item-title="返回" left-item-color="white">
+    <list class="content list">
+      <!-- start: 查询 -->
+      <cell class="header cell">
+         <div class="search-panel">
+          <input placeholder="搜索" value="{{keyNameText}}" onchange="schange($event, 'keyNameText')" class="search-input"></input>
+          <image src="{{utils.getImageBaseUrl() + 'images/products_icon.png'}}" onclick="search()" class="search-icon"></image>
+        </div>
+      </cell>
+      <!-- end: 查询 -->
+
+      <cell class="tiaojian cell"  style="height:{{pheight}}">
+        <div class="iconHead">
+          <text class="iconHeadText" onclick="selectCondition" style="background-image:url('src/images/shangxia.png');background-size:22px;background-repeat: no-repeat;background-position-x: 220px;background-position-y: center;">{{slabel}}</text>
+          <text class="iconHeadText" onclick="selectConditionNew" style="background-image:url('src/images/shangxia.png');background-size:22px;background-repeat: no-repeat;background-position-x: 220px;background-position-y: center;">{{slabe2}}</text>
+          <text class="iconHeadText" onclick="selectSellNumber"style="background-image:url('src/images/shangxia.png');background-size:22px;background-repeat: no-repeat;background-position-x: 220px;background-position-y: center;">{{slabe3}}</text>
+        </div>
+        
+        
+        <!-- <we-select fontSize="50" sid="{{screen.select_id}}" id="condition" sname="condition" sdata="{{conditions}}" slabel="筛选"></we-select> -->
+        <!-- <input style="font-size:28px;margin-top:20px;margin-bottom:20px;padding-left:20px;" type="text" placeholder="价格由低到高"> -->
+      </cell>
+
+      <cell if="{{productsLength > 0}}" class="cell" style="margin-top:12px;background-color:#EDEDED;">
+        <div class="product-panel">
+
+          <div class="product-item" onclick="toProduct" ds="{{item}}" repeat="item in products">
+            <image class="product-image"  src="{{item.mainPic}}"></image>
+            <div style="padding-left: 15; padding-right: 15;">
+              <text class="product-name">{{item.name}}</text>
+              <div class="product-txt">
+                <div style="flex-direction: row;justify-content: flex-end;align-items: flex-end;">
+                  <text class="product-price-icon">
+                    ￥
+                  </text>
+                  <text class="product-price">
+                    {{utils.toDecimal2(item.suggestedRetailUnitPrice)}}
+                  </text>
+                  <div if="{{item.originUnitPrice}}" style="flex-direction: row;text-decoration: line-through;">
+                    <text class="product-price" style="color:{{throughColor}};text-decoration: line-through;font-size:24px;">
+                      ￥{{utils.toDecimal2(item.originUnitPrice)}}
+                    </text>
+                  </div>
+                </div>
+                <text class="product-note" style="margin-top:5px;margin-left:60px;">
+                  <!-- 10人付款 -->
+                </text>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </cell>
+
+      <cell if="{{productsLength == 0}}" class="cell" style="height: {{serverHeight}};margin-top:20px;background-color:#EDEDED;">
+        <div class="product-panel">
+
+          <div style="flex-direction: column;justify-content: center;">
+            <image class="success" src="{{'src/images/icon_list_empty.png'}}"></image>
+            <text style="width:750px;text-align:center;font-size: 36px;color:#000;margin-top:20px;">暂无商品</text>
+          </div>
+          
+        </div>
+      </cell>
+       <loading  class="loading" onLoading="handleLoading" display="{{displayLoading}}">
+          <text style="color:#eee;"> . </text>
+        </loading>
+      
+    </list>
+    <by-select title="筛选" height="180" sid="{{screen.select_id}}" id="condition" sname="condition" sdata="{{conditions}}"></by-select>
+    <by-select title="筛选" height="180" sid="{{screen.select_id}}" id="conditionNew" sname="conditionNew" sdata="{{conditionsNew}}"></by-select>
+    <by-select title="筛选" height="180" sid="{{screen.select_id}}" id="sellNumber" sname="sellNumber" sdata="{{sellNumber}}"></by-select>
+    
+    
+  </wxc-navpage>
+  
+  
+</template>
+
+<script>
+  require('weex-components');
+  require('./by-components/by-select.we');
+  var stream = require('@weex-module/stream');
+
+  var data = {
+    products: [],
+    cateId: '',
+    searchType: 0,
+    keyName: "",
+    keyNameText: "",
+    priceOrder: 1,
+    productsLength: 1,
+    screen:{},
+    type: '',
+    slabel: '价格',
+    slabe2: '评论',
+    slabe3: '销量',
+    pheight:72,
+    throughColor: "#666666",
+    pageNumber: 1,
+    pageSize: 20,
+    displayLoading: 'hide',
+    finished: false,
+    loadShow: false,
+    priceSort:'asc',
+    pingjia:1,
+    pingjiaDer:'asc',
+    xiaoliang:1,
+    xiaoliangDer:'asc',
+    offset: '0',
+    length: 20
+  };
+
+  data.conditions = [
+    {id: 1, name: "价格由低到高"},
+    {id: 2, name: "价格由高到低"}
+  ];
+  data.conditionsNew = [
+    {id: 1, name: "评论最多"},
+    {id: 2, name: "评论最少"}
+  ];
+  data.sellNumber = [
+ 	  {id: 1, name: "销量最多"},
+    {id: 2, name: "销量最少"}
+  ]
+  
+  data.utils = require('./js-kit/utils');
+
+ 
+  //获取搜索产品列表
+  var getProducts = function(searchType, keyName, priceOrder,pingjia,xiaoliang,me,shopid) {
+   	priceOrder==1?data.priceSort="desc":data.priceSort="asc" //价格
+   	pingjia==0?data.pingjiaDer="desc":data.pingjiaDer="asc" //评价
+   	xiaoliang==0?data.xiaoliangDer="desc":data.xiaoliangDer="asc" //评价
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/home/searchProduct",
+      type:'json',
+      body: {offset:data.offset,length:data.length, keyName: keyName,priceSort:data.priceSort,commentNum:data.pingjiaDer,salesVolume:data.xiaoliangDer,shopId:shopid,cateId:data.cateId}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          data.products=data.products.concat(response.data.data);
+          if(data.products.length < 1) {
+            data.productsLength = 0;
+          }else{
+            data.productsLength = data.products.length;
+          }
+          data.finished = data.productsLength >= response.data.totalRow ? true : false;
+        }
+        me.loadShow = true;
+      }
+    },function(response){
+
+    });
+  };
+
+  //推荐产品
+  var getRecommend = function(positionId, pageNumber, pageSize, me) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/home/paginateRecommendProdByPosId",
+      type:'json',
+      body: {positionId: positionId,offset:0,length:10}
+    }, function(response) {
+        if(response.data) {
+        if(response.data.error == 0) {
+          data.products=data.products.concat(response.data.data);
+          if(data.products.length < 1) {
+            data.productsLength = 0;
+          }else{
+            data.productsLength = data.products.length;
+          }
+
+          data.finished = data.productsLength >= response.data.totalRow ? true : false;
+        }
+        me.loadShow = true;
+      }
+    },function(response){
+
+    });
+  };
+  module.exports = {
+    data: data,
+    created: function() {
+        var bundleUrl = this.$getConfig().bundleUrl;
+        var categoryId = data.utils.getParameterByName('categoryId', bundleUrl);
+        var code = data.utils.getParameterByName('code', bundleUrl);
+        this.$on('naviBar.leftItem.click',function(e){
+          if(categoryId) {
+            this.$openURL(this.utils.getAppBaseUrl(this) + 'index.js?index=1&code='+code);
+          }else{
+            data.utils.pop(this);
+          }
+        });
+    },
+    init:function () {
+      var bundleUrl = this.$getConfig().bundleUrl;
+      var categoryId = data.utils.getParameterByName('categoryId', bundleUrl);
+      var tempShopId = data.utils.getParameterByName('id', bundleUrl);
+      data.type = data.utils.getParameterByName('type', bundleUrl);
+      data.keyName = data.utils.getParameterByName('keyName', bundleUrl);
+      data.cateId = categoryId;
+      if(categoryId) {
+        data.searchType = 2;
+        getProducts(data.searchType, data.keyName, data.priceOrder,1,1,this,this.tempShopId);
+      }else if(data.type) {
+        getRecommend(data.type, data.pageNumber,  data.pageSize, this);
+      }else{
+        data.searchType = 1;
+        getProducts(data.searchType, data.keyName, data.priceOrder,1,1, this,tempShopId);
+      }
+      
+      var headerHeight =  data.utils.getRealHeight(this, 88);
+      this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight;
+    },
+    ready: function () {
+      this.$on('conditionclick', function (e) {
+        data.slabel = e.detail.name;
+        if(e.detail.id == 1) {
+          data.priceOrder = 0;
+        }else if(e.detail.id == 2) {
+          data.priceOrder = 1;
+        }
+        data.pageNumber=1;
+        data.products=[];
+        getProducts(data.searchType, data.keyName, data.priceOrder,1,1, this);
+      }.bind(this));
+      this.$on('sellNumberclick', function (e) {
+        data.slabe3 = e.detail.name;
+        if(e.detail.id == 1) {
+          data.xiaoliang = 0;
+        }else if(e.detail.id == 2) {
+          data.xiaoliang = 1;
+        }
+        data.pageNumber=1;
+        data.products=[];
+        getProducts(data.searchType, data.keyName, 1, 1,data.xiaoliang,this);
+      }.bind(this));
+      this.$on('conditionNewclick', function (e) {
+        data.slabe2 = e.detail.name;
+        if(e.detail.id == 1) {
+          data.pingjia = 0;
+        }else if(e.detail.id == 2) {
+          data.pingjia = 1;
+        }
+        data.pageNumber=1;
+        data.products=[];
+        getProducts(data.searchType, data.keyName, 1, data.pingjia,1,this);
+      }.bind(this));
+    },
+    methods: {
+      selectCondition: function() {
+        this.$vm('condition').show();
+      },
+      selectConditionNew: function() {
+        this.$vm('conditionNew').show();
+      },
+      selectSellNumber: function(){
+      	this.$vm('sellNumber').show();
+      },
+      search: function () {
+        data.searchType = 1;
+        data.pageNumber= 1;
+        data.products= [];
+        getProducts(data.searchType, data.keyName, data.priceOrder,1,1,this);
+      },
+      schange: function (e, m) {
+        this.keyName = e.value;
+      },
+      toProduct: function (e) {
+        var v=e.target.attr.ds.id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + v);
+      },
+      handleLoading: function () {
+        var me = this
+        if(!data.finished) {
+          me.displayLoading = 'show';
+          me.$call('modal', 'toast', {
+            message: '加载中...'
+          });
+          me.displayLoading = 'hide';
+          data.offset = parseInt(data.offset) + data.length;
+          if(data.type){
+            getRecommend(data.type, data.pageNumber,  data.pageSize, this);
+          }else{
+            getProducts(data.searchType, data.keyName, data.priceOrder,1,1, this);
+          }
+        }else{
+          me.displayLoading = 'show';
+          me.$call('modal', 'toast', {
+            message: '没有更多加载'
+          });
+          me.displayLoading = 'hide';
+        }
+      },
+    }
+  };
+</script>

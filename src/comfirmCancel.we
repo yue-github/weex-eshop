@@ -1,0 +1,79 @@
+<style>
+  .bg-grey{
+    background-color:#EDEDED;
+  }
+  .header{
+    flex-direction: row;
+      justify-content: center;
+      background-color: #EB5D69;
+      height:88px;
+      align-items: center;
+      color: #ffffff;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+
+  .success{
+    width:152px;
+    height:152px;
+    margin-top:340px;
+    margin-left:300px;
+  }
+
+  .success-text{
+    font-size: 36px;
+    text-align:center;
+    margin-top:20px;
+  }
+   .success-text1{
+    font-size: 36px;
+    text-align:center;
+    margin-top:20px;
+    color:#459ae9;
+  }
+  
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#EB5D69" title="付款取消" title-color="white"  left-item-color="white">
+    <scroller class="bg-grey">
+      <div style="height:{{serverHeight}}">
+        <div>
+          <image class="success" src="{{utils.getImageBaseUrl()+'images/paySuccess.png'}}"></image>
+          <text class="success-text">支付取消</text>
+           <text onclick="goOders" class="success-text1">返回我的订单</text>
+          <text onclick="goShopping" class="success-text1">再逛逛</text>
+        </div>
+      </div>
+    </scroller>
+  </wxc-navpage>
+  
+</template>
+
+<script>
+ require('weex-components');
+  var stream = require('@weex-module/stream');
+ var data={};
+ data.utils = require('./js-kit/utils');
+
+  module.exports = {
+    data: data,
+     init:function () {
+      var headerHeight =  data.utils.getRealHeight(this, 88);
+      var footerHeight =  data.utils.getRealHeight(this, 0);
+      this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight - footerHeight;
+      
+    },
+    methods: {
+      goShopping:function(e){
+         this.$openURL(this.utils.getAppBaseUrl(this) + 'index.js');
+      }, 
+      goOders:function(e){
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'orders.js?status=0');
+      }
+    }
+  }
+
+</script>

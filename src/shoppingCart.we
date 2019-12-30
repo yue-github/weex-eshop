@@ -1,0 +1,714 @@
+<style>
+  .bg-while{
+    background-color: #ffffff;
+     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .row {
+    width: 750px;
+    background-color: #ffffff;
+  }
+
+  .row-header{
+    flex-direction: row;
+  }
+  .item {
+    background-color: #ffffff;
+  }
+
+  .orders{
+
+  }
+
+  .item-title {
+    height: 60px;
+    border-bottom: 1px solid #d9d9d9;
+    border-bottom-width: 1px; 
+    border-bottom-color: #d9d9d9;
+    padding-left:20px;
+    padding-right: 20px;  
+    background: #efefef;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .shop-name {
+    font-size: 26px;
+    color: #333333;
+  }
+
+  .item-product {
+    height: 210px;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color: #d9d9d9;
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction: row;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .product-image {
+    width: 136px;
+    height: 136px;
+  }
+
+  .product-r {
+    flex: 1;
+    margin-left: 20px;
+    height: 155px;
+  }
+  .product-l{
+    height: 155px;
+  }
+
+  .p-info1 {
+    
+    /*overflow-wrap: hidden;*/
+    overflow:hidden;
+      flex-direction:row;
+     justify-content:flex-start;
+    align-items: center;
+  }
+
+  .product-name {
+    height: 70px;
+    width: 500px;
+    font-size: 26px;
+    color: #333333;
+  }
+
+  .product-attr {
+    font-size: 22px;
+    color: #666666;
+  }
+
+  .product-price {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+  }
+
+  .p-price {
+    color: #F49601;
+    font-size: 26px;
+  }
+
+  .p-num {
+    font-size: 22px;
+    color: #666666;
+  }
+
+  .header-between{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height:60px;
+    background-color:#ffffff;
+    padding-left:20px;
+    border-bottom-color: #D1D1D1;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+  }
+
+  .header-text{
+    font-size:28px;
+    color:#444444;
+    margin-right:15px;
+    margin-left:15px;
+  }
+
+  .submit-row-between{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height:100px;
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    font-size: 36px;
+    color:#ffffff;
+    text-align: center;
+    border-top-color: #D1D1D1;
+    border-top-style: solid;
+    border-top-width: 1px;
+  }
+
+  .submit-left{
+    flex-direction: row;
+    justify-content: space-between;
+    width:500px;
+  }
+
+  .submit-text{
+    margin-left:20px;
+    font-size:28px;
+    color:#333333;
+  }
+
+  .row-end{
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .submit-all{
+    color:#333333;
+    font-size: 28px;
+  }
+
+  .submit-price{
+    color:#F49601;
+    font-size:32px;
+    margin-right:20px;
+  }
+
+  .submit{
+    width:250px;
+    height:100px;
+    justify-content: center;
+    align-items: center;
+    background-color:#FDE314;
+    border-radius: 0px;
+    border-color: #EB5D69;
+  }
+
+  .submit-text-btn{
+    font-size:36px;
+    color:#ffffff;
+  }
+
+  .row-end-center{
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .add-amount{
+    font-size:35px;
+    border-style:solid;
+    border-width:1px;
+    border-color:#D1D1D1;
+    width:60px;
+    height:50px;
+    text-align:center;
+    color: #999;
+  }
+  .amount{
+    width:50px;
+    height:50px;
+    font-size:30px;
+    text-align:center;
+    border-top-style:solid;
+    border-top-width:1px;
+    border-top-color:#D1D1D1;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    border-bottom-color:#D1D1D1;
+  }
+
+  .no-checkbox{
+    width:28px;
+    height:28px;
+    margin-right:20px;
+  }
+
+  .is-checkbox{
+    width:28px;
+    height:28px;
+    margin-right:20px;
+  }
+  
+  .header{
+    flex-direction: row;
+    justify-content: center;
+    background-color: #EB5D69;
+    height:88px;
+    align-items: center;
+    color: #ffffff;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+
+  .shoppingEmpty{
+    width:227px;
+    height:227px;
+    margin-top:150px;
+    margin-left:260px;
+  }
+
+  .success-text{
+    font-size: 36px;
+    text-align:center;
+    margin-top:50px;
+    color:#999999;
+  }
+
+  .buttons{
+    border-width:1px;
+    border-style:solid;
+    border-color:#EB5E68;
+    width:280px;
+    margin-left:235px;
+    margin-top:40px;
+    background-color:#FDE314;
+    color:#ffffff;
+    border-radius:0px;
+  }
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="购物车" left-item-title="返回" left-item-color="white"  title-color="white" left-item-color="white">
+    <scroller if="{{dataLength==0}}"  style="height: {{serverHeight}};">
+       <div>
+        <image class="shoppingEmpty" src="{{utils.getImageBaseUrl() + 'images/shoppingEmpty.png'}}"></image>
+        <text class="success-text">亲，购物车空空的耶！</text>
+        <!-- start: 提交按钮 -->
+        <div>
+          <wxc-button type="primary" onclick="goShopping" size="middle" value="去逛逛" class="buttons"></wxc-button>
+        </div>
+        <!-- end: 提交按钮 -->
+      </div>
+    </scroller>
+
+    <scroller if="{{dataLength>0}}" class="bg-while" style="height: {{serverHeight}};margin-bottom:100;">
+      <!-- start: 头部 -->
+      <div>
+        <div class="header-between" style="margin-top:20px;">
+          <div style="flex-direction: row;justify-content: flex-start;">
+            <div onClick="allSelect(0)" style="flex-direction: row;justify-content: flex-start;">
+              <image if="allSelected == 0" class="no-checkbox" style="margin-top:2px" src="{{utils.getImageBaseUrl() + 'images/no_checkbox.png'}}">
+              <text if="allSelected == 0" style="color:#444444;font-size:28px;">全选</text>
+            </div>
+            <div onClick="allSelect(1)" style="flex-direction: row;justify-content: flex-start;">
+              <image if="allSelected == 1" class="is-checkbox" style="margin-top:2px" src="{{utils.getImageBaseUrl() + 'images/is_checkbox.png'}}">
+              <text if="allSelected == 1" style="color:#444444;font-size:28px;">全选</text>
+            </div>
+          </div>
+          <div class="row-header">
+            <!-- <text class="header-text">编辑</text> -->
+            <text onClick="delete" class="header-text">删除</text>
+          </div>
+        </div>
+      </div>
+      <!-- end: 头部 -->
+      
+      <!-- start: 购物车列表 -->
+      <div class="orders">
+        <div class="div">
+          <div class="row" repeat="{{data in getMyShoppingCart}}">
+            <div class="item">
+            <!-- 
+              <div class="item-title" ds="{{data}}" onClick="shopSelect">
+                <image if="data.shopSelected == 0" style="margin-top:2px" class="no-checkbox" src="{{utils.getImageBaseUrl() + 'images/no_checkbox.png'}}">
+                <image if="data.shopSelected == 1" style="margin-top:2px" class="is-checkbox" src="{{utils.getImageBaseUrl() + 'images/is_checkbox.png'}}">
+                <text class="shop-name">{{data.shopName}}</text>
+              </div>
+            -->
+              <div class="item-product" repeat="{{item in data.products}}">
+                <div class="product-l">
+                  <image if="item.isSelected == 1" onClick="isSelect(item,data)" class="is-checkbox" src="{{utils.getImageBaseUrl() + 'images/is_checkbox.png'}}">
+                  <image if="item.isSelected == 0" onClick="isSelect(item,data)" class="no-checkbox" src="{{utils.getImageBaseUrl() + 'images/no_checkbox.png'}}">
+                </div>
+                <div class="product-l" onclick="toProduct" ds="{{item}}">
+                  <image class="product-image" src="{{item.mainPic}}"></image>
+                </div>
+
+                <div class="product-r">
+                  <div class="p-info1">
+                    <text class="product-name">{{item.productName}}</text>
+                  </div>
+                  <div class="p-info2">
+                    <text class="product-attr">{{item.selectProterties}}</text>
+                  </div>
+                  <div class="product-price">
+                    <text class="p-price">￥{{utils.toDecimal2(item.suggestedRetailUnitPrice)}}</text>
+                    <div class="row-end-center">
+                      <text class="add-amount" onClick="setAmount($event, item, -1)">-</text>
+                      <input class="amount" type="text" value="{{item.amount}}"  oninput="setAmount($event, item, 'amount')">
+                      <text class="add-amount" onClick="setAmount($event, item, -2)">+</text>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end: 购物车列表 -->
+    </scroller>
+
+       <!-- start: 提交按钮 -->
+      <div if="{{dataLength>0}}" class="submit-row-between" style="margin-bottom: 88;">
+        <div class="submit-left">
+          <div style="flex-direction: row;margin-left:20px;margin-top:5px;">
+            <div onClick="allSelect(0)" style="flex-direction: row;justify-content: flex-start;">
+              <image if="allSelected == 0" style="margin-top:2px" class="no-checkbox" src="{{utils.getImageBaseUrl() + 'images/no_checkbox.png'}}">
+              <text if="allSelected == 0" style="color:#444444;font-size:28px;">全选</text>
+            </div>
+            <div onClick="allSelect(1)" style="flex-direction: row;justify-content: flex-start;">
+              <image if="allSelected == 1" style="margin-top:2px" class="is-checkbox" src="{{ 'src/images/is_checkbox.png'}}">
+              <text if="allSelected == 1" style="color:#444444;font-size:28px;">全选</text>
+            </div>
+          </div>
+          <div class="row-end">
+            <text class="submit-all">合计：</text>
+            <text class="submit-price">￥{{utils.toDecimal2(totalPrice)}}</text>
+          </div>
+        </div>
+        <div class="submit" onclick="toSubmit">
+          <text class="submit-text-btn">结算</text>
+        </div>
+      </div>
+      <!-- end: 提交按钮 -->
+  </wxc-navpage>
+</template>
+
+<script>
+ require('weex-components');
+ var stream = require('@weex-module/stream');
+ var data = {allSelected: 0,totalPrice: "",getMyShoppingCart:[],dataLength:1,defaultNum: 0,addNum: ''};
+
+ data.utils = require('./js-kit/utils');
+ var modal = require('@weex-module/modal');
+
+ //获取购物车列表
+ var getMyShoppingCart = function(me) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shoppingCart/getMyShoppingCart",
+      type:'json'
+    }, function(response) {
+      if(response.data) {
+        var result = response.data.data;
+
+        data.dataLength=response.data.data.length;
+        if(!result) {
+          return;
+        }
+        for(var i=0;i<result.length;i++){
+          var shop = result[i];
+          var productList = shop.products;
+          var totalLength = productList.length;
+          var selectLength = 0;
+          for (var j = 0; j < totalLength; j++) {
+            if(productList[j].selectProterties == null || productList[j].selectProterties == '') {
+              productList[j].selectProterties = '';
+            }
+            if (productList[j].isSelected == 1) {
+              selectLength++;
+            }
+          }
+
+          if (selectLength == totalLength) {
+            shop.shopSelected = 1;
+            me.allSelected = 1;
+          } else {
+            shop.shopSelected =0;
+            me.allSelected = 0;
+          }
+        }
+        data.getMyShoppingCart = response.data.data;
+        data.totalPrice = response.data.totalPrice;
+      }
+    },function(response){
+
+    });
+  };
+
+  //选中购物车
+  var selectShoppingCart = function(ids, me) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shoppingCart/selectShoppingCart",
+      type:'json',
+      body:{ids:JSON.stringify(ids)}
+    }, function(response) {
+      if(response.data) {
+        data.totalPrice = response.data.totalPrice;
+      }
+    },function(response){
+
+    });
+  };
+
+  //取消选中购物车
+  var unSelectShoppingCart = function(ids, me) {
+    data.utils.fetch(me,{
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shoppingCart/selectShoppingCart",
+      type:'json',
+      body:{ids:JSON.stringify(ids)}
+    }, function(response) {
+      if(response.data) {
+        data.totalPrice = response.data.totalPrice;
+      }
+    },function(response){
+
+    });
+  };
+
+  //判断最少选中一条商品
+  var hasSelected = function () {
+    var ids = [];
+    for(var i = 0; i < data.getMyShoppingCart.length; i++) {
+      var productListSelected =  data.getMyShoppingCart[i].products;
+      for(var k = 0; k< productListSelected.length; k++) {
+        if(productListSelected[k].isSelected == 1) {
+          ids.push(productListSelected[k].id);
+        }
+      }
+    }
+    return ids.length > 0;
+  }
+
+  //改变产品数量
+  var changeProductNum = function (ds, n, me) {
+    // if(n > 0) {
+    //   ds.amount = n;
+    // }else{
+    //   ds.amount = 1;
+    // }
+
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/shoppingCart/update",
+      type:'json',
+      body:{id:ds.id,amount:ds.amount}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == -1) {
+          modal.toast({'message': '库存不足', 'duration': 1});
+          getMyShoppingCart(me);
+        }else{
+          getMyShoppingCart(me);
+        }
+      }
+    },function(response){
+
+    });
+  }
+
+  var isInteger = function (obj) {
+   return parseInt(obj, 10) === obj
+  }
+
+ module.exports = {
+    data: data,
+    created: function() {
+        this.$on('naviBar.leftItem.click',function(e){
+          data.utils.pop(this);
+        });
+        
+    },
+    init:function () {
+      var headerHeight =  data.utils.getRealHeight(this, 88);
+      var footerHeight =  data.utils.getRealHeight(this, 188);
+      this.serverHeight = this.$getConfig().env.deviceHeight - headerHeight - footerHeight;
+      // this.serverHeight = 300;
+
+      var bundleUrl = this.$getConfig().bundleUrl;
+      var autoLoad = data.utils.getParameterByName('autoLoad', bundleUrl);
+     
+      // if(autoLoad != 'f') {
+        getMyShoppingCart(this);
+      // }
+    },
+    methods: {
+    
+      //选中商品
+      isSelect:function (item,data) {
+        if(item.isSelected == 0) {
+          item.isSelected = 1;          
+        }else{
+          item.isSelected = 0;    
+          data.allSelected = 0;      
+        }
+
+        var productList = data.products;
+        var totalLength = productList.length;
+        var selectLength = 0;
+        for(var i = 0; i<totalLength; i++) {
+          if (productList[i].isSelected == 1) {
+            selectLength++;
+          }
+        }
+
+        if (selectLength == totalLength) {
+          data.shopSelected=1;
+          this.allSelected = 1;
+        }else{
+          data.shopSelected=0;
+          this.allSelected = 0;
+        }
+
+        var ids = [];
+        for(var i = 0; i< data.products.length; i++) {
+          if(data.products[i].isSelected == 1) {
+          	var temp={};
+          	temp.id = data.products[i].id;
+          	temp.selected =1;
+            ids.push(temp);
+          }else{
+          	var temp={};
+          	temp.id = data.products[i].id;
+          	temp.selected = 0;
+            ids.push(temp);
+          }
+        }
+        selectShoppingCart(ids, this);
+
+      },
+      //商店选中
+      shopSelect:function (e) {
+        var seltype=0;
+        var ids = [];
+        var data = e.target.attr.ds;
+        for(var i = 0; i< data.products.length; i++) {
+          var temp={}
+          temp.ids= data.products[i].id;
+          temp.selected = data.isSelected;
+          ids.push(temp)
+        }
+
+        if(data.shopSelected==0){
+        	ids=[];
+          seltype=1;
+          data.shopSelected=1;
+          for(var k = 0; k< data.products.length; k++) {
+         	  var temp={}
+            data.products[k].isSelected= seltype;
+            temp.id= data.products[k].id;
+            temp.selected = 1;
+            ids.push(temp)
+          }
+          selectShoppingCart(ids, this);
+        }else{
+       	  ids=[];
+          seltype=0;
+          data.shopSelected=0;
+          for(var k = 0; k< data.products.length; k++) {
+            data.products[k].isSelected= seltype;
+            var temp={}
+	          temp.id= data.products[k].id;
+	          temp.selected = 0
+	          ids.push(temp)
+          }
+          this.allSelected = 0;
+          unSelectShoppingCart(ids, this);
+        }
+      },
+      //商品数量
+      setAmount:function(e, item, n) {
+        if(n==-1){
+          if(item.amount>1){
+            item.amount=parseInt(item.amount)-1;
+          }
+        }else if(n==-2){
+           item.amount=parseInt(item.amount)+1;
+        }else if(e.value){
+          item.amount=e.value;
+        }
+        if(isNaN(Number(item.amount))){
+        	item.amount=1;
+        	this.utils.toast({'message': '数量请输入数字', 'duration': 1});
+        }
+        if(item.amount<=0){
+        	item.amount=1;
+        	this.utils.toast({'message': '数量至少为1', 'duration': 1});
+        }
+        changeProductNum(item, item.amount, this);
+        
+      },
+      //全部选中
+      allSelect: function (v) {
+        var ids = [];
+        if(v == 0) {
+          for(var i = 0; i < data.getMyShoppingCart.length; i++) {
+            data.getMyShoppingCart[i].shopSelected = 1;
+            for(var k = 0; k < data.getMyShoppingCart[i].products.length; k++) {
+              var temp={}; 
+              data.getMyShoppingCart[i].products[k].isSelected = 1;
+              temp.id=data.getMyShoppingCart[i].products[k].id;
+              temp.selected = data.getMyShoppingCart[i].products[k].isSelected;
+              //ids.push(data.getMyShoppingCart[i].products[k].id);
+              ids.push(temp);
+            }
+          }
+          data.allSelected = 1;
+          selectShoppingCart(ids, this);
+        }else{
+       	  ids = [];
+          for(var i = 0; i < data.getMyShoppingCart.length; i++) {
+            data.getMyShoppingCart[i].shopSelected = 0;
+            for(var k = 0; k < data.getMyShoppingCart[i].products.length; k++) {
+              data.getMyShoppingCart[i].products[k].isSelected = 0;
+               var temp={}; 
+              temp.id=data.getMyShoppingCart[i].products[k].id;
+              ids.push(temp);
+            }
+          }
+          data.allSelected = 0;
+          unSelectShoppingCart(ids, this);
+        }
+      },
+      //删除商品 @param ids
+      delete: function () {
+        var ids = [];
+        var me = this;
+        for(var i = 0; i < data.getMyShoppingCart.length; i++ ) {
+          for(var k = 0; k < data.getMyShoppingCart[i].products.length; k++) {
+            if(data.getMyShoppingCart[i].products[k].isSelected == 1) {
+              ids.push(data.getMyShoppingCart[i].products[k].id);
+            }
+          }
+        }
+        data.utils.fetch(this, {
+          method: 'post',
+          url: data.utils.getServerBaseUrl() + "webapp/shoppingCart/removeMore",
+          type:'json',
+          body:{ids: JSON.stringify(ids)}
+        }, function(response) {
+          if(response.data) {
+            getMyShoppingCart(me);
+          }
+        },function(response){
+
+        });
+      },
+      toSubmit: function (e) {
+        if(hasSelected() == false) {
+          modal.toast({'message': '至少有一件商品', 'duration': 1});
+        }else{
+          var shops = data.getMyShoppingCart;
+          for (var i = 0; i < shops.length; i++) {
+            var products = shops[i].products;
+            for (var j = 0; j < products.length; j++) {
+              var product = products[j];
+              if (product.isSelected == 1 && (product.is_sale == 0 || product.isDelete == 1)) {
+                var content = '"' + product.productName + '"' + "已下架，请从购物车中删除该商品再购买";
+                modal.toast({'message':content, 'duration': 2});
+                return;
+              }
+            }
+          }
+          this.$openURL(this.utils.getAppBaseUrl(this) + 'comfirm.js');
+        }
+      },
+      toProduct: function (e) {
+        var id = e.target.attr.ds.product_id;
+        this.$openURL(this.utils.getAppBaseUrl(this) + 'product.js?id=' + id);
+      },
+      //去购物
+      goShopping: function(){
+         this.$openURL(this.utils.getAppBaseUrl(this) + 'index.js?index=1');
+      }
+    }
+  };
+</script>

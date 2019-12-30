@@ -1,0 +1,172 @@
+<style>
+  .bg-grey{
+    background-color:#EDEDED;
+  }
+  .header{
+    flex-direction: row;
+	  justify-content: center;
+	  background-color: #EB5D69;
+	  height:88px;
+	  align-items: center;
+	  color: #ffffff;
+  }
+  .header-title{
+    color:#ffffff;
+    font-size:36px;
+  }
+
+  .item{
+    width:700px;
+    height:280px;
+    margin-top:20px;
+    margin-left:20px;
+    margin-bottom: 20px;
+  }
+
+  .image{
+    width:710px;
+    height:280px;
+    position: absolute;
+  }
+
+  .hongbao{
+  	width:120px;
+  	height: 120px;
+  	position: absolute;
+  	margin-top: 30px;
+  	margin-left: 30px;
+  	margin-right:30px;
+  }
+
+  .space-between{
+  	flex-direction: row;
+  	justify-content: space-between;
+  }
+
+  .font-32{
+	font-size:32px;
+  }
+
+  .font-60{
+	 font-size:48px;
+  }
+
+  .color-white{
+  	color:#ffffff;
+  }
+
+  .receiver-name{
+  	margin-top:30px;
+  	margin-left:180px;
+  }
+
+  .mg-t-60{
+  	margin-top:70px;
+  }
+
+  .receiver-time{
+  	margin-left:30px;
+  	font-size:28px;
+  }
+
+  .receiver-bg-r{
+  	width:140px;
+  	height:280px;
+  	background-color:rgba(0,0,0,0.2);
+  	margin-right:-10px;
+  	border-top-right-radius: 10px;
+  }
+
+  .receiver-title{
+  	width:36px;
+  	margin-top:60px;
+  	margin-left:50px;
+  	font-size:36px;
+  }
+
+  .height-50{
+    height:150px;
+  }
+
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#EB5D69" title="领取红包" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="bg-grey">
+      <div>
+
+      <!-- start: 红包 -->
+      <div>
+        <div class="item">
+          <div class="space-between">
+            <image class="image" src="http://192.168.1.120:8081/images/receiver.png"></image>
+            <!-- start: 红包左 -->
+              <div >
+                <div class="height-50">
+                  <image class="hongbao" src="http://192.168.1.120:8081/images/receiver_01.png"></image>
+                  <div class="receiver-name">
+                    <text class="font-32 color-white">3M防护口罩</text>
+                    <text class="font-60 color-white">满￥30减￥5</text>
+                  </div>
+                </div>
+                <div class="mg-t-60">
+                  <text class="receiver-time color-white">有效期：2016/06/01 — 2016/9/1</text>
+                </div>
+              </div>
+              <!-- end: 红包左 -->
+
+              <!-- start: 红包右 -->
+              <div class="receiver-bg-r">
+                <text class="receiver-title color-white">立即领取</text>
+              </div>
+              <!-- end: 红包右 -->
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="space-between">
+            <image class="image" src="http://192.168.1.120:8081/images/receiver.png"></image>
+            <!-- start: 红包左 -->
+              <div >
+                <div class="height-50">
+                  <image class="hongbao" src="http://192.168.1.120:8081/images/receiver_01.png"></image>
+                  <div class="receiver-name">
+                    <text class="font-32 color-white">3M防护口罩</text>
+                    <text class="font-60 color-white">满￥30减￥5</text>
+                  </div>
+                </div>
+                <div class="mg-t-60">
+                  <text class="receiver-time color-white">有效期：2016/06/01 — 2016/9/1</text>
+                </div>
+              </div>
+              <!-- end: 红包左 -->
+
+              <!-- start: 红包右 -->
+              <div class="receiver-bg-r">
+                <text class="receiver-title color-white">立即领取</text>
+              </div>
+              <!-- end: 红包右 -->
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- end: 红包 -->
+
+      
+
+      </div>
+      </scroller>
+  </wxc-navpage>
+	
+</template>
+
+<script>
+  require('weex-components');
+  module.exports = {
+    data: {
+      
+    },
+    
+  }
+</script>

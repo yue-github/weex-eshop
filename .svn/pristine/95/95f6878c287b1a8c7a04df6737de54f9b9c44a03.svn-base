@@ -1,0 +1,662 @@
+<style>
+  .bg-grey{
+    background-color:#EDEDED;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .tabs {
+    margin-top:20px;
+    height: 70px;
+    background-color: #ffffff;
+      flex-direction: row;
+  }
+
+  .tab {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-bottom-width: 5px;
+  }
+
+  .tab-text {
+    font-size: 32px;
+    color: #333333;
+  }
+
+  .item-txt {
+    font-size: 28px;
+    margin-top:10px;
+    color: #555;
+  }
+
+  .item-text {
+    font-size: 28px;
+    margin-top:10px;
+    color: #000000;
+  }
+
+  .input{
+    height: 60px;
+    font-size:24px;
+    width:380px;
+    margin-left:20px;
+  }
+
+  .cause{
+    height: 60px;
+    font-size:24px;
+    width:300px;
+    margin-left:20px;
+  }
+
+  .note{
+    /*height: 300px;*/
+    font-size:24px;
+    width:500px;
+    margin-left:20px;
+  }
+
+  .item{
+    height:100px;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+   .row-end{
+  	width:150px;
+  	flex-direction: row;
+  	justify-content: flex-end;
+    align-items: center;
+  	margin-left:20px;
+  }
+
+  .red{
+    color:#FDE314;
+    margin-top:10px;
+    font-size:28px;
+  }
+
+  .border{
+  	border-style: solid;
+  	border-width: 1px;
+  	border-color: #E6E9EE;
+    background-color: #F9F9F9;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .buttons{
+  	padding-top:30px;
+    margin-top:30px;
+    border-width:1px;
+    border-style:solid;
+    border-color:#FDE314;
+    width:700px;
+    background-color:#FDE314;
+    margin-left:25px;
+    color:white;
+    border-radius:0px;
+    height: 100px;
+    font-size: 36px;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .upload{
+  	font-size:24px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+  	text-align: center;
+    border-radius: 0px;
+    color: #000000;
+  }
+
+  .price{
+    margin-left:5px;
+    /*margin-top:10px;*/
+  	font-size:24px;
+  	color:#666666;
+  }
+
+  .icon{
+  	width:26px;
+  	height:26px;
+  	margin-right:5px;
+    /*margin-top: 15px;*/
+    margin-left:10px;
+  }
+
+  .price-text{
+    margin-top:20px;
+    margin-left:10px;
+    font-size:24px;
+    color:#666666;
+  }
+
+  .radio {
+    margin-top:20px;
+    margin-bottom:20px;
+    margin-left:20px;
+    width:32;
+    height:32;
+  }
+
+  .radio-select{
+    padding-left:20px;
+    padding-right:20px;
+    margin-left:20px;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+  }
+
+  .radio-text{
+    font-color:#000;
+    font-size:26px;
+    margin-left:10px;
+  }
+
+  .only-no-isGeted{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #E6E9EE;
+    background-color: #F9F9F9;
+    flex-direction: row;
+    align-items: center;
+    padding-left:20px;
+  }
+
+</style>
+
+<template>
+  <wxc-navpage data-role="none" height="88" background-color="#FDE314" title="{{pageName}}" title-color="white" left-item-title="返回" left-item-color="white">
+    <scroller class="bg-grey">
+      <!-- start: 产品页面 -->
+      <div if="{{tabIndex == 0}}">
+	    <wxc-list-item class="item" style="height:{{pheight}}">
+    		<div class="row-end">
+	      		<text class="item-text">退款原因</text>
+	        	<text class="red">*</text>
+	        	<text class="item-txt">：</text>
+	      	</div>
+          <div style="margin-left:0px;justify-content: flex-start;flex-direction: row;align-items: center;width:500px;" onclick="selectRefund">
+            <text class="item-text">{{refundText}}</text>
+          </div>
+	    </wxc-list-item>
+	    <wxc-list-item class="item">
+    		<div class="row-end">
+	      		<text class="item-text">退款金额</text>
+	        	<text class="red">*</text>
+	        	<text class="item-txt">：</text>
+	      	</div>
+	        <input class="cause border"  type="text" value="{{refundData.refundCash}}" oninput="vchange($event, 'refundCash')">
+	        <text class="price-text">最多￥{{utils.toDecimal2(productOrder.allowApplyCash)}}</text>
+	    </wxc-list-item>
+
+	    <wxc-list-item class="item" style="height:200px;">
+    		<div class="row-end">
+	      		<text class="item-text">退款说明</text>
+            <text class="red">*</text>
+	        	<text class="item-txt">：</text>
+      	</div>
+        <input class="note border" value="{{refundData.note}}" oninput="vchange($event, 'note')"></input>
+	    </wxc-list-item>
+
+	    <wxc-list-item class="item">
+    		<div class="row-end">
+      		<text class="item-text" style="margin-right:20;">上传凭证</text>
+        	<text class="item-txt">：</text>
+        </div>
+      </wxc-list-item>  
+
+      <div style="width:750;flex-direction:row;flex-wrap:wrap;padding-top:20;padding-left:45;padding-right:20;background:#fff;">
+        <div style="padding-right:20;" repeat="{{item in refundData.pics}}" onclick="upload0($index)">
+          <image style="width:110px;height:110px;margin-bottom:20;" src="{{item}}" >
+        </div>
+        <div if='{{isHide}}' style="width:110px;height:110px;margin-bottom:20;" onclick="upload0(-1)" >
+           <img style="width:110px;height:110px;margin-bottom:20;" src="{{utils.getImageBaseUrl()+ 'images/icon9.png'}}">
+        </div>
+      </div>
+	    <!-- start: 提交按钮 -->
+        <div class="pd-b20" onclick="submitRefund()" style="margin-top:60px;">
+            <text class="buttons">申请退款</text>
+        </div>
+         <!-- end: 提交按钮 -->
+      </div>
+      <!-- end: 产品页面 -->
+
+      <!-- start: 店铺页面 -->
+      <div class="wrap" if="{{tabIndex == 1}}">
+        <wxc-list-item class="item">
+            <div class="row-end">
+              <text class="item-text">是否收到货</text>
+              <text class="red">*</text>
+              <text class="item-txt">：</text>
+            </div>
+            <div class="radio-select" onclick="selectIsGeted(1)">
+              <image class="radio" if="{{backGoodsIsGeted == 0}}" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+              <image class="radio" if="{{backGoodsIsGeted == 1}}" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+              <text class="radio-text">未收到货</text>
+            </div>
+            <div class="radio-select" onclick="selectIsGeted(2)">
+              <image class="radio" if="{{backGoodsIsGeted == 1}}" src="{{utils.getImageBaseUrl() + 'images/icon_radio_b.png'}}"></image>
+              <image class="radio" if="{{backGoodsIsGeted == 0}}" src="{{utils.getImageBaseUrl() + 'images/icon_radio_w.png'}}"></image>
+              <text class="radio-text">已收到货</text>
+            </div>
+        </wxc-list-item>
+  	    <wxc-list-item class="item" style="height:{{bheight}}">
+      		<div class="row-end">
+  	      		<text class="item-text">退货原因</text>
+  	        	<text class="red">*</text>
+  	        	<text class="item-txt">：</text>
+  	      	</div>
+            <div style="margin-left:0px;justify-content: flex-start;flex-direction: row;align-items: center;width:500px;" onclick="selectBack">
+              <text class="item-text" style="margin-left:20px;">{{backText}}</text>
+            </div>
+  	      	
+  	    </wxc-list-item>
+
+  	    <wxc-list-item class="item">
+      		<div class="row-end">
+  	      		<text class="item-text">退款金额</text>
+  	        	<text class="red">*</text>
+  	        	<text class="item-txt">：</text>
+  	      	</div>
+  	        <input class="cause border" value="{{backGoods.refundCash}}" oninput="bchange($event, 'refundCash')" type="text" value="79.80">
+            <text class="price-text">最多￥{{utils.toDecimal2(productOrder.allowApplyCash)}}</text>
+  	    </wxc-list-item>
+
+  	    <wxc-list-item class="item" style="height:200px;">
+      		<div class="row-end">
+  	      		<text class="item-text">退款说明</text>
+              <text class="red">*</text>
+  	        	<text class="item-txt">：</text>
+  	      	</div>
+  	        <input class="note border" value="{{backGoods.note}}" oninput="bchange($event, 'note')" rows="5"></input>
+  	    </wxc-list-item>
+
+  	    <wxc-list-item class="item">
+          <div class="row-end">
+            <text class="item-text">上传凭证</text>
+            <text class="item-txt">：</text>
+          </div>
+        </wxc-list-item>
+           <div style="width:750;flex-direction:row;flex-wrap:wrap;padding-top:20;padding-left:45;padding-right:20;background:#fff;">
+            <div style="padding-right:20;" repeat="{{item in backGoods.pics}}" onclick="upload1($index)">
+              <image style="width:110px;height:110px;margin-bottom:20;" src="{{item}}" >
+            </div>
+            <div style="width:110px;height:110px;margin-bottom:20;" if='{{isHide}}' onclick="upload1(-1)" >
+               <img style="width:110px;height:110px;margin-bottom:20;" src="{{utils.getImageBaseUrl()+ 'images/icon9.png'}}">
+            </div>
+          </div>
+        <!-- start: 提交按钮 -->
+      <div style="margin-top:60px;" onclick="submitBack()">
+        <text class="buttons">申请退货</text>
+      </div>
+       <!-- end: 提交按钮 -->
+        
+      </div>
+
+      <!-- end: 店铺页面 -->
+      <by-select title="退款原因" sid="{{refuncReason.reason_id}}" id="refund" sname="refund" sdata="{{refuncReason}}"></by-select>
+      <by-select title="退款原因" sid="{{backReason.reason_id}}" id="back" sname="back" sdata="{{backReason}}"></by-select>
+      <by-select id="head0" sname="head0" title="申请退款" height="150" sdata="{{hdata0}}"></by-select>
+      <by-select id="head1" sname="head1" title="申请退货" height="150" sdata="{{hdata1}}"></by-select>
+
+    </scroller>
+  </wxc-navpage>
+  
+</template>
+
+<script>
+ require('weex-components');
+ require('./by-components/by-select.we');
+ var stream = require('@weex-module/stream');
+ var modal = require('@weex-module/modal');
+
+ var data = {
+    isHide:1,
+    pageName:"退款",
+    refundCause: {reason_id: 0},
+    backCause: {reason_id: 0},
+    refundData: {pics:[]},
+    backGoods: {isGeted: 1,pics:[]},
+    pheight: 100,
+    bheight: 100,
+    tabIndex: 0,
+    backGoodsIsGeted: 0,
+    refundText: '下拉选择',
+    backText: '下拉选择',
+    isShow: false,
+    productOrder: {unitOrdered: 0,allowApplyCash: 0,couponDiscount:0},
+    hdata0: [
+      {id: 1, name: '拍照'},
+      {id: 2, name: '相册'},
+    ],
+    hdata1: [
+      {id: 1, name: '拍照'},
+      {id: 2, name: '相册'},
+    ],
+    img: 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png'
+ };
+
+ data.refuncReason = [
+    {id: 1, name: "拍错了/不想要了"},
+    {id: 2, name: "信息填写错误，重新拍"},
+    {id: 3, name: "未按照约定时间发货"},
+    {id: 4, name: "退运费"},
+    {id: 4, name: "其他"},
+ ];
+
+ data.backReason = [
+    {id: 1, name: "未按约定时间发货"},
+    {id: 2, name: "空包裹/少货"},
+    {id: 3, name: "拍错了/不想要了"},
+    {id: 4, name: "退运费"},
+    {id: 4, name: "其他"}
+ ];
+
+ data.utils = require('./js-kit/utils');
+ //提交退款信息
+ var toRefund = function (me) {
+    if(!data.refundData.reason) {
+      modal.toast({'message': '请选择退款原因', 'duration': 1});
+      return;
+    }
+    data.refundData.refundAmount=data.productOrder.unitOrdered;   
+    if(data.refundData.refundCash > data.productOrder.allowApplyCash) {
+      modal.toast({'message': '申请退款的金额不能超过购买的总金额', 'duration': 1});
+      return;
+    }
+    if(!data.refundData.note) {
+      modal.toast({'message': '必须填写退款说明', 'duration': 1});
+      return;
+    }
+    data.refundData.couponDiscount=data.productOrder.couponDiscount;
+    if(!data.refundData.couponDiscount){
+      data.refundData.couponDiscount="0";
+    }
+    data.refundData.pics = JSON.stringify(data.refundData.pics);
+    // data.refundData.note = "textareaNote";
+ 
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/refund/submitRefund",
+      type:'json',
+      body: data.refundData
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          me.utils.toast({'message': '申请退款成功', 'duration': 1},function(){
+            me.$openURL(me.utils.getAppBaseUrl(me) + 'backs.js?type=1');
+          }); 
+        }else{
+          modal.toast({'message': response.data.errmsg, 'duration': 1});
+        }
+      }
+    },function(response){
+
+    });
+ }
+
+ //提交退货信息
+ var toBackGoods = function (me) {
+    if(!data.backGoods.reason) {
+      modal.toast({'message': '请选择退货原因', 'duration': 1});
+      return;
+    }
+    if(data.backGoods.isGeted == 1) {
+      data.backGoods.refundAmount = data.productOrder.unitOrdered;
+    }else{
+      data.backGoods.isGeted='0';
+    }
+
+    data.backGoods.refundAmount=data.productOrder.unitOrdered;
+    data.backGoods.couponDiscount=data.productOrder.couponDiscount;
+    if(!data.backGoods.couponDiscount){
+      data.backGoods.couponDiscount="0";
+    }
+    if(!data.backGoods.refundCash) {
+      modal.toast({'message': '申请退货金额不能为空', 'duration': 1});
+      return;
+    }
+    if(data.backGoods.refundCash > data.productOrder.allowApplyCash) {
+      modal.toast({'message': '申请退货的金额不能超过购买的总数量', 'duration': 1});
+      return;
+    }
+    if(!data.backGoods.note) {
+      modal.toast({'message': '必须填写退货说明', 'duration': 1});
+      return;
+    }
+
+    data.backGoods.pics = JSON.stringify(data.backGoods.pics);
+    // data.backGoods.note = "textareaNote";
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/backGoods/submitBack",
+      type:'json',
+      body: data.backGoods
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          me.utils.toast({'message': '申请退货成功', 'duration': 1},function(){
+            me.$openURL(me.utils.getAppBaseUrl(me) + 'backs.js?type=0');
+          });
+        }else{
+          modal.toast({'message': response.data.errmsg, 'duration': 1});
+        }
+      }
+    },function(response){
+
+    });
+ }
+
+ //获取退货商品
+ var getProductOrder = function (me) {
+    data.utils.fetch(me, {
+      method: 'post',
+      url: data.utils.getServerBaseUrl() + "webapp/backs/getProductOrder",
+      type:'json',
+      body: {productOrderId: data.backGoods.productOrderId}
+    }, function(response) {
+      if(response.data) {
+        if(response.data.error == 0) {
+          data.productOrder = response.data.productOrder;
+          if(data.productOrder.orderStatus==2){
+              me.tabIndex=0;
+              me.pageName="退款";
+          }else if(data.productOrder.orderStatus==3 || data.productOrder.orderStatus==4){
+            me.tabIndex=1;
+            me.pageName="退货";
+          }
+        }
+      }
+    },function(response){
+
+    });
+ }
+
+ module.exports = {
+      data: data,
+      created: function() {
+          var me = this;
+          $('#weex').append('<input type="file" id="file" style="display:none;"/>');
+          this.$on('naviBar.leftItem.click',function(e){
+            data.utils.pop(this);
+          });
+
+          //退款
+          this.$on('head0click', function (e) {
+            var id = e.detail.id;
+
+            var upload = require('@weex-module/upload');
+            var reuslt = upload.upload(id, data.utils.getServerBaseUrl() + "admin/file/upload", function(resp) {
+              if(resp.error == 0) {
+                me.refundData.pics.push(resp.path);
+              }else{
+                modal.toast({'message': '上传图片失败', 'duration': 1});
+              }
+            });          
+          }.bind(this));
+
+          //退货
+          this.$on('head1click', function (e) {
+            var id = e.detail.id;
+
+            var upload = require('@weex-module/upload');
+            var reuslt = upload.upload(id, data.utils.getServerBaseUrl() + "admin/file/upload", function(resp) {
+              if(resp.error == 0) {
+                me.backGoods.pics.push(resp.path);
+              }else{
+                modal.toast({'message': '上传图片失败', 'duration': 1});
+              }
+            });          
+          }.bind(this));
+      },
+      ready: function () {
+        var me = this;
+        me.$on('refundclick', function (e) {
+          me.refundText = e.detail.name;
+          data.refundData.reason = e.detail.name;
+        }.bind(this));
+        me.$on('backclick', function (e) {
+          me.backText = e.detail.name;
+          data.backGoods.reason = e.detail.name;
+        }.bind(this));
+      },
+      init: function () {
+        var bundleUrl = this.$getConfig().bundleUrl;
+        data.refundData.productOrderId = data.utils.getParameterByName('productOrderId', bundleUrl);
+        data.backGoods.productOrderId = data.utils.getParameterByName('productOrderId', bundleUrl);
+        getProductOrder(this);
+      },
+      methods: {
+        checkTab: function(index) {
+          this.tabIndex = index;
+          // if(this.tabIndex == 0) {
+
+          // }else{
+          //   getProductOrder(this);
+          // }
+        },
+        vchange: function (e, m) {
+          this.refundData[m] = e.value;
+        },
+        bchange: function (e, m) {
+          this.backGoods[m] = e.value;
+        },
+        submitRefund: function () {
+          toRefund(this);
+        },
+        submitBack: function () {
+          toBackGoods(this);
+        },
+        selectIsGeted: function (isGeted) {
+          if(isGeted == 1) {
+            data.backGoodsIsGeted = 0;
+            data.backGoods.isGeted = 0;
+            data.backText = '下拉选择';
+            data.backReason = [
+              {id: 1, name: "未按约定时间发货"},
+              {id: 2, name: "空包裹/少货"},
+              {id: 3, name: "拍错了/不想要了"},
+              {id: 4, name: "退运费"},
+              {id: 4, name: "其他"}
+           ];
+          }else{
+            data.backGoodsIsGeted = 1;
+            data.backGoods.isGeted = 1;
+            data.backText = '下拉选择';
+            data.backReason = [
+              {id: 1, name: "收到商品少件/破损/污渍等"},
+              {id: 2, name: "假冒品牌"},
+              {id: 3, name: "商品及商品本身的外包装严重损坏"},
+              {id: 4, name: "商品已过期/已变质"},
+              {id: 5, name: "商品数量/重量不符"},
+              {id: 6, name: "卖家发错货"},
+              {id: 7, name: "退运费"},
+              {id: 8, name: "其他"}
+            ];
+          }
+        },
+        selectRefund: function () {
+          this.$vm('refund').show();
+        },
+        selectBack: function () {
+          this.$vm('back').show();
+        },
+        upload0: function(index) {
+          var me = this;
+          if(data.refundData.pics.length==4){
+            data.isHide=0;
+          }
+          if(data.refundData.pics.length >5) {
+            modal.toast({'message': '上传图片不能超过5张', 'duration': 1});
+            return;
+          }
+          $('input:file').localResizeIMG({
+              width: 91,
+              quality: 0.8,
+              success: function (result) {
+                me.utils.fetch(me, {
+                  method: 'post',
+                  url: me.utils.getServerBaseUrl() + "pc/orders/saveBase64",
+                  type:'json',
+                  body: {file: result.base64}
+                }, function(response) {
+                  var datas = JSON.stringify(response.data);
+                  if(response.data) {
+                    if(index == -1) {
+                      me.refundData.pics.push(JSON.parse(datas).path);
+                    }else{
+                      me.refundData.pics.splice(index, 1, JSON.parse(response.data).data);
+                    }
+                  }
+                });
+              }
+          });
+          $('#file').click();
+        },
+        upload1: function(index) {
+          var me = this;
+          if(data.backGoods.pics.length==4){
+            data.isHide=0;
+          }
+          if(data.backGoods.pics.length >5) {
+            modal.toast({'message': '上传图片不能超过5张', 'duration': 1});
+            return;
+          }
+          $('input:file').localResizeIMG({
+              width: 91,
+              quality: 0.8,
+              success: function (result) {
+                me.utils.fetch(me, {
+                  method: 'post',
+                  url: me.utils.getServerBaseUrl() + "pc/orders/saveBase64",
+                  type:'json',
+                  body: {file: result.base64}
+                }, function(response) {
+                  var datas = JSON.stringify(response.data);
+                  if(response.data) {
+                    if(index == -1) {
+                      data.backGoods.pics.push(JSON.parse(datas).path);
+                    }else{
+                      data.backGoods.pics.splice(index, 1, JSON.parse(response.data).data);
+                    }
+                   
+                  }
+                });
+              }
+          });
+          $('#file').click();
+        }
+      }
+    } 
+   
+</script>

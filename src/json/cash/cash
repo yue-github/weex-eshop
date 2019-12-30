@@ -1,0 +1,4 @@
+{"error": 0,"totalPages":10, "data":[
+	{"id": 1,"cashTitle":"满50减100","minPurchaseAmount":50,"cashDiscount": 30,"is_used": 0,"depositTime": "2016/11/11","expirationTime": "2016/12/31"},
+	{"id": 2,"cashTitle":"满50减100","minPurchaseAmount":50,"cashDiscount": 20,"is_used": 1,"depositTime": "2016/11/11","expirationTime": "2016/12/31"}
+]}

@@ -1,0 +1,110 @@
+<template>
+ 	  <div id="byModal" class="by-modal" onclick="close" style="justify-content:center;background-color: rgba(0, 0, 0, 0.8);position: absolute;top: 0;left: 0;right: 0;bottom: 0;">
+        <div class="by-modal-panel">
+          <div class="by-modal-title">
+            <text class="by-modal-title-txt">{{title}}</text>
+          </div>
+          <div class="by-modal-content">
+            <div style="flex:1;">
+              <list style="height: {{height}};">
+                <cell onclick="itemClick" ds="{{item}}" class="by-modal-item" repeat="{{item in sdata}}"><text class="by-modal-item-txt">{{item.name}}</text></cell>
+              </list>
+            </div>
+          </div>
+        </div>
+      </div>
+</template>
+
+<style>
+  .by-modal {
+    justify-content:center;
+    background-color: rgba(0, 0, 0, 0.8); 
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+  }
+
+  .by-modal-panel {
+    background-color:#ffffff;
+    margin-left: 50;
+    margin-right:50;
+    padding-left:20;
+    padding-right:20;
+    border-radius:10;
+  }
+
+  .by-modal-title {
+    height:80;
+    justify-content:center;
+    border-bottom: 2px solid #d9d9d9; 
+    border-bottom-width:2px;
+    border-bottom-color:#d9d9d9;
+  }
+
+  .by-modal-title-txt {
+    font-size: 28px;
+  }
+
+  .by-modal-content {
+    flex-direction: row;
+    margin-top:10;
+    margin-bottom:10;
+  }
+
+  .by-modal-item {
+    justify-content:center;
+    height:80;
+    border-bottom: 1px solid #efefef; 
+    border-bottom-width:1px;
+    border-bottom-color:#efefef;
+  }
+
+  .by-modal-item-txt {
+    font-size: 28px;
+  }
+</style>
+
+<script>
+	module.exports = {
+		data: {
+			title: '标题',
+			height: 290,
+			sdata: [
+				{id: 1, name: 't1'},
+				{id: 2, name: 't2'}
+			]
+		},
+		computed: {
+			
+		},
+		methods: {
+			close: function() {
+		        this._ids.byModal.el.setClassStyle({visibility: 'hidden'});
+      		},
+      		show: function() {
+      			this._ids.byModal.el.setClassStyle({visibility: 'visible'});
+      		},
+			itemClick: function(e) {
+				var ds = e.target.attr.ds;
+				this.$dispatch(this.sname + 'click', ds);
+				this.close();
+			}
+
+		},
+		created: function() {
+			
+		},
+		ready: function() {
+			//dom.scrollToElement(this.$el('byDatePanel'), {offset: 10});
+		},
+		init: function() {
+			this.panelVisibility = "hidden";
+			this.panelHeight = 1000;
+
+			
+		}
+	}
+</script>

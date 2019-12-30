@@ -1,0 +1,7 @@
+{"error": 0, "data":[
+	{"positionName":"周边游","productList": [
+		{"id": 1,"name": "清远漂流1", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/p6_ban2.jpg","summary": "2天一夜免费晚"},
+		{"id": 2,"name": "清远漂流2", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/p6_ban2.jpg","summary": "2天一夜免费晚"},
+		{"id": 3,"name": "清远漂流3", "suggestedRetailUnitPrice": 100,"recommendPic": "http://192.168.1.120:8081/images/p6_ban2.jpg","summary": "2天一夜免费晚"}
+	]}
+]}

@@ -1,0 +1,115 @@
+<template>
+  <div style="flex-direction: column;">
+    <!-- <image class="tab-bg" src="http://service.eebin.com/images/table_bg.jpg"></image> -->
+    <wxc-tabbar id="tabbar" selected-index="{{selectedIndex}}" tab-items = {{tabItems}}></wxc-tabbar>
+  </div>
+</template>
+
+<style>
+  .tab-bg{
+    width:750px;
+    height:88px;
+    position: absolute;
+    bottom: 0px;
+  }
+</style>
+
+<script>
+  require('weex-components');
+  var utils = require('./js-kit/utils');
+
+  module.exports = {
+    data: {
+      code:0,
+      selectedIndex: 0,
+      tabItems: [
+        {
+          index: 0,
+          title: '首页',
+          titleColor: '#000000',
+          icon: '',
+          image: utils.getImageBaseUrl() + 'images/tbar_home_b.png',
+          selectedImage: utils.getImageBaseUrl() + 'images/tbar_home_r.png',
+          src: 'home.js',
+          visibility: 'visible',
+          selectedColor:'#000000',
+          
+        },
+        {
+          index: 1,
+          title: '分类',
+          titleColor: '#000000',
+          icon: '',
+          image: utils.getImageBaseUrl() + 'images/tbar_class_b.png',
+          selectedImage: utils.getImageBaseUrl() + 'images/tbar_class_r.png',
+          src: 'category.js',
+          visibility: 'visible',
+          selectedColor:'#000000',
+        },
+        {
+          index: 2,
+          title: '购物车',
+          titleColor: '#000000',
+          icon: '',
+          image: utils.getImageBaseUrl() + 'images/tbar_shopcart_b1.png',
+          selectedImage: utils.getImageBaseUrl() + 'images/tbar_shopcart_r.png',
+          src: 'shoppingCart.js?autoLoad=f',
+          visibility: 'hidden',
+        },
+        {
+          index: 3,
+          title: '我的',
+          titleColor: '#000000',
+          icon: '',
+          image: utils.getImageBaseUrl() + 'images/tbar_my_b.png',
+          selectedImage: utils.getImageBaseUrl() + 'images/tbar_my_r.png',
+          src: 'center.js?autoLoad=f',
+          visibility: 'visible',
+        }       
+      ],
+    },
+
+    init: function () {
+      
+    },
+    created: function() {
+      var base = utils.getTabbarBaseUrl(this)
+      for(var i = 0; i < this.tabItems.length; i++) {
+        var tabItem = this.tabItems[i];
+        tabItem.src = base + tabItem.src;
+      }
+      var bundleUrl = this.$getConfig().bundleUrl;
+      var index = utils.getParameterByName('index', bundleUrl);
+      this.code = utils.getParameterByName('code', bundleUrl);
+      if(index !== null) {
+     
+        if((index == 3 || index == 2 || index == 1)) {
+          var temps = this.tabItems.filter(function(s){
+      
+            return s.index == index;
+          });
+
+          // if(temps.length > 0) {
+          //  // temps[0].src += "?autoLoad=1";
+          // }
+          if(this.code){
+            var url=this.tabItems[1].src+'?code='+this.code;
+            this.tabItems[1].src=url;
+          }
+          this.selectedIndex = index;
+        }
+      }
+    },
+    methods: {
+      ready: function (e) {
+        var me = this;
+        me.$on('tabBar.onClick',function(e){
+          // var detail= e.detail;
+          // if(detail.index == 3 || detail.index == 2) {
+          //   this.$openURL(utils.getAppBaseUrl(this) + 'index.js?index=' + detail.index);
+          // }
+        });
+      },
+    }
+  }
+</script>

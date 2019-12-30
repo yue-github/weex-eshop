@@ -1,0 +1,17 @@
+
+{"error": 0, "totalPrice": 1000, "totalAmount": 10, 
+	"data": 
+	[
+		{"shop_id":1,"shopName": "乐驿自营1", "shopLogo": "www.baidu.com", 
+		"productList": [
+			{"id":1,"product_id": "11", "productName" : "超级水蜜桃", "mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","selectProterties": "2.5kg", "amount": 20, "suggestedRetailUnitPrice": 60,"totalPrice":300, "isSelected": 0},
+			{"id":2,"product_id": "11", "productName" : "超级水蜜桃", "mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","selectProterties": "2.5kg", "amount": 20, "suggestedRetailUnitPrice": 60,"totalPrice":300, "isSelected": 0}
+		]},
+		{"shop_id":2,"shopName": "乐驿自营2", "shopLogo": "www.baidu.com", 
+		"productList": [
+			{"id":3,"product_id": "11", "productName" : "超级水蜜桃", "mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","selectProterties": "2.5kg", "amount": 20, "suggestedRetailUnitPrice": 60,"totalPrice":300, "isSelected": 1},
+			{"id":4,"product_id": "11", "productName" : "超级水蜜桃", "mainPic": "http://192.168.1.120:8081/images/product_m_01.jpg","selectProterties": "2.5kg", "amount": 20, "suggestedRetailUnitPrice": 60,"totalPrice":300, "isSelected": 0}
+		]}
+
+	]
+}

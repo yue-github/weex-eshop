@@ -1,0 +1,150 @@
+<style>
+	.content{
+		background-color: #EAEAEA;
+	}
+	.addr_item{
+		padding:30px;
+		flex-direction: column;
+		justify-content: center;
+		background-color: #fff;
+		margin-top: 30px;
+	}
+	.top{
+		flex-direction: column;
+		justify-content: center;
+	}
+	.addr_name{
+		margin-bottom: 10px;
+	}
+	.addr_name_txt{
+		font-size: 32px;
+		color: #454545;
+	}
+	.addr_detail_txt{
+		font-size: 32px;
+		color: #666666;
+	}
+	.dv{
+		border-bottom-color: #ccc;
+		border-bottom-width: 1px;
+		border-bottom-style: solid;
+		height: 1px;
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+	.img{
+		width:38px;
+		height:38px;
+	}
+	.addr_opt{
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	.addr_opt_item{
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+	.addr_opt_item{
+		flex-direction: row;
+		justify-content: flex-end;
+	}
+	.mgl{
+		margin-left: 25px;
+	}
+	.opt_name_txt{
+		font-size:32px;
+		color:#767676;
+		margin-left: 5px;
+	}
+	.add_btn{
+    	background-color: #EB5D69;
+    	margin-left: 40px;
+    	margin-right: 40px;
+    	margin-top: 60px;
+    	flex-direction: row;
+		justify-content: center;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	.add_btn_txt{
+		color: white;
+		font-size: 38px;
+	}
+</style>
+
+<template>
+	<wxc-navpage data-role="none" height="88" background-color="#EB5D69" title="我的地址" title-color="white" left-item-title="返回" left-item-color="white">
+        <scroller class="content">
+        	<!-- start: 地址列表 -->
+        	<div class="addr_item">
+        		<div class="top">
+        			<div class="addr_name"><text class="addr_name_txt">冯世奋 12345582</text></div>
+        			<div class="addr_detail"><text  class="addr_detail_txt">广东省广州市天河区石牌桥518号地中海国际酒店2623</text></div>
+        		</div>
+        		<div class="dv"></div>
+        		<div class="bottom">
+        			<div class="addr_opt">
+        				<div class="addr_opt_item">
+	        				<image class="img" src="http://192.168.1.118:8081/images/icon_delete.png"></image>
+	        				<text class="opt_name_txt">默认地址</text>
+        				</div>
+        				<div class="addr_opt_item">
+	        				<div class="addr_opt_item">
+		        				<image class="img" src="http://192.168.1.118:8081/images/icon_edit.png"></image>
+		        				<text class="opt_name_txt">编辑</text>
+	        				</div>
+	        				<div class="addr_opt_item mgl">
+		        				<image class="img" src="http://192.168.1.118:8081/images/icon_delete.png"></image>
+		        				<text class="opt_name_txt">删除</text>
+	        				</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        	<!-- end: 地址列表 -->
+
+        	<!-- start: 地址列表 -->
+        	<div class="addr_item">
+        		<div class="top">
+        			<div class="addr_name"><text class="addr_name_txt">冯世奋 12345582</text></div>
+        			<div class="addr_detail"><text  class="addr_detail_txt">广东省广州市天河区石牌桥518号地中海国际酒店2623</text></div>
+        		</div>
+        		<div class="dv"></div>
+        		<div class="bottom">
+        			<div class="addr_opt">
+        				<div class="addr_opt_item">
+	        				<image class="img" src="http://192.168.1.118:8081/images/icon_delete.png"></image>
+	        				<text class="opt_name_txt">默认地址</text>
+        				</div>
+        				<div class="addr_opt_item">
+	        				<div class="addr_opt_item">
+		        				<image class="img" src="http://192.168.1.118:8081/images/icon_edit.png"></image>
+		        				<text class="opt_name_txt">编辑</text>
+	        				</div>
+	        				<div class="addr_opt_item mgl">
+		        				<image class="img" src="http://192.168.1.118:8081/images/icon_delete.png"></image>
+		        				<text class="opt_name_txt">删除</text>
+	        				</div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        	<!-- end: 地址列表 -->
+
+        	<!-- start:添加按钮 -->
+        	<div class="add_btn"><text class="add_btn_txt">添加</text></div>
+        	<!-- end:添加按钮 -->
+        </scroller>
+    </wxc-navpage>
+	
+</template>
+
+<script>
+  require('weex-components');
+  module.exports = {
+    data: {
+      
+    },
+    
+  }
+</script>

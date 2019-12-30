@@ -1,0 +1,4 @@
+{"error": 0, "data": [
+	{"id":1,"accountNumber": "12345456789132", "bankBranch": "中国银行"},
+	{"id":2,"accountNumber": "97564652", "bankBranch": "广州银行"}
+]}
